@@ -1,5 +1,5 @@
 item.endstart.recipe.name=レシピ作成
-item.endstart.FluidInjecter.name=クリエィティブドラム液体注入機
+item.endstart.fluid_injecter.name=クリエィティブドラム液体注入機
 item.endstart.end_bed.name=エンドのベッド
 item.endstart.create_wall.name=壁生成
 item.endstart.msg.is_not_end=「エンドのベッド」はエンドでしか使えません。

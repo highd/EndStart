@@ -18,58 +18,58 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.UniversalBucket;
 
-@ItemRegister(name = "FluidInjecter")
+@ItemRegister(name = "fluid_injecter")
 public class FluidInjecter extends ItemBase {
-    public FluidInjecter() {
-        setCreativeTab(CreativeTabs.TOOLS);
-    }
+	public FluidInjecter() {
+		setCreativeTab(CreativeTabs.TOOLS);
+	}
 
-    private void exchangeDrum(ItemStack stack, EntityPlayer player, World world, BlockPos pos) {
-        String blockName = world.getBlockState(pos).getBlock().getRegistryName().toString();
-        if (!blockName.equals("extrautils2:drum") || world.isRemote) {
-            return;
-        }
-        InventoryPlayer inventory = player.inventory;
-        int slot = inventory.getSlotFor(stack);
-        if (slot + 1 >= inventory.getSizeInventory()) {
-            return;
-        }
-        ItemStack bucket = inventory.getStackInSlot(slot + 1);
-        if (bucket.getItem() instanceof UniversalBucket) {
-            String bucketFluid = NbtTagUtil.getString("FluidName", bucket).orElse("");
-            WorldUtil.getNbtTag(world, pos).ifPresent(tag -> {
-                NBTTagCompound tank = tag.getCompoundTag("tank");
-                if (tank.hasKey("FluidName")) {
-                    String drumFluid = tank.getString("FluidName");
-                    NbtTagUtil.setString("FluidName", bucket, drumFluid);
-                    if (!bucketFluid.equals("")) {
-                        tank.setString("FluidName", bucketFluid);
-                    } else {
-                        NBTTagCompound empty = new NBTTagCompound();
-                        empty.setString("Empty", "");
-                        tag.setTag("tank", empty);
-                    }
-                } else {
-                    inventory.setInventorySlotContents(slot + 1, new ItemStack(Items.BUCKET));
-                    if (!bucketFluid.equals("")) {
-                        NBTTagCompound fluidTag = new NBTTagCompound();
-                        fluidTag.setString("FluidName", bucketFluid);
-                        fluidTag.setInteger("Amount", 1000);
-                        tag.setTag("tank", fluidTag);
-                    }
-                }
-                TileEntity tile = world.getTileEntity(pos);
-                tile.readFromNBT(tag);
-            });
-            return;
-        }
-    }
+	private void exchangeDrum(ItemStack stack, EntityPlayer player, World world, BlockPos pos) {
+		String blockName = world.getBlockState(pos).getBlock().getRegistryName().toString();
+		if (!blockName.equals("extrautils2:drum") || world.isRemote) {
+			return;
+		}
+		InventoryPlayer inventory = player.inventory;
+		int slot = inventory.getSlotFor(stack);
+		if (slot + 1 >= inventory.getSizeInventory()) {
+			return;
+		}
+		ItemStack bucket = inventory.getStackInSlot(slot + 1);
+		if (bucket.getItem() instanceof UniversalBucket) {
+			String bucketFluid = NbtTagUtil.getString("FluidName", bucket).orElse("");
+			WorldUtil.getNbtTag(world, pos).ifPresent(tag -> {
+				NBTTagCompound tank = tag.getCompoundTag("tank");
+				if (tank.hasKey("FluidName")) {
+					String drumFluid = tank.getString("FluidName");
+					NbtTagUtil.setString("FluidName", bucket, drumFluid);
+					if (!bucketFluid.equals("")) {
+						tank.setString("FluidName", bucketFluid);
+					} else {
+						NBTTagCompound empty = new NBTTagCompound();
+						empty.setString("Empty", "");
+						tag.setTag("tank", empty);
+					}
+				} else {
+					inventory.setInventorySlotContents(slot + 1, new ItemStack(Items.BUCKET));
+					if (!bucketFluid.equals("")) {
+						NBTTagCompound fluidTag = new NBTTagCompound();
+						fluidTag.setString("FluidName", bucketFluid);
+						fluidTag.setInteger("Amount", 1000);
+						tag.setTag("tank", fluidTag);
+					}
+				}
+				TileEntity tile = world.getTileEntity(pos);
+				tile.readFromNBT(tag);
+			});
+			return;
+		}
+	}
 
-    @Override
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn,
-            BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        exchangeDrum(stack, playerIn, worldIn, pos);
-        return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+	@Override
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn,
+			BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		exchangeDrum(stack, playerIn, worldIn, pos);
+		return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 
-    }
+	}
 }
