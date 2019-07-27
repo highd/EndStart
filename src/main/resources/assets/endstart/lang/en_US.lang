@@ -1,2 +1,5 @@
 item.endstart.recipe.name=Recipe Creater
 item.endstart.FluidInjecter.name=Creative Drum Fluid Injecter
+item.endstart.end_bed.name=End Bed
+item.endstart.msg.is_not_end=The "End Bed" can only used in The End.
+item.endstart.msg.chane_spawn=You changed the spawn point.
