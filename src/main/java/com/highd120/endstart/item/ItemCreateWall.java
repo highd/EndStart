@@ -35,9 +35,6 @@ public class ItemCreateWall extends ItemBase {
 	@Override
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) {
-			return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-		}
 		for (int y = -EndStartConfig.wall_height; y <= EndStartConfig.wall_height; y++) {
 			for (int x = -EndStartConfig.wall_range; x <= EndStartConfig.wall_range; x++) {
 				setBlock(worldIn, pos.add(x, y, -EndStartConfig.wall_range));
@@ -62,6 +59,7 @@ public class ItemCreateWall extends ItemBase {
 		entities.forEach(entity -> {
 			worldIn.removeEntity(entity);
 		});
+		stack.stackSize--;
 		return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 }
