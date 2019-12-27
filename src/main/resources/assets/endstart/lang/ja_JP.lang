@@ -1,6 +1,9 @@
 item.endstart.recipe.name=レシピ作成
 item.endstart.fluid_injecter.name=クリエィティブドラム液体注入機
 item.endstart.end_bed.name=エンドのベッド
+item.endstart.ex_core.name=真理のコア
+item.endstart.life_core.name=生命のコア
+
 item.endstart.create_wall.name=壁生成
 item.endstart.msg.is_not_end=「エンドのベッド」はエンドでしか使えません。
 item.endstart.msg.chane_spawn=スポーン地点を変更しました。
