@@ -52,7 +52,7 @@ public class ItemManager {
                 throw new ClassCastException(clazz.getName());
             }
         });
-        BlockManager.itemBlocInit(itemMap, isClient);
+        BlockManager.itemBlockInit(itemMap, isClient);
 
     }
 

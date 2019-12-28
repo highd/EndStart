@@ -46,7 +46,7 @@ public class BlockManager {
     /**
      * アイテムブロックの初期化。
      */
-    public static void itemBlocInit(Map<Class<?>, Item> itemMap, boolean isClient) {
+    public static void itemBlockInit(Map<Class<?>, Item> itemMap, boolean isClient) {
         blockMap.forEach((key, block) -> {
             ItemBlock item = new ItemBlock(block);
             item.setUnlocalizedName(block.getUnlocalizedName());
