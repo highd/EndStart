@@ -8,6 +8,9 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 //Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
 
@@ -71,6 +74,8 @@ dependencies {
     deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
     // at runtime, use the full JEI jar
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
+    compile files('run/mods/Mekanism-1.10.2-9.2.4.103.jar')
+    compile files('run/mods/Avaritia-1.10.2-2.2.7-universal.jar')
 
 }
 

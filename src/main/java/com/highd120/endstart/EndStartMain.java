@@ -1,5 +1,6 @@
 package com.highd120.endstart;
 
+import com.highd120.endstart.block.TileAutoDireCraftingTable;
 import com.highd120.endstart.command.DeleteRecipeTmpCommand;
 import com.highd120.endstart.item.ItemRecipeCreater;
 import com.highd120.endstart.util.block.BlockManager;
@@ -18,7 +19,9 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;;
 
 /**
  * メインとなるクラス。
@@ -38,6 +41,8 @@ public class EndStartMain {
 		ItemRecipeCreater.load();
 		BlockManager.init();
 		ItemManager.init(event.getSide().isClient());
+		GameRegistry.registerTileEntity(TileAutoDireCraftingTable.class, MOD_ID + ".auto_dire_crafting");
+		EndStartMessages.registerNetworkMessages();
 	}
 
 	/**
@@ -47,6 +52,7 @@ public class EndStartMain {
 	@EventHandler
 	public void init(FMLPreInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(PlayerDataEvents.class);
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiManager());
 	}
 
 	@EventHandler
