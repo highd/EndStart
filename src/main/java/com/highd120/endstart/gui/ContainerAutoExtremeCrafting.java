@@ -77,7 +77,7 @@ public class ContainerAutoExtremeCrafting extends Container {
 		table.setRecipeId(recipeId);
 		table.markDirty();
 		slecter.setInventorySlotContents(0, recipeList.get(recipeId));
-		PacketNormal packet = new PacketNormal(table.getPos(), null);
+		PacketNormal packet = new PacketNormal(pos, null);
 		packet.setValue(recipeId);
 		EndStartMessages.INSTANCE.sendToServer(packet);
 	}
@@ -91,7 +91,7 @@ public class ContainerAutoExtremeCrafting extends Container {
 		table.setRecipeId(recipeId);
 		table.markDirty();
 		slecter.setInventorySlotContents(0, recipeList.get(recipeId));
-		PacketNormal packet = new PacketNormal(table.getPos(), null);
+		PacketNormal packet = new PacketNormal(pos, null);
 		packet.setValue(recipeId);
 		EndStartMessages.INSTANCE.sendToServer(packet);
 	}
@@ -142,7 +142,6 @@ public class ContainerAutoExtremeCrafting extends Container {
 
 	@Override
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
-		System.out.println("slotId = " + slotId + ", dragType = " + dragType + ", clickTypeIn = " + clickTypeIn);
 		if (slotId == 82) {
 			return null;
 		}

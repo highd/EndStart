@@ -10,6 +10,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -46,10 +47,10 @@ public class GUIAutoExtremeCrafting extends GuiContainer {
 		int foo = (this.width - this.xSize) / 2;
 		int bar = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(foo, bar, 0, 0, this.ySize, this.ySize);
-		fontRendererObj.drawString(Integer.toString(table.getEnergyStoraged()), guiLeft + 175, guiTop + 25,
+		fontRendererObj.drawString(Integer.toString(table.getEnergyStored(EnumFacing.UP)), guiLeft + 175, guiTop + 25,
 				0x000000);
-		fontRendererObj.drawString(Integer.toString(table.getMaxEnergyStoraged()), guiLeft + 175, guiTop + 35,
-				0x000000);
+		fontRendererObj.drawString(Integer.toString(table.getMaxEnergyStored(EnumFacing.UP)), guiLeft + 175,
+				guiTop + 35, 0x000000);
 	}
 
 	public class CustomButton extends GuiButton {

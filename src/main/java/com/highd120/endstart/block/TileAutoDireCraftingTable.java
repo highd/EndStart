@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.highd120.endstart.EndStartConfig;
 import com.highd120.endstart.gui.InventoryAutoDireCrafting;
 import com.highd120.endstart.network.TileEntityHasPacket;
 import com.highd120.endstart.util.ItemUtil;
 
+import cofh.api.energy.IEnergyReceiver;
 import morph.avaritia.recipe.extreme.ExtremeCraftingManager;
 import morph.avaritia.recipe.extreme.ExtremeShapedOreRecipe;
 import morph.avaritia.recipe.extreme.ExtremeShapedRecipe;
@@ -27,28 +25,18 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class TileAutoDireCraftingTable extends TileHasInventory implements TileEntityHasPacket<Integer> {
+public class TileAutoDireCraftingTable extends TileHasInventory
+		implements TileEntityHasPacket<Integer>, IEnergyReceiver {
 
 	public int recipeId = 0;
 
-	private EnergyStorage storage = new EnergyStorage(EndStartConfig.AutoExtremeCraftingTickCost * 100);
-
-	public int getMaxEnergyStoraged() {
-		return storage.getMaxEnergyStored();
-	}
-
-	public int getEnergyStoraged() {
-		return storage.getEnergyStored();
-	}
+	private int energy = 0;
 
 	@Override
 	public void update() {
-		if (storage.getEnergyStored() < EndStartConfig.AutoExtremeCraftingTickCost) {
+		if (energy < EndStartConfig.AutoExtremeCraftingTickCost) {
 			return;
 		}
 		InventoryCrafting craft = new InventoryAutoDireCrafting(new Container() {
@@ -60,16 +48,16 @@ public class TileAutoDireCraftingTable extends TileHasInventory implements TileE
 
 		List<IRecipe> recipeList = ExtremeCraftingManager.getInstance().getRecipeList();
 		IRecipe recipe = recipeList.get(recipeId);
+		ItemStack result = recipe.getCraftingResult(craft).copy();
 		ItemStack[] remaining = recipe.getRemainingItems(craft);
 		if (!recipe.matches(craft, worldObj)) {
 			return;
 		}
-		ItemStack result = recipe.getCraftingResult(craft).copy();
 		int stackSize = getItemStack(0).map(item -> item.stackSize).orElse(0);
 		if (stackSize + result.stackSize > result.getMaxStackSize()) {
 			return;
 		}
-		storage.extractEnergy(EndStartConfig.AutoExtremeCraftingTickCost, false);
+		energy -= EndStartConfig.AutoExtremeCraftingTickCost;
 		result.stackSize += stackSize;
 		setInventory(0, result);
 		TileEntity upTileEntity = worldObj.getTileEntity(getPos().up());
@@ -93,6 +81,7 @@ public class TileAutoDireCraftingTable extends TileHasInventory implements TileE
 				setInventory(i + 1, null);
 			}
 		}
+		markDirty();
 	}
 
 	private static ItemStack inesetInventory(InvWrapper inventory, ItemStack itemstack) {
@@ -129,7 +118,7 @@ public class TileAutoDireCraftingTable extends TileHasInventory implements TileE
 	public void subReadNbt(NBTTagCompound compound) {
 		recipeId = compound.getInteger("recipeId");
 		if (compound.hasKey("energy")) {
-			storage.receiveEnergy(compound.getInteger("energy"), false);
+			energy = compound.getInteger("energy");
 		}
 		super.subReadNbt(compound);
 	}
@@ -137,7 +126,7 @@ public class TileAutoDireCraftingTable extends TileHasInventory implements TileE
 	@Override
 	public void subWriteNbt(NBTTagCompound compound) {
 		compound.setInteger("recipeId", recipeId);
-		compound.setInteger("energy", storage.getEnergyStored());
+		compound.setInteger("energy", energy);
 		super.subWriteNbt(compound);
 	}
 
@@ -154,20 +143,16 @@ public class TileAutoDireCraftingTable extends TileHasInventory implements TileE
 	@Override
 	public void execute(EntityPlayerMP playerEntity, Integer data) {
 		recipeId = data;
-	}
-
-	@Override
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-		if (capability == CapabilityEnergy.ENERGY) {
-			return CapabilityEnergy.ENERGY.cast(storage);
-		}
-
-		return super.getCapability(capability, facing);
-	}
-
-	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-		return capability == CapabilityEnergy.ENERGY || super.hasCapability(capability, facing);
+		InventoryCrafting craft = new InventoryAutoDireCrafting(new Container() {
+			@Override
+			public boolean canInteractWith(EntityPlayer entityPlayer) {
+				return false;
+			}
+		}, this);
+		List<IRecipe> recipeList = ExtremeCraftingManager.getInstance().getRecipeList();
+		IRecipe recipe = recipeList.get(recipeId);
+		ItemStack result = recipe.getCraftingResult(craft).copy();
+		setInventory(82, result);
 	}
 
 	public static class ItemHadler extends SimpleItemStackHandler {
@@ -263,5 +248,32 @@ public class TileAutoDireCraftingTable extends TileHasInventory implements TileE
 			}
 			return super.extractItem(slot, amount, simulate);
 		}
+	}
+
+	@Override
+	public int getEnergyStored(EnumFacing facing) {
+		return energy;
+	}
+
+	@Override
+	public int getMaxEnergyStored(EnumFacing facing) {
+		return EndStartConfig.AutoExtremeCraftingTickCost * 100;
+	}
+
+	@Override
+	public boolean canConnectEnergy(EnumFacing facing) {
+		return true;
+	}
+
+	@Override
+	public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
+		int energyReceived = Math.min(EndStartConfig.AutoExtremeCraftingTickCost * 100 - energy, maxReceive);
+
+		if (!simulate) {
+			energy += energyReceived;
+		}
+		markDirty();
+		blockUpdate();
+		return energyReceived;
 	}
 }

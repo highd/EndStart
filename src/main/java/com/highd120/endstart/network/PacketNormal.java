@@ -81,8 +81,10 @@ public class PacketNormal implements IMessage {
 			BlockPos postion = new BlockPos(x, y, z);
 			TileEntity tile = world.getTileEntity(postion);
 			TileEntityHasPacket hasPacket = (TileEntityHasPacket) tile;
-			Object data = gson.fromJson(message.data.json, hasPacket.getDataClass());
-			hasPacket.execute(playerEntity, data);
+			if (hasPacket != null) {
+				Object data = gson.fromJson(message.data.json, hasPacket.getDataClass());
+				hasPacket.execute(playerEntity, data);
+			}
 		}
 	}
 
