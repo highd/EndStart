@@ -197,7 +197,7 @@ public class TileAutoDireCraftingTable extends TileHasInventory
 				return false;
 			}
 			if (recipeItem instanceof ItemStack) {
-				if (!ItemUtil.equalItemStackForRecipe((ItemStack) recipeItem, stack)) {
+				if (!ItemUtil.equalItemStackForRecipe(stack, (ItemStack) recipeItem)) {
 					return false;
 				}
 			}
@@ -205,7 +205,7 @@ public class TileAutoDireCraftingTable extends TileHasInventory
 				List<ItemStack> itemList = (List<ItemStack>) recipeItem;
 				boolean flag = false;
 				for (ItemStack item : itemList) {
-					if (ItemUtil.equalItemStackForRecipe(item, stack)) {
+					if (ItemUtil.equalItemStackForRecipe(stack, item)) {
 						flag = true;
 					}
 				}
