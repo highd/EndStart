@@ -1,6 +1,17 @@
 package com.highd120.endstart;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.highd120.endstart.block.TileAutoDireCraftingTable;
+import com.highd120.endstart.command.DebugCommand;
 import com.highd120.endstart.command.DeleteRecipeTmpCommand;
 import com.highd120.endstart.item.ItemRecipeCreater;
 import com.highd120.endstart.util.block.BlockManager;
@@ -10,8 +21,12 @@ import mekanism.api.infuse.InfuseRegistry;
 import mekanism.api.infuse.InfuseType;
 import mekanism.common.MekanismItems;
 import mekanism.common.recipe.RecipeHandler;
+import mekanism.common.recipe.RecipeHandler.Recipe;
 import mekanism.common.recipe.inputs.InfusionInput;
+import mekanism.common.recipe.inputs.ItemStackInput;
+import mekanism.common.recipe.machines.EnrichmentRecipe;
 import mekanism.common.recipe.machines.MetallurgicInfuserRecipe;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -55,6 +70,13 @@ public class EndStartMain {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiManager());
 	}
 
+	private static String convertItemDataString(EnrichmentRecipe recipe) {
+		ItemStack input = recipe.getInput().ingredient;
+		String registryName = input.getItem().getRegistryName().toString();
+		String metaData = Integer.toString(input.getItemDamage());
+		return registryName + "," + metaData;
+	}
+
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		InfuseType redstoneType = InfuseRegistry.get("REDSTONE");
@@ -62,11 +84,30 @@ public class EndStartMain {
 		InfusionInput circuitInput = new InfusionInput(redstoneType, 10, osmium);
 		ItemStack circuit = new ItemStack(MekanismItems.ControlCircuit, 1, 0);
 		MetallurgicInfuserRecipe circuitRecipe = new MetallurgicInfuserRecipe(circuitInput, circuit);
-		RecipeHandler.removeRecipe(RecipeHandler.Recipe.METALLURGIC_INFUSER, circuitRecipe);
+		RecipeHandler.removeRecipe(Recipe.METALLURGIC_INFUSER, circuitRecipe);
+		HashMap<ItemStackInput, EnrichmentRecipe> recipeMap = Recipe.ENRICHMENT_CHAMBER.get();
+		List<String> removes = Arrays.asList(EndStartConfig.removeEnrichmentChamber);
+		List<EnrichmentRecipe> recipeList = recipeMap.entrySet().stream()
+				.map(entry -> entry.getValue())
+				.collect(Collectors.toList());
+		recipeList.stream()
+				.filter(recipe -> removes.contains(convertItemDataString(recipe)))
+				.forEach(recipe -> {
+					RecipeHandler.removeRecipe(Recipe.ENRICHMENT_CHAMBER, recipe);
+				});
+		try {
+			new File(Minecraft.getMinecraft().mcDataDir, "logs\\endstart").mkdir();
+			Path path = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\logs\\endstart\\removes.txt");
+			Files.write(path, recipeList.stream().map(EndStartMain::convertItemDataString)
+					.collect(Collectors.toList()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event) {
 		event.registerServerCommand(new DeleteRecipeTmpCommand());
+		event.registerServerCommand(new DebugCommand());
 	}
 }
