@@ -16,6 +16,10 @@ import com.highd120.endstart.command.DeleteRecipeTmpCommand;
 import com.highd120.endstart.item.ItemRecipeCreater;
 import com.highd120.endstart.util.block.BlockManager;
 import com.highd120.endstart.util.item.ItemManager;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 import mekanism.api.infuse.InfuseRegistry;
 import mekanism.api.infuse.InfuseType;
@@ -27,7 +31,9 @@ import mekanism.common.recipe.inputs.ItemStackInput;
 import mekanism.common.recipe.machines.EnrichmentRecipe;
 import mekanism.common.recipe.machines.MetallurgicInfuserRecipe;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -42,7 +48,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;;
  * メインとなるクラス。
  * @author hdgam
  */
-@Mod(modid = EndStartMain.MOD_ID, version = EndStartMain.VERSION, dependencies = "required-after:Mekanism;")
+@Mod(modid = EndStartMain.MOD_ID, version = EndStartMain.VERSION, dependencies = "required-after:Mekanism;required-after:abyssalcraft;")
 public class EndStartMain {
 	public static final String MOD_ID = "endstart";
 	public static final String MOD_NAME = "End Start";
@@ -103,6 +109,29 @@ public class EndStartMain {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		List<String> blackList = Arrays.asList(
+			"abyssalcraft:psdl",
+			"abyssalcraft:ethaxiumingot",
+			"abyssalcraft:gatewaykeydl",
+			"abyssalcraft:drainstaff",
+			"abyssalcraft:dreadaltartop",
+			"abyssalcraft:dreadaltarbottom",
+			"abyssalcraft:tieredsacrificialaltar",
+			"abyssalcraft:tieredenergypedestal",
+			"abyssalcraft:transmutationgem",
+			"abyssalcraft:oc",
+			"abyssalcraft:staff"
+		);
+		List<NecronomiconRitual> removeList = RitualRegistry.instance().getRituals().stream().filter(ritual -> {
+			if (ritual instanceof NecronomiconInfusionRitual) {
+				NecronomiconInfusionRitual infusion = (NecronomiconInfusionRitual) ritual;
+				String registryName = infusion.getItem().getItem().getRegistryName().toString();
+				return blackList.contains(registryName);
+			}
+			return false;
+		}).collect(Collectors.toList());
+		RitualRegistry.instance().getRituals().removeAll(removeList);
 	}
 
 	@EventHandler
