@@ -47,6 +47,9 @@ public class TileAutoDireCraftingTable extends TileHasInventory
 		}, this);
 
 		List<IRecipe> recipeList = ExtremeCraftingManager.getInstance().getRecipeList();
+		if (recipeList.size() <= recipeId) {
+			return;
+		}
 		IRecipe recipe = recipeList.get(recipeId);
 		ItemStack result = recipe.getCraftingResult(craft).copy();
 		ItemStack[] remaining = recipe.getRemainingItems(craft);
