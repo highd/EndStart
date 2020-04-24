@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.highd120.endstart.item.ItemExtra;
 import com.highd120.endstart.util.ItemUtil;
 import com.highd120.endstart.util.NbtTagUtil;
 import com.highd120.endstart.util.WorldUtil;
+import com.highd120.endstart.util.item.ItemManager;
 
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.entity.EntityList;
@@ -14,6 +16,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -229,6 +232,14 @@ public class PlayerDataEvents {
 
 	@SubscribeEvent
 	public static void onLivingDrops(LivingDropsEvent event) {
+		if ("ieCrushed".equals(event.getSource().getDamageType()) && event.getEntity() instanceof EntityVillager
+				&& random.nextInt(100) < 5) {
+			ItemStack lifeCore = ItemManager.getItemStack(ItemExtra.class, 1);
+			BlockPos postion = event.getEntity().getPosition();
+			EntityItem result = new EntityItem(event.getEntity().getEntityWorld(), postion.getX(), postion.getY(),
+					postion.getZ(), lifeCore);
+			event.getDrops().add(result);
+		}
 		if (!(event.getSource().getEntity() instanceof EntityPlayer)) {
 			return;
 		}
