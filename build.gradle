@@ -8,6 +8,7 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'eclipse'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
@@ -70,11 +71,15 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+    provided 'org.projectlombok:lombok:1.16.4'
     // compile against the JEI API but do not include it at runtime
     deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
     // at runtime, use the full JEI jar
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
+    compile 'org.yaml:snakeyaml:1.17'
     compile files('run/mods/Mekanism-1.10.2-9.2.4.103.jar')
+    compile files('run/mods/AbyssalCraft-1.10.2-1.9.4.11-FINAL.jar')
     compile files('run/mods/Avaritia-1.10.2-2.2.7-universal.jar')
 
 }
@@ -97,4 +102,16 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+eclipse {
+    project.name = 'lombok-sample'
+
+    classpath {
+        plusConfigurations += [configurations.provided]
+        noExportConfigurations += [configurations.provided]
+    }
+}
+javadoc {
+    options.charSet = 'UTF-8'
+    options.encoding = 'UTF-8'
 }
