@@ -9,4 +9,6 @@ public class EndStartConfig {
 	public static int wall_height = 5;
 	public static int AutoExtremeCraftingTickCost = 100000;
 	public static String removeEnrichmentChamber[] = {};
+	public static boolean isGenerateLibrary = true;
+	public static int generateLibraryRate = 50;
 }

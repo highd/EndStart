@@ -11,11 +11,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.highd120.endstart.block.TileAutoDireCraftingTable;
+import com.highd120.endstart.block.TileCrafterCore;
 import com.highd120.endstart.command.DebugCommand;
 import com.highd120.endstart.command.DeleteRecipeTmpCommand;
 import com.highd120.endstart.item.ItemRecipeCreater;
 import com.highd120.endstart.util.block.BlockManager;
 import com.highd120.endstart.util.item.ItemManager;
+import com.highd120.endstart.world.WorldGenerator;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
@@ -57,12 +59,14 @@ public class EndStartMain {
 	@Instance
 	public static EndStartMain instance = new EndStartMain();
 
+    
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ItemRecipeCreater.load();
 		BlockManager.init();
 		ItemManager.init(event.getSide().isClient());
 		GameRegistry.registerTileEntity(TileAutoDireCraftingTable.class, MOD_ID + ".auto_dire_crafting");
+		GameRegistry.registerTileEntity(TileCrafterCore.class, MOD_ID + ".crafter_core");
 		EndStartMessages.registerNetworkMessages();
 	}
 
@@ -74,6 +78,7 @@ public class EndStartMain {
 	public void init(FMLPreInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(PlayerDataEvents.class);
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiManager());
+        GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
 	}
 
 	private static String convertItemDataString(EnrichmentRecipe recipe) {
