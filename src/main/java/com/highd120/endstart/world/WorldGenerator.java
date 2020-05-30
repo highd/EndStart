@@ -12,7 +12,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -23,7 +22,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenerator implements IWorldGenerator {
 	private static ResourceLocation LIBRARY_STRUCTURE = new ResourceLocation(EndStartMain.MOD_ID, "end_library");
-	
+
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world,
             IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
@@ -37,7 +36,7 @@ public class WorldGenerator implements IWorldGenerator {
         if (isGenerateLand(pos, random, world)) {
         	generateLand(sWorld, random, pos);
         }
-        
+
     }
 
     private boolean isGenerateLand(BlockPos pos, Random random, World world) {

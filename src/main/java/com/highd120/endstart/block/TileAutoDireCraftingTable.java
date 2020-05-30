@@ -74,7 +74,7 @@ public class TileAutoDireCraftingTable extends TileHasInventory
 				itemStack.stackSize--;
 			}
 			if (remaining[i] != null) {
-				ItemStack remainingItem = inesetInventory(new InvWrapper(upInventory), remaining[i]);
+				ItemStack remainingItem = insertInventory(new InvWrapper(upInventory), remaining[i]);
 				if (remainingItem != null) {
 					itemStack = remainingItem;
 					setInventory(i + 1, remainingItem);
@@ -87,17 +87,17 @@ public class TileAutoDireCraftingTable extends TileHasInventory
 		markDirty();
 	}
 
-	private static ItemStack inesetInventory(InvWrapper inventory, ItemStack itemstack) {
-		if (inventory == null || inventory.getInv() == null || itemstack == null) {
-			return itemstack;
+	private static ItemStack insertInventory(InvWrapper inventory, ItemStack itemStack) {
+		if (inventory == null || inventory.getInv() == null || itemStack == null) {
+			return itemStack;
 		}
 		for (int i = 0; i < inventory.getSlots(); i++) {
-			itemstack = inventory.insertItem(i, itemstack, false);
-			if (itemstack == null || itemstack.stackSize == 0) {
+			itemStack = inventory.insertItem(i, itemStack, false);
+			if (itemStack == null || itemStack.stackSize == 0) {
 				return null;
 			}
 		}
-		return itemstack;
+		return itemStack;
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class TileAutoDireCraftingTable extends TileHasInventory
 
 	@Override
 	public SimpleItemStackHandler createItemStackHandler() {
-		return new ItemHadler(this, 83);
+		return new ItemHandler(this, 83);
 	}
 
 	@Override
@@ -158,10 +158,10 @@ public class TileAutoDireCraftingTable extends TileHasInventory
 		setInventory(82, result);
 	}
 
-	public static class ItemHadler extends SimpleItemStackHandler {
+	public static class ItemHandler extends SimpleItemStackHandler {
 		private TileAutoDireCraftingTable table;
 
-		public ItemHadler(TileAutoDireCraftingTable inv, int limit) {
+		public ItemHandler(TileAutoDireCraftingTable inv, int limit) {
 			super(inv, limit);
 			table = inv;
 		}

@@ -5,17 +5,12 @@ import javax.annotation.Nonnull;
 import com.highd120.endstart.util.block.BlockRegister;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -35,7 +30,7 @@ public class BlockCrafterCore extends Block  {
 		IBlockState state = blockState.getBaseState().withProperty(ACTIVE, false);
         setDefaultState(state);
 	}
-    
+
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
             EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX,

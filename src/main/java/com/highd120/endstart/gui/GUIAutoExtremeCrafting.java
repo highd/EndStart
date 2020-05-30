@@ -147,7 +147,6 @@ public class GUIAutoExtremeCrafting extends GuiContainer {
 		@Override
 		public void drawButton(Minecraft mc, int mouseX, int mouseY) {
 			if (this.visible) {
-				FontRenderer fontrenderer = mc.fontRendererObj;
 				mc.getTextureManager().bindTexture(backgroundButton);
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition
