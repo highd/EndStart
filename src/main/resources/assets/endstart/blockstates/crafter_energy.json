@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "endstart:crafter_energy", "y": 180 },
+    "facing=south": { "model": "endstart:crafter_energy" },
+    "facing=west": { "model": "endstart:crafter_energy", "y": 90 },
+    "facing=east": { "model": "endstart:crafter_energy", "y": 270 },
+    "facing=up": { "model": "endstart:crafter_energy", "x": 90 },
+    "facing=down": { "model": "endstart:crafter_energy", "x": 270 }
+  }
+}

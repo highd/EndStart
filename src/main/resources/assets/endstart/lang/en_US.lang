@@ -7,6 +7,8 @@ item.endstart.empty.name=Empty
 
 tile.endstart.auto_dire_crafting.name=Auto Dire Crafting Table
 tile.endstart.crafter_core.name=Crafter Core
+tile.endstart.crafter_energy.name=Crafter Energy
+tile.endstart.crafter_heater.name=Crafter Heater
 
 item.endstart.create_wall.name=Wall Creater
 item.endstart.msg.is_not_end=The "End Bed" can only used in The End.

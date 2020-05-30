@@ -25,13 +25,37 @@ import net.minecraft.world.World;
 
 @BlockRegister(name = "crafter_core")
 public class BlockCrafterCore extends Block  {
+    public static final PropertyBool ACTIVE = PropertyBool.create("active");
 	public BlockCrafterCore() {
 		super(Material.IRON);
 		setHarvestLevel("pickaxe", 3);
 		setSoundType(SoundType.GLASS);
 		setHardness(100.0F);
 		setResistance(2000.0F);
+		IBlockState state = blockState.getBaseState().withProperty(ACTIVE, false);
+        setDefaultState(state);
 	}
+    
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
+            EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX,
+            float hitY, float hitZ) {
+        if (!worldIn.isRemote) {
+        	TileCrafterCore tile = (TileCrafterCore) worldIn.getTileEntity(pos);
+            tile.activate();
+            worldIn.setBlockState(pos, state.withProperty(ACTIVE, Boolean.valueOf(tile.isActive())), 4);
+        }
+        return true;
+    }
+
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    	TileCrafterCore tile = (TileCrafterCore) world.getTileEntity(pos);
+        if (tile != null) {
+            tile.breakEvent();
+        }
+        super.breakBlock(world, pos, state);
+    }
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
@@ -52,4 +76,22 @@ public class BlockCrafterCore extends Block  {
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileCrafterCore();
     }
+    
+    @Nonnull
+    @Override
+    public BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, ACTIVE);
+    }
+    
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        int meta = state.getValue(ACTIVE) ? 1 : 0;
+        return meta;
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        boolean active = meta == 1;
+        return getDefaultState().withProperty(ACTIVE, active);
+    }   
 }
