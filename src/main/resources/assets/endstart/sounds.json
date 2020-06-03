@@ -1,0 +1,10 @@
+{
+	"injection_effect": {
+		"sounds":["endstart:injection_effect"],
+		"subtitle": "endstart.subtitle.injection_effect"
+	},
+	"injection_complete": {
+		"sounds":["endstart:injection_complete"],
+		"subtitle": "endstart.subtitle.injection_complete"
+	}
+}

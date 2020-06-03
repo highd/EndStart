@@ -10,11 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.highd120.endstart.block.InjectionRecipe;
 import com.highd120.endstart.block.TileAutoDireCraftingTable;
 import com.highd120.endstart.block.TileCrafterCore;
+import com.highd120.endstart.block.TileStand;
 import com.highd120.endstart.command.DebugCommand;
 import com.highd120.endstart.command.DeleteRecipeTmpCommand;
 import com.highd120.endstart.item.ItemRecipeCreater;
+import com.highd120.endstart.proxy.CommonProxy;
 import com.highd120.endstart.util.block.BlockManager;
 import com.highd120.endstart.util.item.ItemManager;
 import com.highd120.endstart.world.WorldGenerator;
@@ -38,6 +41,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -59,15 +63,23 @@ public class EndStartMain {
 	@Instance
 	public static EndStartMain instance = new EndStartMain();
 
-    
+
+    @SidedProxy(clientSide = "com.highd120.endstart.proxy.ClientProxy",
+            serverSide = "com.highd120.endstart.proxy.CommonProxy")
+    public static CommonProxy proxy;
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ItemRecipeCreater.load();
-		BlockManager.init();
+        BlockManager.init();
+        InjectionRecipe.init();
 		ItemManager.init(event.getSide().isClient());
 		GameRegistry.registerTileEntity(TileAutoDireCraftingTable.class, MOD_ID + ".auto_dire_crafting");
 		GameRegistry.registerTileEntity(TileCrafterCore.class, MOD_ID + ".crafter_core");
-		EndStartMessages.registerNetworkMessages();
+		GameRegistry.registerTileEntity(TileStand.class, MOD_ID + ".stand");
+        EndStartMessages.registerNetworkMessages();
+        SoundList.init();
+        proxy.registerRenderers();
 	}
 
 	/**

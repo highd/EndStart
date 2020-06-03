@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 
 import com.highd120.endstart.util.ItemUtil;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -75,6 +76,8 @@ public abstract class TileHasInventory extends TileEntityBase {
 		@Override
 		public void onContentsChanged(int slot) {
 			if (!tile.worldObj.isRemote) {
+				IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+				tile.getWorld().notifyBlockUpdate(tile.getPos(), state, state, 8);
 				tile.worldObj.scheduleUpdate(tile.pos, tile.getBlockType(),
 						tile.getBlockType().tickRate(tile.worldObj));
 			}
