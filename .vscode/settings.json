@@ -21,5 +21,8 @@
         "tieredenergypedestal",
         "tieredsacrificialaltar",
         "transmutationgem"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "python.pythonPath": "C:\\Users\\hdgam\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
+    "java.dependency.packagePresentation": "hierarchical"
 }
