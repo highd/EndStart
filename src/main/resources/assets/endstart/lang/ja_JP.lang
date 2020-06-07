@@ -8,6 +8,7 @@ item.endstart.empty.name=空白
 tile.endstart.auto_dire_crafting.name=自動ダイヤ作業台
 tile.endstart.crafter_core.name=クラフター　コア
 tile.endstart.stand.name=スタンド
+tile.endstart.nolife_wither_skeleton.name=生命無きウィザースケルトンスカル
 item.endstart.create_wall.name=壁生成
 item.endstart.msg.is_not_end=「エンドのベッド」はエンドでしか使えません。
 item.endstart.msg.chane_spawn=スポーン地点を変更しました。

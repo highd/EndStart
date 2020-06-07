@@ -8,6 +8,7 @@ item.endstart.empty.name=Empty
 tile.endstart.auto_dire_crafting.name=Auto Dire Crafting Table
 tile.endstart.crafter_core.name=Crafter Core
 tile.endstart.stand.name=Stand
+tile.endstart.nolife_wither_skeleton.name=No Life Wither Skeleton Skull
 
 item.endstart.create_wall.name=Wall Creater
 item.endstart.msg.is_not_end=The "End Bed" can only used in The End.
