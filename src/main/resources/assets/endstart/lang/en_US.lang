@@ -3,6 +3,8 @@ item.endstart.fluid_injecter.name=Creative Drum Fluid Injecter
 item.endstart.end_bed.name=End Bed
 item.endstart.ex_core.name=True Core
 item.endstart.life_core.name=Life Core
+item.endstart.fire.name=Fire Orb
+item.endstart.water.name=Water Orb
 item.endstart.empty.name=Empty
 
 tile.endstart.auto_dire_crafting.name=Auto Dire Crafting Table

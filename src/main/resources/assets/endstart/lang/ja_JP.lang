@@ -3,6 +3,8 @@ item.endstart.fluid_injecter.name=クリエィティブドラム液体注入機
 item.endstart.end_bed.name=エンドのベッド
 item.endstart.ex_core.name=真理のコア
 item.endstart.life_core.name=生命のコア
+item.endstart.fire.name=火のオーブ
+item.endstart.water.name=水のオーブ
 item.endstart.empty.name=空白
 
 tile.endstart.auto_dire_crafting.name=自動ダイヤ作業台
