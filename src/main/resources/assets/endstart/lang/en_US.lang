@@ -7,6 +7,8 @@ item.endstart.fire.name=Fire Orb
 item.endstart.water.name=Water Orb
 item.endstart.empty.name=Empty
 
+endstart.injection=Injection
+
 tile.endstart.auto_dire_crafting.name=Auto Dire Crafting Table
 tile.endstart.crafter_core.name=Crafter Core
 tile.endstart.stand.name=Stand

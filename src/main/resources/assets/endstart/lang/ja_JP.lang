@@ -7,6 +7,8 @@ item.endstart.fire.name=火のオーブ
 item.endstart.water.name=水のオーブ
 item.endstart.empty.name=空白
 
+endstart.injection=アイテム注入
+
 tile.endstart.auto_dire_crafting.name=自動ダイヤ作業台
 tile.endstart.crafter_core.name=クラフター　コア
 tile.endstart.stand.name=スタンド
