@@ -2,6 +2,7 @@ package com.highd120.endstart.block;
 
 import javax.annotation.Nonnull;
 
+import com.highd120.endstart.EndStartCreativeTab;
 import com.highd120.endstart.util.block.BlockRegister;
 
 import net.minecraft.block.Block;
@@ -30,7 +31,8 @@ public class BlockCrafterCore extends Block  {
 		setHarvestLevel("pickaxe", 3);
 		setSoundType(SoundType.GLASS);
 		setHardness(100.0F);
-		setResistance(2000.0F);
+        setResistance(2000.0F);
+        setCreativeTab(EndStartCreativeTab.INSTANCE);
 	}
 
     @Override

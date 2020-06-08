@@ -5,6 +5,8 @@ item.endstart.ex_core.name=真理のコア
 item.endstart.life_core.name=生命のコア
 item.endstart.empty.name=空白
 
+itemGroup.endstart=End Start
+
 tile.endstart.auto_dire_crafting.name=自動ダイヤ作業台
 tile.endstart.crafter_core.name=Crafter Core
 

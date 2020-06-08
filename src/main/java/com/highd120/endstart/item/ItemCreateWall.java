@@ -6,7 +6,6 @@ import com.google.common.base.Predicate;
 import com.highd120.endstart.EndStartConfig;
 import com.highd120.endstart.util.item.ItemRegister;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +21,6 @@ import net.minecraft.world.World;
 @ItemRegister(name = "create_wall")
 public class ItemCreateWall extends ItemBase {
 	public ItemCreateWall() {
-		setCreativeTab(CreativeTabs.TOOLS);
 	}
 
 	private void setBlock(World world, BlockPos point) {

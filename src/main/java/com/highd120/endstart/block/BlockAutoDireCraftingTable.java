@@ -1,5 +1,6 @@
 package com.highd120.endstart.block;
 
+import com.highd120.endstart.EndStartCreativeTab;
 import com.highd120.endstart.EndStartMain;
 import com.highd120.endstart.util.block.BlockRegister;
 
@@ -22,6 +23,7 @@ public class BlockAutoDireCraftingTable extends Block {
 		setSoundType(SoundType.GLASS);
 		setHardness(50.0F);
 		setResistance(2000.0F);
+        setCreativeTab(EndStartCreativeTab.INSTANCE);
 	}
 
 	@Override

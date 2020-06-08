@@ -4,7 +4,6 @@ import com.highd120.endstart.util.NbtTagUtil;
 import com.highd120.endstart.util.WorldUtil;
 import com.highd120.endstart.util.item.ItemRegister;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -21,7 +20,6 @@ import net.minecraftforge.fluids.UniversalBucket;
 @ItemRegister(name = "fluid_injecter")
 public class FluidInjecter extends ItemBase {
 	public FluidInjecter() {
-		setCreativeTab(CreativeTabs.TOOLS);
 	}
 
 	private void exchangeDrum(ItemStack stack, EntityPlayer player, World world, BlockPos pos) {

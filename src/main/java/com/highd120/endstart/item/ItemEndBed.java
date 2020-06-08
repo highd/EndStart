@@ -1,5 +1,6 @@
 package com.highd120.endstart.item;
 
+import com.highd120.endstart.EndStartCreativeTab;
 import com.highd120.endstart.block.BlockEndBed;
 import com.highd120.endstart.util.block.BlockManager;
 import com.highd120.endstart.util.item.ItemRegister;
@@ -21,6 +22,10 @@ import net.minecraft.world.World;
 
 @ItemRegister(name = "end_bed")
 public class ItemEndBed extends ItemBed {
+    public ItemEndBed() {
+        setCreativeTab(EndStartCreativeTab.INSTANCE);
+    }
+
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (worldIn.isRemote) {
