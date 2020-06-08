@@ -8,7 +8,7 @@ public class TileStand extends TileHasSingleItem {
      */
     public void removeItem() {
         if (getItem() != null) {
-            //itemHandler.setStackInSlot(0, null);
+            itemHandler.setStackInSlot(0, null);
         }
     }
 
