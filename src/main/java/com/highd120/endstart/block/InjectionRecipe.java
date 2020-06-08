@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.highd120.endstart.block.InjectionRecipeData.Input;
+import com.highd120.endstart.item.ItemExtra;
+import com.highd120.endstart.util.item.ItemManager;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -40,11 +42,14 @@ public class InjectionRecipe {
                 1000,
                 new ItemStack(Blocks.LEAVES), new ItemStack(Blocks.LEAVES),
                 new ItemStack(Blocks.LEAVES), new ItemStack(Blocks.LEAVES)));
-        recipes.add(createRecipe(new ItemStack(Items.BUCKET),
-                new ItemStack(Items.LAVA_BUCKET),
+        recipes.add(createRecipe(
+                ItemManager.getItemStack(BlockNoLifeSkull.class),
+                new ItemStack(Items.SKULL,1,1),
                 1000,
-                new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA),
-                new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA)));
+                ItemManager.getItemStack(ItemExtra.class, 2),
+                ItemManager.getItemStack(ItemExtra.class, 3),
+                ItemManager.getItemStack(ItemExtra.class, 2),
+                ItemManager.getItemStack(ItemExtra.class, 3)));
     }
 }
 

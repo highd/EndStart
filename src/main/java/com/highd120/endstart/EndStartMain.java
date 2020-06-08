@@ -72,13 +72,13 @@ public class EndStartMain {
 	public void preInit(FMLPreInitializationEvent event) {
 		ItemRecipeCreater.load();
         BlockManager.init();
-        InjectionRecipe.init();
 		ItemManager.init(event.getSide().isClient());
 		GameRegistry.registerTileEntity(TileAutoDireCraftingTable.class, MOD_ID + ".auto_dire_crafting");
 		GameRegistry.registerTileEntity(TileCrafterCore.class, MOD_ID + ".crafter_core");
 		GameRegistry.registerTileEntity(TileStand.class, MOD_ID + ".stand");
         EndStartMessages.registerNetworkMessages();
         SoundList.init();
+        InjectionRecipe.init();
         proxy.registerRenderers();
 	}
 
