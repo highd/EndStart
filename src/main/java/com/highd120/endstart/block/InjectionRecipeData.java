@@ -3,6 +3,7 @@ package com.highd120.endstart.block;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
@@ -43,7 +44,7 @@ public class InjectionRecipeData {
     protected List<String> getItemNameList(List<ItemStack> itemList) {
         return itemList.stream()
                 .map(item -> getItemName(item))
-                .filter(name -> name != null)
+                .filter(Objects::nonNull)
                 .sorted()
                 .collect(Collectors.toList());
     }
@@ -61,7 +62,7 @@ public class InjectionRecipeData {
                 && getItemName(input.main).equals(getItemName(injection));
     }
 
-    public ItemStack craft(List<ItemStack> itemList, ItemStack injection) {
+    public ItemStack craft() {
         return output.copy();
     }
 

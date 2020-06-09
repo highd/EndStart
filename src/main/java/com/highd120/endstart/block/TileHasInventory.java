@@ -60,9 +60,9 @@ public abstract class TileHasInventory extends TileEntityBase {
 	 * ブロックの破壊時のイベント。
 	 */
 	public void breakEvent() {
-		IntStream.range(0, itemHandler.getSlots()).forEach(i -> {
-			ItemUtil.dropItem(worldObj, pos, itemHandler.getStackInSlot(i));
-		});
+		IntStream.range(0, itemHandler.getSlots()).forEach(i -> 
+			ItemUtil.dropItem(worldObj, pos, itemHandler.getStackInSlot(i))
+		);
 	}
 
 	public static class SimpleItemStackHandler extends ItemStackHandler {
@@ -82,21 +82,6 @@ public abstract class TileHasInventory extends TileEntityBase {
 						tile.getBlockType().tickRate(tile.worldObj));
 			}
 			tile.markDirty();
-		}
-
-		@Override
-		public NBTTagCompound serializeNBT() {
-			return super.serializeNBT();
-		}
-
-		@Override
-		public void deserializeNBT(NBTTagCompound nbt) {
-			super.deserializeNBT(nbt);
-		}
-
-		@Override
-		public void setSize(int size) {
-			super.setSize(size);
 		}
 
 		public Optional<ItemStack> getItemStock(int slot) {

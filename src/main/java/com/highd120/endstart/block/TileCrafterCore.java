@@ -2,6 +2,7 @@ package com.highd120.endstart.block;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.highd120.endstart.EndStartMessages;
@@ -29,10 +30,10 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyReceive
 
     private ItemStack resultItem;
     private InjectionState state = InjectionState.NOT_WORKING;
-    private int soundCount = 0;
     private CrafterEffectManager effect;
     private int energy = 0;
     private int completeEnergy = 0;
+    private static final String ENERGY_TAG = "energy";
 
     private static InjectionState[] stateList = InjectionState.values();
 
@@ -42,7 +43,7 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyReceive
 
     /**
      * 現在の状態の取得。
-     * 
+     *
      * @return 状態。
      */
     public InjectionState getState() {
@@ -54,14 +55,13 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyReceive
         super.subReadNbt(compound);
         resultItem = NbtTagUtil.readItem(compound, "resultItem");
         state = stateList[compound.getInteger("state")];
-        NbtTagUtil.readListFunction(compound, "standList", NbtTagUtil::readBlockPos);
         if (compound.hasKey("effect")) {
             effect = new CrafterEffectManager();
             effect.readNbt(compound);
         }
-		if (compound.hasKey("energy")) {
-			energy = compound.getInteger("energy");
-		}
+        if (compound.hasKey(ENERGY_TAG)) {
+            energy = compound.getInteger(ENERGY_TAG);
+        }
     }
 
     @Override
@@ -72,35 +72,27 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyReceive
         if (effect != null) {
             effect.writeNbt(compound);
         }
-		compound.setInteger("energy", energy);
+        compound.setInteger(ENERGY_TAG, energy);
     }
 
     @Override
     public void update() {
-        if (effect != null) {
-            effect.upDate();
-            EndStartMessages.sendToNearby(getWorld(), getPos(), new NetworkInjectionEffect(getPos()));
+        if (effect == null) {
+            return;
         }
-        if (state == InjectionState.CHARGE_MANA) {
-            soundCount++;
-            if (soundCount % 9 == 0) {
-                // SoundList.playSoundBlock(getWorld(), BotaniaSoundEvents.ding, getPos());
-            }
-            if (energy >= completeEnergy) {
-                SoundList.playSoundBlock(getWorld(), SoundList.injectionEffect, getPos());
-                state = InjectionState.EFFECT;
-                effect.start();
-                soundCount = 0;
-                blockUpdate();
-            }
+        effect.upDate();
+        EndStartMessages.sendToNearby(getWorld(), getPos(), new NetworkInjectionEffect(getPos()));
+        if (state == InjectionState.CHARGE_MANA && energy >= completeEnergy) {
+            SoundList.playSoundBlock(getWorld(), SoundList.injectionEffect, getPos());
+            state = InjectionState.EFFECT;
+            effect.start();
+            blockUpdate();
         }
-        if (state == InjectionState.EFFECT) {
-            if (effect.isEnd()) {
-                SoundList.playSoundBlock(getWorld(), SoundList.injectionComplete, getPos());
-                effect = null;
-                complete();
-                blockUpdate();
-            }
+        if (state == InjectionState.EFFECT && effect.isEnd()) {
+            SoundList.playSoundBlock(getWorld(), SoundList.injectionComplete, getPos());
+            effect = null;
+            complete();
+            blockUpdate();
         }
     }
 
@@ -126,11 +118,13 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyReceive
     public void active() {
         LaunchableResult result = isLaunchable();
         if (state == InjectionState.NOT_WORKING && result.isLaunchable) {
-            List<BlockPos> standList = result.standList.stream().filter(stand -> stand.getItem() != null)
-                    .map(stand -> stand.getPos()).collect(Collectors.toList());
+            List<BlockPos> standList = result.standList.stream()
+                .filter(stand -> stand.getItem() != null)
+                .map(TileStand::getPos)
+                .collect(Collectors.toList());
             effect = new CrafterEffectManager(standList, getPos());
             state = InjectionState.CHARGE_MANA;
-            result.standList.forEach(stand -> stand.removeItem());
+            result.standList.forEach(TileStand::removeItem);
             itemHandler.setItemStock(0, null);
         }
     }
@@ -147,20 +141,24 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyReceive
 
     /**
      * 稼働できるかの判定。
-     * 
+     *
      * @return 稼働できるか。
      */
     public LaunchableResult isLaunchable() {
         if (getItem() == null) {
             return new LaunchableResult(new ArrayList<>(), false);
         }
-        List<TileStand> standList = WorldUtil.scanTileEnity(getWorld(), MathUtil.getAxisAlignedPlane(getPos(), 3),
-                tile -> tile instanceof TileStand);
-        List<ItemStack> itemList = standList.stream().map(stand -> stand.getItem()).filter(item -> item != null)
-                .collect(Collectors.toList());
+        List<TileStand> standList = WorldUtil.scanTileEnity(
+            getWorld(),
+            MathUtil.getAxisAlignedPlane(getPos(), 3),
+            tile -> tile instanceof TileStand);
+        List<ItemStack> itemList = standList.stream()
+            .map(TileStand::getItem)
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
         for (InjectionRecipeData data : InjectionRecipe.recipes) {
             if (data.checkRecipe(itemList, getItem())) {
-                resultItem = data.craft(itemList, getItem());
+                resultItem = data.craft();
                 completeEnergy = data.useEnergy;
                 return new LaunchableResult(standList, true);
             }
@@ -168,31 +166,31 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyReceive
         return new LaunchableResult(new ArrayList<>(), false);
     }
 
-	@Override
-	public int getEnergyStored(EnumFacing facing) {
-		return energy;
-	}
+    @Override
+    public int getEnergyStored(EnumFacing facing) {
+        return energy;
+    }
 
-	@Override
-	public int getMaxEnergyStored(EnumFacing facing) {
-		return 1000000;
-	}
+    @Override
+    public int getMaxEnergyStored(EnumFacing facing) {
+        return 1000000;
+    }
 
-	@Override
-	public boolean canConnectEnergy(EnumFacing facing) {
-		return true;
-	}
+    @Override
+    public boolean canConnectEnergy(EnumFacing facing) {
+        return true;
+    }
 
-	@Override
-	public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
-		int energyReceived = Math.min(getMaxEnergyStored(facing) - energy, maxReceive);
+    @Override
+    public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
+        int energyReceived = Math.min(getMaxEnergyStored(facing) - energy, maxReceive);
 
-		if (!simulate) {
-			energy += energyReceived;
-		}
-		markDirty();
-		blockUpdate();
-		return energyReceived;
-	}
+        if (!simulate) {
+            energy += energyReceived;
+        }
+        markDirty();
+        blockUpdate();
+        return energyReceived;
+    }
 
 }

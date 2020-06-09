@@ -1,7 +1,5 @@
 package com.highd120.endstart.jei;
 
-import java.awt.Point;
-
 import javax.annotation.Nonnull;
 
 import com.highd120.endstart.EndStartMain;
