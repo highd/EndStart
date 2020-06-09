@@ -2,6 +2,7 @@ package com.highd120.endstart.block;
 
 import javax.annotation.Nonnull;
 
+import com.highd120.endstart.EndStartCreativeTab;
 import com.highd120.endstart.util.block.BlockRegister;
 
 import net.minecraft.block.Block;
@@ -20,6 +21,7 @@ public class BlockNoLifeSkull extends Block {
     public BlockNoLifeSkull() {
         super(Material.CIRCUITS);
 		setHardness(1.5F);
+        setCreativeTab(EndStartCreativeTab.INSTANCE);
     }
 
     @Nonnull

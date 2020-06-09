@@ -2,6 +2,7 @@ package com.highd120.endstart.block;
 
 import javax.annotation.Nonnull;
 
+import com.highd120.endstart.EndStartCreativeTab;
 import com.highd120.endstart.block.BlockHasSingleItem;
 import com.highd120.endstart.util.block.BlockRegister;
 
@@ -26,6 +27,7 @@ public class BlockStand extends BlockHasSingleItem {
         super(Material.ROCK);
         setHardness(3.5F);
         setSoundType(SoundType.STONE);
+        setCreativeTab(EndStartCreativeTab.INSTANCE);
     }
 
     @Nonnull
