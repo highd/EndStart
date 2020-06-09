@@ -50,7 +50,8 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-		handleUpdateTag(packet.getNbtCompound());
+        super.onDataPacket(net, packet);
+        subReadNbt(packet.getNbtCompound());
 	}
 
 	@Override

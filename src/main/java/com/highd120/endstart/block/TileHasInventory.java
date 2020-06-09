@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 
 import com.highd120.endstart.util.ItemUtil;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -59,9 +60,9 @@ public abstract class TileHasInventory extends TileEntityBase {
 	 * ブロックの破壊時のイベント。
 	 */
 	public void breakEvent() {
-		IntStream.range(0, itemHandler.getSlots()).forEach(i -> {
-			ItemUtil.dropItem(worldObj, pos, itemHandler.getStackInSlot(i));
-		});
+		IntStream.range(0, itemHandler.getSlots()).forEach(i -> 
+			ItemUtil.dropItem(worldObj, pos, itemHandler.getStackInSlot(i))
+		);
 	}
 
 	public static class SimpleItemStackHandler extends ItemStackHandler {
@@ -75,25 +76,12 @@ public abstract class TileHasInventory extends TileEntityBase {
 		@Override
 		public void onContentsChanged(int slot) {
 			if (!tile.worldObj.isRemote) {
+				IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+				tile.getWorld().notifyBlockUpdate(tile.getPos(), state, state, 8);
 				tile.worldObj.scheduleUpdate(tile.pos, tile.getBlockType(),
 						tile.getBlockType().tickRate(tile.worldObj));
 			}
 			tile.markDirty();
-		}
-
-		@Override
-		public NBTTagCompound serializeNBT() {
-			return super.serializeNBT();
-		}
-
-		@Override
-		public void deserializeNBT(NBTTagCompound nbt) {
-			super.deserializeNBT(nbt);
-		}
-
-		@Override
-		public void setSize(int size) {
-			super.setSize(size);
 		}
 
 		public Optional<ItemStack> getItemStock(int slot) {

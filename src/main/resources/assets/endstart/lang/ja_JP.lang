@@ -3,13 +3,20 @@ item.endstart.fluid_injecter.name=クリエィティブドラム液体注入機
 item.endstart.end_bed.name=エンドのベッド
 item.endstart.ex_core.name=真理のコア
 item.endstart.life_core.name=生命のコア
+item.endstart.fire.name=火のオーブ
+item.endstart.water.name=水のオーブ
 item.endstart.empty.name=空白
 
 itemGroup.endstart=End Start
 
 tile.endstart.auto_dire_crafting.name=自動ダイヤ作業台
 tile.endstart.crafter_core.name=Crafter Core
+endstart.injection=アイテム注入
 
+tile.endstart.auto_dire_crafting.name=自動ダイヤ作業台
+tile.endstart.crafter_core.name=クラフター　コア
+tile.endstart.stand.name=スタンド
+tile.endstart.nolife_wither_skeleton.name=生命無きウィザースケルトンスカル
 item.endstart.create_wall.name=壁生成
 item.endstart.msg.is_not_end=「エンドのベッド」はエンドでしか使えません。
 item.endstart.msg.chane_spawn=スポーン地点を変更しました。
