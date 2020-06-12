@@ -1,4 +1,5 @@
-item.endstart.recipe.name=レシピ作成
+item.endstart.old_recipe.name=レシピ作成
+item.endstart.new_recipe.name=新レシピ作成
 item.endstart.fluid_injecter.name=クリエィティブドラム液体注入機
 item.endstart.end_bed.name=エンドのベッド
 item.endstart.ex_core.name=真理のコア
