@@ -7,6 +7,8 @@ item.endstart.life_core.name=生命のコア
 item.endstart.empty.name=空白
 item.endstart.argument.name=引数
 
+endstart.valid=エラー
+
 tile.endstart.auto_dire_crafting.name=自動ダイヤ作業台
 tile.endstart.crafter_core.name=Crafter Core
 
