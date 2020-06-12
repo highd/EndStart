@@ -5,6 +5,7 @@ item.endstart.end_bed.name=End Bed
 item.endstart.ex_core.name=True Core
 item.endstart.life_core.name=Life Core
 item.endstart.empty.name=Empty
+item.endstart.argument.name=Argument
 
 tile.endstart.auto_dire_crafting.name=Auto Dire Crafting Table
 tile.endstart.crafter_core.name=Crafter Core
