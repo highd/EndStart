@@ -10,9 +10,10 @@ import net.minecraft.item.ItemStack;
 
 @ItemRegister(name = "argument")
 public class ItemArgument extends ItemBase {
+    public static final String TAG = "args";
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        NbtTagUtil.getString("args", stack).ifPresent(text ->
+        NbtTagUtil.getString(TAG, stack).ifPresent(text ->
             tooltip.add(text)
         );
     }

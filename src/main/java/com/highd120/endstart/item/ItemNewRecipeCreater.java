@@ -17,6 +17,8 @@ import java.util.regex.Matcher;
 
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
+import com.highd120.endstart.util.NbtTagUtil;
+import com.highd120.endstart.util.item.ItemManager;
 import com.highd120.endstart.util.item.ItemRegister;
 
 import net.minecraft.client.Minecraft;
@@ -99,6 +101,9 @@ public class ItemNewRecipeCreater extends ItemBase {
     private static String createItemText(ItemStack stack) {
         if (stack == null) {
             return "null";
+        }
+        if (stack.getItem() == ItemManager.getItem(ItemArgument.class)) {
+            return NbtTagUtil.getString(ItemArgument.TAG, stack).orElse("null");
         }
         final String itemName = stack.getItem().getRegistryName().toString();
         final int meta = stack.getMetadata();

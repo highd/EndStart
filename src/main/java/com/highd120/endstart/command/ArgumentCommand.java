@@ -34,10 +34,10 @@ public class ArgumentCommand extends CommandBase {
         }
         EntityPlayer player = (EntityPlayer) sender;
         ItemStack stack = player.getHeldItemMainhand();
-        if (args.length != 1 || stack == null || stack.getItem() != ItemManager.getItem(ItemArgument.class) ) {
+        if (args.length != 1 || stack == null || stack.getItem() != ItemManager.getItem(ItemArgument.class)) {
             sender.addChatMessage(new TextComponentTranslation("endstart.valid")
                 .setStyle(new Style().setColor(TextFormatting.RED)));
         }
-        NbtTagUtil.setString("args", stack, args[0]);
+        NbtTagUtil.setString(ItemArgument.TAG, stack, args[0]);
     }
 }
