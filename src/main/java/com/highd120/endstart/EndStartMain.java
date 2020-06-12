@@ -13,7 +13,10 @@ import java.util.stream.Collectors;
 import com.highd120.endstart.block.TileAutoDireCraftingTable;
 import com.highd120.endstart.block.TileCrafterCore;
 import com.highd120.endstart.command.DebugCommand;
+import com.highd120.endstart.command.DeleteRecipeNewTmpCommand;
 import com.highd120.endstart.command.DeleteRecipeTmpCommand;
+import com.highd120.endstart.command.ReloadCommand;
+import com.highd120.endstart.item.ItemNewRecipeCreater;
 import com.highd120.endstart.item.ItemRecipeCreater;
 import com.highd120.endstart.util.block.BlockManager;
 import com.highd120.endstart.util.item.ItemManager;
@@ -62,7 +65,8 @@ public class EndStartMain {
     
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		ItemRecipeCreater.load();
+        ItemRecipeCreater.load();
+        ItemNewRecipeCreater.load();
 		BlockManager.init();
 		ItemManager.init(event.getSide().isClient());
 		GameRegistry.registerTileEntity(TileAutoDireCraftingTable.class, MOD_ID + ".auto_dire_crafting");
@@ -141,6 +145,8 @@ public class EndStartMain {
 
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event) {
+		event.registerServerCommand(new ReloadCommand());
+		event.registerServerCommand(new DeleteRecipeNewTmpCommand());
 		event.registerServerCommand(new DeleteRecipeTmpCommand());
 		event.registerServerCommand(new DebugCommand());
 	}

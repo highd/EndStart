@@ -81,6 +81,7 @@ dependencies {
     compile files('run/mods/Mekanism-1.10.2-9.2.4.103.jar')
     compile files('run/mods/AbyssalCraft-1.10.2-1.9.4.11-FINAL.jar')
     compile files('run/mods/Avaritia-1.10.2-2.2.7-universal.jar')
+    compile group: 'org.mapdb', name: 'mapdb', version: '3.0.0'
     testCompile('junit:junit:4.13')
 }
 
