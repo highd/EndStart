@@ -7,6 +7,9 @@ item.endstart.life_core.name=生命のコア
 item.endstart.fire.name=火のオーブ
 item.endstart.water.name=水のオーブ
 item.endstart.empty.name=空白
+item.endstart.argument.name=引数
+
+endstart.valid=エラー
 
 itemGroup.endstart=End Start
 

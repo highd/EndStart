@@ -14,6 +14,7 @@ import com.highd120.endstart.block.InjectionRecipe;
 import com.highd120.endstart.block.TileAutoDireCraftingTable;
 import com.highd120.endstart.block.TileCrafterCore;
 import com.highd120.endstart.block.TileStand;
+import com.highd120.endstart.command.ArgumentCommand;
 import com.highd120.endstart.command.DebugCommand;
 import com.highd120.endstart.command.DeleteRecipeNewTmpCommand;
 import com.highd120.endstart.command.DeleteRecipeTmpCommand;
@@ -161,5 +162,6 @@ public class EndStartMain {
 		event.registerServerCommand(new DeleteRecipeNewTmpCommand());
 		event.registerServerCommand(new DeleteRecipeTmpCommand());
 		event.registerServerCommand(new DebugCommand());
+		event.registerServerCommand(new ArgumentCommand());
 	}
 }

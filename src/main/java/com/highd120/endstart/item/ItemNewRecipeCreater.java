@@ -10,17 +10,16 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import com.highd120.endstart.util.NbtTagUtil;
+import com.highd120.endstart.util.item.ItemManager;
 import com.highd120.endstart.util.item.ItemRegister;
-
-import org.yaml.snakeyaml.Yaml;
-import org.mapdb.DB;
-import org.mapdb.DBMaker;
-import org.mapdb.HTreeMap;
-import org.mapdb.Serializer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,12 +40,12 @@ import net.minecraftforge.items.VanillaDoubleChestItemHandler;
 public class ItemNewRecipeCreater extends ItemBase {
 	private static ExtraCraftData craftData;
 	public static void load() {
-        final Path extraDataPath = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\config\\extraCraft.yaml");
+        final Path extraDataPath = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\config\\extraCraft.json");
 		try {
             if (Files.exists(extraDataPath)) {
-                final Yaml yaml = new Yaml();
-                final Path path = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\config\\extraCraft.yaml");
-                craftData = yaml.loadAs(Files.newBufferedReader(path), ExtraCraftData.class);
+                Gson gson = new Gson();
+                final Path path = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\config\\extraCraft.json");
+                craftData = gson.fromJson(Files.newBufferedReader(path), ExtraCraftData.class);
             } else {
                 craftData = new ExtraCraftData();
                 craftData.setNbtFilter(new HashMap<>());
@@ -57,19 +56,23 @@ public class ItemNewRecipeCreater extends ItemBase {
 		}
     }
 
-    private static void updateDb(Consumer<HTreeMap<String, String> > consumer) {
-        try (DB db = DBMaker.fileDB(new File(Minecraft.getMinecraft().mcDataDir, "test_db")).make();
-            HTreeMap<String, String> map = db.hashMap("map", Serializer.STRING, Serializer.STRING).createOrOpen()) {
-            consumer.accept(map);
-            Collection<String> script = map.getValues();
-            try {
-				new File(Minecraft.getMinecraft().mcDataDir, "scripts").mkdir();
-				Path path = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\scripts\\extra_new.zs");
-				Files.write(path, script);
-			} catch (IOException err) {
-				err.printStackTrace();
-			}
-        }
+    private static void updateDb(Consumer<Map<String, String> > consumer) {
+        final Path tmpFilePath = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\tempScript");
+		try {
+            Map<String,String> codeMap = new HashMap<>();
+            Gson gson = new Gson();
+            if (Files.exists(tmpFilePath)) {
+                codeMap = gson.fromJson(Files.newBufferedReader(tmpFilePath), Map.class);
+            }
+            consumer.accept(codeMap);
+            Files.write(tmpFilePath, Lists.newArrayList(gson.toJson(codeMap)));
+            Collection<String> script = codeMap.values();
+            new File(Minecraft.getMinecraft().mcDataDir, "scripts").mkdir();
+            Path path = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\scripts\\extra_new.zs");
+            Files.write(path, script);
+		} catch (final IOException error) {
+			error.printStackTrace();
+		}
     }
 
     public static void deleteRecipe(ItemStack stack) {
@@ -98,6 +101,9 @@ public class ItemNewRecipeCreater extends ItemBase {
     private static String createItemText(ItemStack stack) {
         if (stack == null) {
             return "null";
+        }
+        if (stack.getItem() == ItemManager.getItem(ItemArgument.class)) {
+            return NbtTagUtil.getString(ItemArgument.TAG, stack).orElse("null");
         }
         final String itemName = stack.getItem().getRegistryName().toString();
         final int meta = stack.getMetadata();
