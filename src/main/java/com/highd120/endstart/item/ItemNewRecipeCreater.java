@@ -57,7 +57,7 @@ public class ItemNewRecipeCreater extends ItemBase {
     }
 
     private static void updateDb(Consumer<Map<String, String> > consumer) {
-        final Path tmpFilePath = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\tempScript");
+        final Path tmpFilePath = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\tempNewScript");
 		try {
             Map<String,String> codeMap = new HashMap<>();
             Gson gson = new Gson();
