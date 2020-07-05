@@ -8,6 +8,7 @@ item.endstart.fire.name=Fire Orb
 item.endstart.water.name=Water Orb
 item.endstart.empty.name=Empty
 item.endstart.argument.name=Argument
+item.endstart.shulker_shell.name=Shulker Shell
 
 endstart.valid=ERROR
 

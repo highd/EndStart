@@ -8,6 +8,7 @@ item.endstart.fire.name=火のオーブ
 item.endstart.water.name=水のオーブ
 item.endstart.empty.name=空白
 item.endstart.argument.name=引数
+item.endstart.shulker_shell.name=シュルカーの殻
 
 endstart.valid=エラー
 
