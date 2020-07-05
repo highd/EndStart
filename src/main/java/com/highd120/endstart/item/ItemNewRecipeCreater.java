@@ -21,6 +21,7 @@ import com.highd120.endstart.util.NbtTagUtil;
 import com.highd120.endstart.util.item.ItemManager;
 import com.highd120.endstart.util.item.ItemRegister;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -151,9 +152,11 @@ public class ItemNewRecipeCreater extends ItemBase {
             return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
         }
         final String blockName = worldIn.getBlockState(pos).getBlock().getRegistryName().toString();
-        final String downBlockName = worldIn.getBlockState(pos.down()).getBlock().getRegistryName().toString();
+        final IBlockState downState = worldIn.getBlockState(pos.down());
+        final String downBlockName = downState.getBlock().getRegistryName().toString();
+        final int downBlockMeta = downState.getBlock().getMetaFromState(downState);
         final Integer width = craftData.getWidthMap().get(blockName);
-        final String template = craftData.getRecipeTemplate().get(downBlockName);
+        final String template = craftData.getRecipeTemplate().get(downBlockName + ":" + downBlockMeta);
         final ItemStack output = handler.getStackInSlot(0);
         if (width == null || template == null) {
             return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
