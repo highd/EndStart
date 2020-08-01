@@ -16,8 +16,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityShulker;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -234,21 +232,13 @@ public class PlayerDataEvents {
 
 	@SubscribeEvent
 	public static void onLivingDrops(LivingDropsEvent event) {
-		if ("ieCrushed".equals(event.getSource().getDamageType()) && event.getEntity() instanceof EntityZombie
+		if ("ieCrushed".equals(event.getSource().getDamageType()) && event.getEntity() instanceof EntityVillager
 				&& random.nextInt(100) < 5) {
 			ItemStack lifeCore = ItemManager.getItemStack(ItemExtra.class, 1);
 			BlockPos postion = event.getEntity().getPosition();
 			EntityItem result = new EntityItem(event.getEntity().getEntityWorld(), postion.getX(), postion.getY(),
 					postion.getZ(), lifeCore);
 			event.getDrops().add(result);
-		}
-		int rank = (int) (50 + event.getLootingLevel() * 6.25f);
-		if (event.getEntity() instanceof EntityShulker && rank < random.nextInt(100)) {
-			EntityItem entityitem = new EntityItem(event.getEntityLiving().getEntityWorld(),
-					event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, 
-					ItemManager.getItemStack(ItemExtra.class, 4));
-			entityitem.setDefaultPickupDelay();
-			event.getDrops().add(entityitem);
 		}
 		if (!(event.getSource().getEntity() instanceof EntityPlayer)) {
 			return;
