@@ -10,4 +10,5 @@ public class ExtraCraftData {
     private Map<String, Integer> widthMap;
 	private Map<String, String> recipeTemplate;
 	private Map<String, List<String>> nbtFilter;
+	private Map<String, Boolean> isPrint;
 }

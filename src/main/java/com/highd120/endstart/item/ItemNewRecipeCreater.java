@@ -1,5 +1,8 @@
 package com.highd120.endstart.item;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -51,6 +54,7 @@ public class ItemNewRecipeCreater extends ItemBase {
                 craftData = new ExtraCraftData();
                 craftData.setNbtFilter(new HashMap<>());
                 craftData.setRecipeTemplate(new HashMap<>());
+                craftData.setIsPrint(new HashMap<>());
             }
 		} catch (final IOException error) {
 			error.printStackTrace();
@@ -156,13 +160,21 @@ public class ItemNewRecipeCreater extends ItemBase {
         final String downBlockName = downState.getBlock().getRegistryName().toString();
         final int downBlockMeta = downState.getBlock().getMetaFromState(downState);
         final Integer width = craftData.getWidthMap().get(blockName);
-        final String template = craftData.getRecipeTemplate().get(downBlockName + ":" + downBlockMeta);
+        final String downBlockString = downBlockName + ":" + downBlockMeta;
+        final String template = craftData.getRecipeTemplate().get(downBlockString);
         final ItemStack output = handler.getStackInSlot(0);
         if (width == null || template == null) {
             return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
         }
         final String code = convertRecipeCode(template, handler, width);
-        updateDb(map -> map.put(createItemText(output), code));
+        if (!craftData.getIsPrint().containsKey(downBlockString) || craftData.getIsPrint().get(downBlockString)) {
+        	updateDb(map -> map.put(createItemText(output), code));
+        } else {
+    		Toolkit kit = Toolkit.getDefaultToolkit();
+    		Clipboard clip = kit.getSystemClipboard();
+    		StringSelection ss = new StringSelection(code);
+    		clip.setContents(ss, null);
+        }
         return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     }
 
