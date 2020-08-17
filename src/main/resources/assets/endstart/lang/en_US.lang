@@ -10,6 +10,19 @@ item.endstart.empty.name=Empty
 item.endstart.argument.name=Argument
 item.endstart.shulker_shell.name=Shulker Shell
 
+item.endstart.magnesium.name=Magnesium Dust
+item.endstart.crystal.name=Crystal Dust
+item.endstart.zinc.name=Zinc Dust
+item.endstart.tungsten.name=Tungsten Dust
+item.endstart.dark_iron.name=DarkIron Dust
+item.endstart.platinum.name=Platinum Dust
+item.endstart.palladium.name=Palladium Dust
+item.endstart.nickel.name=Nickel Dust
+item.endstart.volcanic.name=Volcanic Dust
+item.endstart.carbon.name=Carbon Dust
+item.endstart.mercury.name=Mercury Dust
+item.endstart.uranium.name=Uranium Dust
+
 endstart.valid=ERROR
 
 itemGroup.endstart=End Start
@@ -19,6 +32,7 @@ tile.endstart.auto_dire_crafting.name=Auto Dire Crafting Table
 tile.endstart.crafter_core.name=Crafter Core
 tile.endstart.stand.name=Stand
 tile.endstart.nolife_wither_skeleton.name=No Life Wither Skeleton Skull
+tile.endstart.blackhole.name=Black Hole
 
 item.endstart.create_wall.name=Wall Creater
 item.endstart.msg.is_not_end=The "End Bed" can only used in The End.
