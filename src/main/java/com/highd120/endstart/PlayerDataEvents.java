@@ -97,9 +97,14 @@ public class PlayerDataEvents {
 			}
 			if (player.ticksExisted > 3 && !persist.getBoolean(TAG_PLAYER_SPAWN)) {
 				player.addChatComponentMessage(new TextComponentString("Spawn!"));
-				player.changeDimension(1);
 				persist.setBoolean(TAG_PLAYER_SPAWN, true);
-				persist.setBoolean(TAG_NO_DRAGON, false);
+				if (player.isCreative()) {
+					persist.setBoolean(TAG_NO_DRAGON, true);
+					persist.setBoolean(TAG_TOUCH_ENDPORTAL, true);
+				} else {
+					player.changeDimension(1);
+					persist.setBoolean(TAG_NO_DRAGON, false);
+				}
 			}
 			int playerY = player.getPosition().getY();
 			BlockPos playerBottom = player.getPosition().add(0, -1, 0);
