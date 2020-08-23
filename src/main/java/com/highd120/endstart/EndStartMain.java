@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import com.highd120.endstart.block.InjectionRecipe;
 import com.highd120.endstart.block.TileAutoDireCraftingTable;
+import com.highd120.endstart.block.TileBlood;
 import com.highd120.endstart.block.TileCrafterCore;
 import com.highd120.endstart.block.TileStand;
 import com.highd120.endstart.command.ArgumentCommand;
@@ -81,6 +82,7 @@ public class EndStartMain {
 		GameRegistry.registerTileEntity(TileAutoDireCraftingTable.class, MOD_ID + ".auto_dire_crafting");
 		GameRegistry.registerTileEntity(TileCrafterCore.class, MOD_ID + ".crafter_core");
 		GameRegistry.registerTileEntity(TileStand.class, MOD_ID + ".stand");
+		GameRegistry.registerTileEntity(TileBlood.class, MOD_ID + ".blood");
         EndStartMessages.registerNetworkMessages();
         SoundList.init();
         InjectionRecipe.init();

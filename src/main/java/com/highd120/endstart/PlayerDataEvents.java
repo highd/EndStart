@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.highd120.endstart.item.ItemEndStoneShard;
 import com.highd120.endstart.item.ItemExtra;
 import com.highd120.endstart.util.ItemUtil;
 import com.highd120.endstart.util.NbtTagUtil;
@@ -203,6 +204,12 @@ public class PlayerDataEvents {
 		String blockName = event.getState().getBlock().getRegistryName().toString();
 		if (blockName.equals("storagedrawers:basicDrawers")) {
 			onBreakDrawer(event);
+		}
+		if (event.getState().getBlock() == Blocks.END_STONE && 
+			event.getPlayer().getHeldItem(EnumHand.MAIN_HAND) == null &&
+			!event.getPlayer().isCreative()) {
+			ItemUtil.dropItem(event.getWorld(), event.getPos(), ItemManager.getItemStack(ItemEndStoneShard.class));
+			
 		}
 	}
 
