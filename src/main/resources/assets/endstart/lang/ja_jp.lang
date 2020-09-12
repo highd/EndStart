@@ -1,0 +1,44 @@
+item.endstart.old_recipe.name=レシピ作成
+item.endstart.new_recipe.name=新レシピ作成
+item.endstart.fluid_injecter.name=クリエィティブドラム液体注入機
+item.endstart.end_bed.name=エンドのベッド
+item.endstart.ex_core.name=真理のコア
+item.endstart.life_core.name=生命のコア
+item.endstart.fire.name=火のオーブ
+item.endstart.water.name=水のオーブ
+item.endstart.empty.name=空白
+item.endstart.argument.name=引数
+item.endstart.shulker_shell.name=シュルカーの殻
+item.endstart.create_wall.name=壁生成
+item.endstart.red_blood.name=赤い血
+item.endstart.black_blood.name=黒ずんだ血
+item.endstart.green_blood.name=緑の血
+item.endstart.end_stone_shard.name=エンドストーンの欠片
+item.endstart.end_stone_sword.name=エンドストーンの剣
+
+item.endstart.magnesium.name=マグネシウムの粉末
+item.endstart.crystal.name=水晶の粉末
+item.endstart.zinc.name=亜鉛の粉末
+item.endstart.tungsten.name=タングステンの粉末
+item.endstart.dark_iron.name=黒鉄の粉末
+item.endstart.platinum.name=プラチナの粉末
+item.endstart.palladium.name=パラジウムの粉末
+item.endstart.nickel.name=ニッケルの粉末
+item.endstart.volcanic.name=火山岩の粉末
+item.endstart.carbon.name=カーボンの粉末
+item.endstart.mercury.name=水銀の粉末
+item.endstart.uranium.name=ウランの粉末
+
+tile.endstart.auto_dire_crafting.name=自動ダイヤ作業台
+tile.endstart.crafter_core.name=クラフター　コア
+tile.endstart.stand.name=スタンド
+tile.endstart.nolife_wither_skeleton.name=生命無きウィザースケルトンスカル
+tile.endstart.blackhole.name=ブラック　ホール
+tile.endstart.blood.name=血粉
+tile.endstart.end_bed.name=リスポーン物体
+
+item.endstart.msg.is_not_end=「エンドのベッド」はエンドでしか使えません。
+item.endstart.msg.chane_spawn=スポーン地点を変更しました。
+endstart.valid=エラー
+itemGroup.endstart=End Start
+endstart.injection=アイテム注入

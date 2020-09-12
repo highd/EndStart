@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "color=black": { "model": "endstart:black_blood" },
+        "color=red": { "model": "endstart:red_blood" }
+    }
+}

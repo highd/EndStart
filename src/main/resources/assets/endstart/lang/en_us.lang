@@ -1,0 +1,42 @@
+item.endstart.recipe.name=Recipe Creater
+item.endstart.new_recipe.name=New Recipe Creater
+item.endstart.end_bed.name=End Bed
+item.endstart.ex_core.name=True Core
+item.endstart.life_core.name=Life Core
+item.endstart.fire.name=Fire Orb
+item.endstart.water.name=Water Orb
+item.endstart.empty.name=Empty
+item.endstart.argument.name=Argument
+item.endstart.shulker_shell.name=Shulker Shell
+item.endstart.create_wall.name=Wall Creater
+item.endstart.red_blood.name=Red Blood
+item.endstart.black_blood.name=Red black Blood
+item.endstart.green_blood.name=Green Blood
+item.endstart.end_stone_shard.name=End Stone Shard
+item.endstart.end_stone_sword.name=End Stone Sword
+
+item.endstart.magnesium.name=Magnesium Dust
+item.endstart.crystal.name=Crystal Dust
+item.endstart.zinc.name=Zinc Dust
+item.endstart.tungsten.name=Tungsten Dust
+item.endstart.dark_iron.name=DarkIron Dust
+item.endstart.platinum.name=Platinum Dust
+item.endstart.palladium.name=Palladium Dust
+item.endstart.nickel.name=Nickel Dust
+item.endstart.volcanic.name=Volcanic Dust
+item.endstart.carbon.name=Carbon Dust
+item.endstart.mercury.name=Mercury Dust
+item.endstart.uranium.name=Uranium Dust
+
+tile.endstart.crafter_core.name=Crafter Core
+tile.endstart.stand.name=Stand
+tile.endstart.nolife_wither_skeleton.name=No Life Wither Skeleton Skull
+tile.endstart.blackhole.name=Black Hole
+tile.endstart.blood.name=Blood Dust
+tile.endstart.end_bed.name=Respawn Object
+
+item.endstart.msg.is_not_end=The "End Bed" can only used in The End.
+item.endstart.msg.chane_spawn=You changed the spawn point.
+endstart.valid=ERROR
+itemGroup.endstart=End Start
+endstart.injection=Injection
