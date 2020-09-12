@@ -13,9 +13,10 @@ item.endstart.create_wall.name=壁生成
 item.endstart.red_blood.name=赤い血
 item.endstart.black_blood.name=黒ずんだ血
 item.endstart.green_blood.name=緑の血
+item.endstart.dust.name=エンドストーンの粉
 item.endstart.end_stone_shard.name=エンドストーンの欠片
 item.endstart.end_stone_sword.name=エンドストーンの剣
-item.endstart.end_pickaxe.name=エンドストーンのピッケル
+item.endstart.end_pickaxe.name=エンドストーンのツルハシ
 
 item.endstart.magnesium.name=マグネシウムの粉末
 item.endstart.crystal.name=水晶の粉末
@@ -31,10 +32,10 @@ item.endstart.mercury.name=水銀の粉末
 item.endstart.uranium.name=ウランの粉末
 
 tile.endstart.auto_dire_crafting.name=自動ダイヤ作業台
-tile.endstart.crafter_core.name=クラフター　コア
+tile.endstart.crafter_core.name=クラフターコア
 tile.endstart.stand.name=スタンド
 tile.endstart.nolife_wither_skeleton.name=生命無きウィザースケルトンスカル
-tile.endstart.blackhole.name=ブラック　ホール
+tile.endstart.blackhole.name=ブラックホール
 tile.endstart.blood.name=血粉
 tile.endstart.end_bed.name=リスポーン物体
 

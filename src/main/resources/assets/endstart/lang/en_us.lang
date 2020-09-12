@@ -12,6 +12,7 @@ item.endstart.create_wall.name=Wall Creater
 item.endstart.red_blood.name=Red Blood
 item.endstart.black_blood.name=Red black Blood
 item.endstart.green_blood.name=Green Blood
+item.endstart.dust.name=End Stone Dust
 item.endstart.end_stone_shard.name=End Stone Shard
 item.endstart.end_stone_sword.name=End Stone Sword
 item.endstart.end_pickaxe.name=End Stone Pickaxe
