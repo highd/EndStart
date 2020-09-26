@@ -17,6 +17,9 @@ item.endstart.dust.name=エンドストーンの粉
 item.endstart.end_stone_shard.name=エンドストーンの欠片
 item.endstart.end_stone_sword.name=エンドストーンの剣
 item.endstart.end_pickaxe.name=エンドストーンのツルハシ
+item.endstart.chalk_red.name=赤いチョーク
+item.endstart.chalk_red_black.name=赤黒いチョーク
+item.endstart.chalk_green.name=緑のチョーク
 
 item.endstart.magnesium.name=マグネシウムの粉末
 item.endstart.crystal.name=水晶の粉末

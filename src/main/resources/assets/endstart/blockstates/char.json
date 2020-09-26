@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "color=red": { "model": "endstart:char_red" },
+        "color=red_black": { "model": "endstart:char_red_black" },
+        "color=green": { "model": "endstart:char_green" }
+    }
+}

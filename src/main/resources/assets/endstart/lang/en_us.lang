@@ -16,6 +16,9 @@ item.endstart.dust.name=End Stone Dust
 item.endstart.end_stone_shard.name=End Stone Shard
 item.endstart.end_stone_sword.name=End Stone Sword
 item.endstart.end_pickaxe.name=End Stone Pickaxe
+item.endstart.chalk_red.name=Red Chalk
+item.endstart.chalk_red_black.name=Red Black Chalk 
+item.endstart.chalk_green.name=Green Chalk
 
 item.endstart.magnesium.name=Magnesium Dust
 item.endstart.crystal.name=Crystal Dust
