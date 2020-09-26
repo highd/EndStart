@@ -6,6 +6,7 @@ import com.google.common.base.Predicate;
 import com.highd120.endstart.EndStartConfig;
 import com.highd120.endstart.util.item.ItemRegister;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,24 +24,34 @@ public class ItemCreateWall extends ItemBase {
 	public ItemCreateWall() {
 	}
 
-	private void setBlock(World world, BlockPos point) {
-		if (!world.isAirBlock(point)) {
-			return;
-		}
-		world.setBlockState(point, Blocks.END_STONE.getDefaultState());
-	}
-
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		for (int y = -EndStartConfig.wall_height; y <= EndStartConfig.wall_height; y++) {
-			for (int x = -EndStartConfig.wall_range; x <= EndStartConfig.wall_range; x++) {
-				setBlock(worldIn, pos.add(x, y, -EndStartConfig.wall_range));
-				setBlock(worldIn, pos.add(x, y, EndStartConfig.wall_range));
+		int range = EndStartConfig.wall_range;
+		int height = EndStartConfig.wall_height;
+		IBlockState endStone = Blocks.END_STONE.getDefaultState();
+		IBlockState air = Blocks.AIR.getDefaultState();
+		for (int y = 1; y <= height - 1; y++) {
+			for (int x = -range; x <= range; x++) {
+				worldIn.setBlockState(pos.add(x, y, -range), endStone);
+				worldIn.setBlockState(pos.add(x, y, range), endStone);
 			}
-			for (int z = -EndStartConfig.wall_range; z <= EndStartConfig.wall_range; z++) {
-				setBlock(worldIn, pos.add(-EndStartConfig.wall_range, y, z));
-				setBlock(worldIn, pos.add(EndStartConfig.wall_range, y, z));
+			for (int z = -range; z <= range; z++) {
+				worldIn.setBlockState(pos.add(-range, y, z), endStone);
+				worldIn.setBlockState(pos.add(range, y, z), endStone);
+			}
+		}
+		for (int y = 1; y <= height - 1; y++) {
+			for (int x = -range + 1; x <= range - 1; x++) {
+				for (int z = -range + 1; z <= range - 1; z++) {
+					worldIn.setBlockState(pos.add(x, y, z), air);
+				}
+			}
+		}
+		for (int x = -range; x <= range; x++) {
+			for (int z = -range; z <= range; z++) {
+				worldIn.setBlockState(pos.add(x, 0, z), endStone);
+				worldIn.setBlockState(pos.add(x, height, z), endStone);
 			}
 		}
 		Predicate<Entity> selector = entity -> {
