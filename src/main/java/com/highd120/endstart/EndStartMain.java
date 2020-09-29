@@ -1,7 +1,9 @@
 package com.highd120.endstart;
 
+import com.highd120.endstart.block.CharRecipe;
 import com.highd120.endstart.block.InjectionRecipe;
 import com.highd120.endstart.block.TileBlood;
+import com.highd120.endstart.block.TileChar;
 import com.highd120.endstart.block.TileCrafterCore;
 import com.highd120.endstart.block.TileStand;
 import com.highd120.endstart.command.ArgumentCommand;
@@ -49,6 +51,7 @@ public class EndStartMain {
 		GameRegistry.registerTileEntity(TileCrafterCore.class, new ResourceLocation(MOD_ID, "crafter_core"));
 		GameRegistry.registerTileEntity(TileStand.class, new ResourceLocation(MOD_ID, "stand"));
 		GameRegistry.registerTileEntity(TileBlood.class, new ResourceLocation(MOD_ID, "blood"));
+		GameRegistry.registerTileEntity(TileChar.class, new ResourceLocation(MOD_ID, "char"));
         EndStartMessages.registerNetworkMessages();
         proxy.registerRenderers();
 	}
@@ -62,6 +65,7 @@ public class EndStartMain {
 		MinecraftForge.EVENT_BUS.register(PlayerDataEvents.class);
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
         InjectionRecipe.init();
+        CharRecipe.init();
 	}
 
 	@EventHandler

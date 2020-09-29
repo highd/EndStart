@@ -7,6 +7,7 @@ import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
@@ -340,5 +341,30 @@ public class NbtTagUtil {
             newList.add(list.getCompoundTagAt(i));
         }
         return newList;
+    }
+    
+    public static boolean checkRecipe(NBTBase recipe, NBTBase input) {
+    	if (recipe instanceof NBTTagCompound && input instanceof NBTTagCompound) {
+    		return checkRecipeCompound((NBTTagCompound)recipe, (NBTTagCompound)input);
+    	}
+    	if (recipe instanceof NBTTagList && input instanceof NBTTagList) {
+    		return checkRecipeList((NBTTagList)recipe, (NBTTagList)input);
+    	}
+    	return recipe == null || recipe.equals(input);
+    }
+    
+    public static boolean checkRecipeCompound(NBTTagCompound recipe, NBTTagCompound input) {
+    	for (String key : recipe.getKeySet()) {
+    		if(!checkRecipe(recipe.getTag(key), input.getTag(key))) return false;
+    	}
+    	return recipe == null || recipe.equals(input);
+    }
+    
+    public static boolean checkRecipeList(NBTTagList recipe, NBTTagList input) {
+    	for (int i = 0; i < recipe.tagCount(); i++) {
+    		if(!checkRecipe(recipe.get(i), input.get(i))) return false;
+    	}
+    	return recipe == null || recipe.equals(input);
+    	
     }
 }

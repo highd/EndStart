@@ -1,7 +1,10 @@
 {
     "variants": {
-        "color=red": { "model": "endstart:char_red" },
-        "color=red_black": { "model": "endstart:char_red_black" },
-        "color=green": { "model": "endstart:char_green" }
+        "color=red,state=normal": { "model": "endstart:char_red" },
+        "color=red_black,state=normal": { "model": "endstart:char_red_black" },
+        "color=green,state=normal": { "model": "endstart:char_green" },
+        "color=red,state=sand": { "model": "endstart:end_sand" },
+        "color=red_black,state=sand": { "model": "endstart:end_sand" },
+        "color=green,state=sand": { "model": "endstart:end_sand" }
     }
 }

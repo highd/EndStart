@@ -1,8 +1,11 @@
 package com.highd120.endstart.jei;
 
 import com.highd120.endstart.block.BlockCrafterCore;
+import com.highd120.endstart.block.CharRecipe;
+import com.highd120.endstart.block.CharRecipeData;
 import com.highd120.endstart.block.InjectionRecipe;
 import com.highd120.endstart.block.InjectionRecipeData;
+import com.highd120.endstart.item.ItemChalk;
 import com.highd120.endstart.util.item.ItemManager;
 
 import mezz.jei.api.IJeiRuntime;
@@ -27,6 +30,7 @@ public class EndStartPlugin implements IModPlugin {
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {
 		registry.addRecipeCategories(new InjectionCategory(registry.getJeiHelpers().getGuiHelper()));
+		registry.addRecipeCategories(new CharCategory(registry.getJeiHelpers().getGuiHelper()));
 	}
 
 	@Override
@@ -34,6 +38,10 @@ public class EndStartPlugin implements IModPlugin {
 		registry.handleRecipes(InjectionRecipeData.class, InjectionRecipeWrapper::new, InjectionCategory.UID);
 		registry.addRecipes(InjectionRecipe.recipes, InjectionCategory.UID);
         registry.addRecipeCatalyst(ItemManager.getItemStack(BlockCrafterCore.class), InjectionCategory.UID);
+        
+		registry.handleRecipes(CharRecipeData.class, CharRecipeWrapper::new, CharCategory.UID);
+		registry.addRecipes(CharRecipe.recipes, CharCategory.UID);
+        registry.addRecipeCatalyst(ItemManager.getItemStack(ItemChalk.class), CharCategory.UID);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.highd120.endstart.proxy;
 
+import com.highd120.endstart.block.TileChar;
+import com.highd120.endstart.block.TileCharRenderer;
 import com.highd120.endstart.block.TileCrafterCore;
 import com.highd120.endstart.block.TileSingleItemRenderer;
 import com.highd120.endstart.block.TileStand;
@@ -17,6 +19,8 @@ public class ClientProxy extends CommonProxy {
                 new TileSingleItemRenderer(1.7f));
         ClientRegistry.bindTileEntitySpecialRenderer(TileStand.class,
                 new TileSingleItemRenderer(1.5f));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileChar.class,
+                new TileCharRenderer());
     }
 
     @Override
