@@ -266,9 +266,5 @@ public class PlayerDataEvents {
 				&& random.nextInt(100) < 5) {
 			addDropItem(event, new ItemStack(ModItems.extra, 1, 1));
 		}
-		int rank = (int) (50 + event.getLootingLevel() * 6.25f);
-		if (event.getEntity() instanceof EntityShulker && rank < random.nextInt(100)) {
-			addDropItem(event, new ItemStack(ModItems.extra, 1, 4));
-		}
 	}
 }
