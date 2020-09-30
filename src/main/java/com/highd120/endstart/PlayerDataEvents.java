@@ -241,7 +241,7 @@ public class PlayerDataEvents {
 	@SubscribeEvent
 	public static void onBreakBlock(BreakEvent event) {
 		if (event.getState().getBlock() == Blocks.END_STONE && 
-			event.getPlayer().getHeldItem(EnumHand.MAIN_HAND) == null &&
+			event.getPlayer().getHeldItem(EnumHand.MAIN_HAND) == ItemStack.EMPTY &&
 			!event.getPlayer().isCreative()) {
 			ItemUtil.dropItem(event.getWorld(), event.getPos(), new ItemStack(ModItems.endStoneShard));
 		}
