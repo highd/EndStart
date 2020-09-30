@@ -4,10 +4,8 @@ import java.util.Locale;
 
 import javax.annotation.Nonnull;
 
-import com.highd120.endstart.item.ItemBlood;
+import com.highd120.endstart.item.ModItems;
 import com.highd120.endstart.util.ItemUtil;
-import com.highd120.endstart.util.block.BlockRegister;
-import com.highd120.endstart.util.item.ItemManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -15,6 +13,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -22,7 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-@BlockRegister(name = "blood")
 public class BlockBlood extends Block {
 	enum Color implements IStringSerializable {
 		RED, BLACK;
@@ -93,8 +91,8 @@ public class BlockBlood extends Block {
 
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-		ItemUtil.dropItem(world, pos, ItemManager.getItemStack(
-				ItemBlood.class, state.getValue(COLOR).ordinal()));
+		ItemUtil.dropItem(world, pos, new ItemStack(ModItems.itemBlood, 1,
+				state.getValue(COLOR).ordinal()));
     }
 
 }

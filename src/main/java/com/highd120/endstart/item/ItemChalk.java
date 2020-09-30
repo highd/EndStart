@@ -1,9 +1,7 @@
 package com.highd120.endstart.item;
 
 import com.highd120.endstart.block.BlockChar;
-import com.highd120.endstart.util.block.BlockManager;
-import com.highd120.endstart.util.item.ItemRegister;
-
+import com.highd120.endstart.block.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,7 +11,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-@ItemRegister(name = "chalk")
 public class ItemChalk extends ItemHasMeta {
 
 	public ItemChalk() {
@@ -36,7 +33,7 @@ public class ItemChalk extends ItemHasMeta {
 		ItemStack stack = player.getHeldItem(hand);
 		int meta = stack.getMetadata();
 		BlockChar.Color color = BlockChar.Color.values()[meta];
-		IBlockState charBlock = BlockManager.getBlock(BlockChar.class).getDefaultState()
+		IBlockState charBlock = ModBlocks.blockChar.getDefaultState()
                 .withProperty(BlockChar.COLOR, color);
 		worldIn.setBlockState(pos.up(), charBlock);
 		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);

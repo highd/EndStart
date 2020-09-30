@@ -5,9 +5,7 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.highd120.endstart.item.ItemExtra;
-import com.highd120.endstart.util.block.BlockRegister;
-import com.highd120.endstart.util.item.ItemManager;
+import com.highd120.endstart.item.ModItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -29,7 +27,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@BlockRegister(name = "char")
 public class BlockChar extends net.minecraft.block.Block {
 	public enum Color implements IStringSerializable {
 		RED, RED_BLACK, GREEN;
@@ -61,7 +58,7 @@ public class BlockChar extends net.minecraft.block.Block {
 	
 	private boolean isStick(ItemStack stack) {
 		int meta = stack.getMetadata();
-		return meta == 18 && stack.getItem() == ItemManager.getItem(ItemExtra.class);
+		return meta == 18 && stack.getItem() == ModItems.extra;
 	}
 	
 	@Override

@@ -21,9 +21,6 @@ import java.util.regex.Matcher;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.highd120.endstart.util.NbtTagUtil;
-import com.highd120.endstart.util.item.ItemManager;
-import com.highd120.endstart.util.item.ItemRegister;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,7 +37,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.VanillaDoubleChestItemHandler;
-@ItemRegister(name = "new_recipe")
 public class ItemNewRecipeCreater extends ItemBase {
 	private static ExtraCraftData craftData;
 	public static void load() {
@@ -108,7 +104,7 @@ public class ItemNewRecipeCreater extends ItemBase {
         if (stack.isEmpty()) {
             return "null";
         }
-        if (stack.getItem() == ItemManager.getItem(ItemArgument.class)) {
+        if (stack.getItem() == ModItems.argument) {
             return NbtTagUtil.getString(ItemArgument.TAG, stack).orElse("null");
         }
         final String itemName = stack.getItem().getRegistryName().toString();

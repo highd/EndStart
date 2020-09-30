@@ -2,9 +2,6 @@ package com.highd120.endstart.item;
 
 import com.highd120.endstart.EndStartCreativeTab;
 import com.highd120.endstart.util.ItemUtil;
-import com.highd120.endstart.util.item.ItemManager;
-import com.highd120.endstart.util.item.ItemRegister;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -12,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-@ItemRegister(name = "end_stone_shard")
 public class ItemEndStoneShard extends ItemBase {
 	public ItemEndStoneShard() {
         setCreativeTab(EndStartCreativeTab.INSTANCE);
@@ -34,7 +30,7 @@ public class ItemEndStoneShard extends ItemBase {
         if (!worldIn.isRemote && (double)state.getBlockHardness(worldIn, pos) != 0.0D) {
             stack.damageItem(1, entityLiving);
         }
-        ItemStack dust = ItemManager.getItemStack(ItemExtra.class, 17);
+        ItemStack dust = new ItemStack(ModItems.extra, 1, 17);
         ItemUtil.dropItem(worldIn, pos, dust);
     	return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
     }

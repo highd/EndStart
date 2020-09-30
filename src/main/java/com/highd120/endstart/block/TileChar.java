@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import com.highd120.endstart.item.ItemExtra;
+import com.highd120.endstart.item.ModItems;
 import com.highd120.endstart.util.ItemUtil;
 import com.highd120.endstart.util.MathUtil;
-import com.highd120.endstart.util.block.BlockManager;
-import com.highd120.endstart.util.item.ItemManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -53,7 +51,7 @@ public class TileChar extends TileHasInventory {
 	public void update() {
         List<EntityFallingBlock> blocks = getWorld().getEntitiesWithinAABB(EntityFallingBlock.class,
                 MathUtil.getAxisAlignedCube(getPos(), 1));
-        Block endSand = BlockManager.getBlock(BlockEndSand.class);
+        Block endSand = ModBlocks.endSand;
         blocks.forEach(entity -> {
         	if (entity.getBlock().getBlock() == endSand && entity.getDistanceSq(pos) < 0.64) {
         		entity.setDead();
@@ -83,13 +81,12 @@ public class TileChar extends TileHasInventory {
 		blockState = blockState.withProperty(BlockChar.STATE, state);
 		world.setBlockState(pos, blockState, 3);
 		int dustCout = rand.nextInt(3);
-		ItemStack dust = ItemManager.getItemStack(ItemExtra.class, 17);
-		dust.setCount(dustCout);
+		ItemStack dust = new ItemStack(ModItems.extra, dustCout, 17);
 		ItemUtil.dropItem(world, pos, dust);
         if (world instanceof WorldServer) {
         	((WorldServer)world).spawnParticle(EnumParticleTypes.BLOCK_CRACK, pos.getX(), pos.getY(), pos.getZ(), 20,
 	        		0.5d, 0.5d, 0.5d, 0.05d, 
-	        		Block.getStateId(BlockManager.getBlock(BlockEndSand.class).getDefaultState()));
+	        		Block.getStateId(ModBlocks.endSand.getDefaultState()));
         }
 	}
 	

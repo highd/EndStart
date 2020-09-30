@@ -9,10 +9,8 @@ import com.highd120.endstart.block.TileStand;
 import com.highd120.endstart.command.ArgumentCommand;
 import com.highd120.endstart.command.DebugCommand;
 import com.highd120.endstart.command.DeleteRecipeNewTmpCommand;
-import com.highd120.endstart.command.DeleteRecipeTmpCommand;
 import com.highd120.endstart.command.ReloadCommand;
 import com.highd120.endstart.item.ItemNewRecipeCreater;
-import com.highd120.endstart.item.ItemRecipeCreater;
 import com.highd120.endstart.proxy.CommonProxy;
 import com.highd120.endstart.world.WorldGenerator;
 import net.minecraft.util.ResourceLocation;
@@ -46,7 +44,6 @@ public class EndStartMain {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-        ItemRecipeCreater.load();
         ItemNewRecipeCreater.load();
 		GameRegistry.registerTileEntity(TileCrafterCore.class, new ResourceLocation(MOD_ID, "crafter_core"));
 		GameRegistry.registerTileEntity(TileStand.class, new ResourceLocation(MOD_ID, "stand"));
@@ -72,7 +69,6 @@ public class EndStartMain {
 	public void serverLoad(FMLServerStartingEvent event) {
 		event.registerServerCommand(new ReloadCommand());
 		event.registerServerCommand(new DeleteRecipeNewTmpCommand());
-		event.registerServerCommand(new DeleteRecipeTmpCommand());
 		event.registerServerCommand(new DebugCommand());
 		event.registerServerCommand(new ArgumentCommand());
 	}

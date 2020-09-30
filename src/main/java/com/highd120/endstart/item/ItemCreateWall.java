@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.highd120.endstart.EndStartConfig;
-import com.highd120.endstart.util.item.ItemRegister;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,7 +17,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-@ItemRegister(name = "create_wall")
 public class ItemCreateWall extends ItemBase {
 	public ItemCreateWall() {
 	}

@@ -3,8 +3,6 @@ package com.highd120.endstart.block;
 import javax.annotation.Nonnull;
 
 import com.highd120.endstart.EndStartCreativeTab;
-import com.highd120.endstart.util.block.BlockRegister;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,7 +10,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-@BlockRegister(name = "nolife_wither_skeleton")
 public class BlockNoLifeSkull extends Block {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(
         4.0 / 16.0, 0, 4.0 / 16.0,

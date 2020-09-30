@@ -1,12 +1,11 @@
 package com.highd120.endstart.jei;
 
-import com.highd120.endstart.block.BlockCrafterCore;
 import com.highd120.endstart.block.CharRecipe;
 import com.highd120.endstart.block.CharRecipeData;
 import com.highd120.endstart.block.InjectionRecipe;
 import com.highd120.endstart.block.InjectionRecipeData;
-import com.highd120.endstart.item.ItemChalk;
-import com.highd120.endstart.util.item.ItemManager;
+import com.highd120.endstart.block.ModBlocks;
+import com.highd120.endstart.item.ModItems;
 
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;
@@ -15,6 +14,7 @@ import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.item.ItemStack;
 
 @JEIPlugin
 public class EndStartPlugin implements IModPlugin {
@@ -37,11 +37,11 @@ public class EndStartPlugin implements IModPlugin {
 	public void register(IModRegistry registry) {
 		registry.handleRecipes(InjectionRecipeData.class, InjectionRecipeWrapper::new, InjectionCategory.UID);
 		registry.addRecipes(InjectionRecipe.recipes, InjectionCategory.UID);
-        registry.addRecipeCatalyst(ItemManager.getItemStack(BlockCrafterCore.class), InjectionCategory.UID);
+        registry.addRecipeCatalyst(new ItemStack(ModBlocks.crafterCore), InjectionCategory.UID);
         
 		registry.handleRecipes(CharRecipeData.class, CharRecipeWrapper::new, CharCategory.UID);
 		registry.addRecipes(CharRecipe.recipes, CharCategory.UID);
-        registry.addRecipeCatalyst(ItemManager.getItemStack(ItemChalk.class), CharCategory.UID);
+        registry.addRecipeCatalyst(new ItemStack(ModItems.chalk), CharCategory.UID);
 	}
 
 	@Override

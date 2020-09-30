@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.highd120.endstart.item.ItemChalk;
+import com.highd120.endstart.item.ModItems;
 import com.highd120.endstart.util.ItemUtil;
-import com.highd120.endstart.util.item.ItemManager;
 
 import lombok.Builder;
 import lombok.Value;
@@ -53,7 +52,7 @@ public class CharRecipeData {
     }
     
     public ItemStack getMain() {
-        return ItemManager.getItemStack(ItemChalk.class, color.ordinal());
+    	return new ItemStack(ModItems.chalk, 1, color.ordinal());
     }
     
     public List<List<ItemStack>> createIngredient() {

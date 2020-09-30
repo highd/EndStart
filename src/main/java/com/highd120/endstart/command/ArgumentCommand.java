@@ -1,8 +1,8 @@
 package com.highd120.endstart.command;
 
 import com.highd120.endstart.item.ItemArgument;
+import com.highd120.endstart.item.ModItems;
 import com.highd120.endstart.util.NbtTagUtil;
-import com.highd120.endstart.util.item.ItemManager;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -22,7 +22,7 @@ public class ArgumentCommand extends CommandBase {
         }
         EntityPlayer player = (EntityPlayer) sender;
         ItemStack stack = player.getHeldItemMainhand();
-        if (args.length != 1 || stack == null || stack.getItem() != ItemManager.getItem(ItemArgument.class)) {
+        if (args.length != 1 || stack == null || stack.getItem() != ModItems.argument) {
             sender.sendMessage(new TextComponentTranslation("endstart.valid")
                 .setStyle(new Style().setColor(TextFormatting.RED)));
         }

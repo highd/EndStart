@@ -1,7 +1,6 @@
 package com.highd120.endstart.block;
 
 import com.highd120.endstart.util.ChatUtil;
-import com.highd120.endstart.util.block.BlockRegister;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,7 +11,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-@BlockRegister(name = "end_bed")
 public class BlockEndBed extends Block {
 	public BlockEndBed() {
         super(Material.ROCK);

@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.highd120.endstart.item.ItemBlood;
-import com.highd120.endstart.item.ItemEndStoneShard;
-import com.highd120.endstart.item.ItemEndStoneSword;
-import com.highd120.endstart.item.ItemExtra;
+import com.highd120.endstart.item.ModItems;
 import com.highd120.endstart.util.ItemUtil;
-import com.highd120.endstart.util.item.ItemManager;
 
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
@@ -247,7 +243,7 @@ public class PlayerDataEvents {
 		if (event.getState().getBlock() == Blocks.END_STONE && 
 			event.getPlayer().getHeldItem(EnumHand.MAIN_HAND) == null &&
 			!event.getPlayer().isCreative()) {
-			ItemUtil.dropItem(event.getWorld(), event.getPos(), ItemManager.getItemStack(ItemEndStoneShard.class));
+			ItemUtil.dropItem(event.getWorld(), event.getPos(), new ItemStack(ModItems.endStoneShard));
 		}
 	}
 	
@@ -262,17 +258,17 @@ public class PlayerDataEvents {
 	public static void onLivingDrops(LivingDropsEvent event) {
 		if (event.getSource().getTrueSource() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
-			if (player.getHeldItemMainhand().getItem() == ItemManager.getItem(ItemEndStoneSword.class)) {
-				addDropItem(event, ItemManager.getItemStack(ItemBlood.class));
+			if (player.getHeldItemMainhand().getItem() == ModItems.endStoneSword) {
+				addDropItem(event, new ItemStack(ModItems.itemBlood));
 			}
 		}
 		if ("ieCrushed".equals(event.getSource().getDamageType()) && event.getEntity() instanceof EntityZombie
 				&& random.nextInt(100) < 5) {
-			addDropItem(event, ItemManager.getItemStack(ItemExtra.class, 1));
+			addDropItem(event, new ItemStack(ModItems.extra, 1, 1));
 		}
 		int rank = (int) (50 + event.getLootingLevel() * 6.25f);
 		if (event.getEntity() instanceof EntityShulker && rank < random.nextInt(100)) {
-			addDropItem(event, ItemManager.getItemStack(ItemExtra.class, 4));
+			addDropItem(event, new ItemStack(ModItems.extra, 1, 4));
 		}
 	}
 }

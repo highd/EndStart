@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.highd120.endstart.block.BlockChar.Color;
-import com.highd120.endstart.item.ItemExtra;
-import com.highd120.endstart.util.item.ItemManager;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -27,17 +24,16 @@ public class CharRecipe {
                 Color.RED,
                 new ItemStack(Blocks.LEAVES), new ItemStack(Blocks.LEAVES),
                 new ItemStack(Blocks.LEAVES), new ItemStack(Blocks.LEAVES)));
-        recipes.add(createRecipe(
-                ItemManager.getItemStack(BlockNoLifeSkull.class),
-                Color.GREEN,
-                ItemManager.getItemStack(ItemExtra.class, 2),
-                ItemManager.getItemStack(ItemExtra.class, 3),
-                ItemManager.getItemStack(ItemExtra.class, 2),
-                ItemManager.getItemStack(ItemExtra.class, 3)));
+
         recipes.add(createRecipe(new ItemStack(Items.APPLE),
                 Color.RED,
                 new ItemStack(Blocks.BEDROCK), new ItemStack(Blocks.LEAVES),
                 new ItemStack(Blocks.LEAVES), new ItemStack(Blocks.BEDROCK)));
+        
+        recipes.add(createRecipe(new ItemStack(Items.BLAZE_ROD),
+                Color.GREEN,
+                new ItemStack(Items.FLINT), new ItemStack(Blocks.LEAVES),
+                new ItemStack(Blocks.LEAVES), new ItemStack(Blocks.LEAVES)));
     }
     
     public static Optional<ItemStack> craft(List<ItemStack> inputs, Color color) {
