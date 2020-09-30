@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "endstart:extra",
+    "data": 18
+  },
+  "pattern": [
+    "D",
+    "D"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": {
+      "item": "endstart:extra",
+      "data": 17
+    }
+  }
+}

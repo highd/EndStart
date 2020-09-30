@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "endstart:end_stone_shard"
+  },
+  "pattern": [
+    "D"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": {
+      "item": "endstart:extra",
+      "data": 17
+    }
+  }
+}
