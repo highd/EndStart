@@ -19,6 +19,7 @@ item.endstart.end_pickaxe.name=End Stone Pickaxe
 item.endstart.chalk_red.name=Red Chalk
 item.endstart.chalk_red_black.name=Red Black Chalk 
 item.endstart.chalk_green.name=Green Chalk
+item.endstart.stick.name=End Stick
 
 item.endstart.magnesium.name=Magnesium Dust
 item.endstart.crystal.name=Crystal Dust
@@ -39,6 +40,7 @@ tile.endstart.nolife_wither_skeleton.name=No Life Wither Skeleton Skull
 tile.endstart.blackhole.name=Black Hole
 tile.endstart.blood.name=Blood Dust
 tile.endstart.end_bed.name=Respawn Object
+tile.endstart.end_sand.name=End Sand
 
 item.endstart.msg.is_not_end=The "End Bed" can only used in The End.
 item.endstart.msg.chane_spawn=You changed the spawn point.
