@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "endstart:end_stone_sword"
+  },
+  "pattern": [
+    "S"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "end_stone_shard"
+    }
+  }
+}

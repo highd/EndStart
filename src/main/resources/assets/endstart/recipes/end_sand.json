@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "endstart:end_sand"
+  },
+  "pattern": [
+    "DD",
+    "DD"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": {
+      "item": "endstart:extra",
+      "data": 17
+    }
+  }
+}

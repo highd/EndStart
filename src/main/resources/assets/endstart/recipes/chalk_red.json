@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "endstart:chalk",
+    "data": 0
+  },
+  "pattern": [
+    "DB"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": {
+      "item": "endstart:extra",
+      "data": 17
+    },
+    "B": {
+      "item": "endstart:item_blood",
+      "data": 0
+    }
+  }
+}
