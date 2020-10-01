@@ -7,14 +7,13 @@ import java.util.Random;
 
 import com.highd120.endstart.item.ModItems;
 import com.highd120.endstart.util.ItemUtil;
-import com.highd120.endstart.util.MathUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
 
 public class TileChar extends TileHasInventory {
@@ -50,7 +49,7 @@ public class TileChar extends TileHasInventory {
 	@Override
 	public void update() {
         List<EntityFallingBlock> blocks = getWorld().getEntitiesWithinAABB(EntityFallingBlock.class,
-                MathUtil.getAxisAlignedCube(getPos(), 1));
+                new AxisAlignedBB(getPos(), getPos().add(1, 2, 1)));
         Block endSand = ModBlocks.endSand;
         blocks.forEach(entity -> {
         	if (entity.getBlock().getBlock() == endSand && entity.getDistanceSq(pos) < 0.64) {
@@ -80,7 +79,7 @@ public class TileChar extends TileHasInventory {
 		state = BlockChar.State.NORMAL;
 		blockState = blockState.withProperty(BlockChar.STATE, state);
 		world.setBlockState(pos, blockState, 3);
-		int dustCout = rand.nextInt(3);
+		int dustCout = rand.nextInt(3) + 1;
 		ItemStack dust = new ItemStack(ModItems.extra, dustCout, 17);
 		ItemUtil.dropItem(world, pos, dust);
         if (world instanceof WorldServer) {
@@ -148,7 +147,7 @@ public class TileChar extends TileHasInventory {
 	}
 	
 	public void changeItem(ItemStack stack, boolean isCreative) {
-		if (stack == ItemStack.EMPTY) {
+		if (stack.isEmpty()) {
 			removeItem();
 		} else {
 			boolean success = addItem(stack);
