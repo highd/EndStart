@@ -76,5 +76,6 @@ public class ModItems {
 		registItemBlock(register, ModBlocks.endSand);
 		registItemBlock(register, ModBlocks.nolifeWitherSkeleton);
 		registItemBlock(register, ModBlocks.stand);
+		registItemBlock(register, ModBlocks.lavaStone);
 	}
 }

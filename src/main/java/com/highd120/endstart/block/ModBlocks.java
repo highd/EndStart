@@ -26,6 +26,7 @@ public class ModBlocks {
 	public static BlockEndSand endSand;
 	public static BlockNoLifeSkull nolifeWitherSkeleton;
 	public static BlockStand stand;
+	public static BlockLavaStone lavaStone;
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -38,5 +39,6 @@ public class ModBlocks {
 		endSand = regist(register, new BlockEndSand(), "end_sand");
 		nolifeWitherSkeleton = regist(register, new BlockNoLifeSkull(), "nolife_wither_skeleton");
 		stand = regist(register, new BlockStand(), "stand");
+		lavaStone = regist(register, new BlockLavaStone(), "lava_stone");
 	}
 }
