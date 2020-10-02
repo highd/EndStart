@@ -29,6 +29,11 @@ public class CharRecipe {
                 new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand),
                 new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand),
                 new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand)));
+        
+        recipes.add(createRecipe(new ItemStack(ModItems.water),
+                Color.RED,
+                new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand),
+                new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand)));
 
         recipes.add(createRecipe(new ItemStack(Blocks.LOG, 3),
                 Color.RED,

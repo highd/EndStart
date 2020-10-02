@@ -52,6 +52,7 @@ public class ModItems {
 	public static ItemEndStoneSword endStoneSword;
 	public static ItemExtra extra;
 	public static ItemNewRecipeCreater newRecipeCreater;
+	public static ItemWater water;
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
@@ -65,6 +66,7 @@ public class ModItems {
 		endStoneSword = registNotItemBase(register, new ItemEndStoneSword(), "end_stone_sword");
 		extra = regist(register, new ItemExtra(), "extra");
 		newRecipeCreater = regist(register, new ItemNewRecipeCreater(), "new_recipe");
+		water = regist(register, new ItemWater(), "set_water");
 		
 		registItemBlock(register, ModBlocks.blackhole);
 		registItemBlock(register, ModBlocks.blood);
