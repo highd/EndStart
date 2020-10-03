@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.highd120.endstart.EndStartMessages;
 import com.highd120.endstart.SoundList;
 import com.highd120.endstart.network.NetworkInjectionEffect;
@@ -14,16 +17,18 @@ import com.highd120.endstart.util.MathUtil;
 import com.highd120.endstart.util.NbtTagUtil;
 import com.highd120.endstart.util.WorldUtil;
 
-
-import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.EnergyStorage;
 import lombok.AllArgsConstructor;
 import lombok.Value;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
-public class TileCrafterCore extends TileHasSingleItem implements IEnergyStorage {
+public class TileCrafterCore extends TileHasSingleItem {
     public enum InjectionState {
         NOT_WORKING, CHARGE_MANA, EFFECT, ITEM_FLOW;
     }
@@ -31,7 +36,7 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyStorage
     private ItemStack resultItem;
     private InjectionState state = InjectionState.NOT_WORKING;
     private CrafterEffectManager effect;
-    private int energy = 0;
+    private EnergyStorage energyStorage = new EnergyStorage(1000000);
     private int completeEnergy = 0;
     private static final String ENERGY_TAG = "energy";
 
@@ -60,7 +65,7 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyStorage
             effect.readNbt(compound);
         }
         if (compound.hasKey(ENERGY_TAG)) {
-            energy = compound.getInteger(ENERGY_TAG);
+        	energyStorage = new EnergyStorage(1000000, 1000000, 0, compound.getInteger(ENERGY_TAG));
         }
     }
 
@@ -72,7 +77,7 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyStorage
         if (effect != null) {
             effect.writeNbt(compound);
         }
-        compound.setInteger(ENERGY_TAG, energy);
+        compound.setInteger(ENERGY_TAG, energyStorage.getEnergyStored());
     }
 
     @Override
@@ -82,10 +87,11 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyStorage
         }
         effect.upDate();
         EndStartMessages.sendToNearby(getWorld(), getPos(), new NetworkInjectionEffect(getPos()));
-        if (state == InjectionState.CHARGE_MANA && energy >= completeEnergy) {
+        if (state == InjectionState.CHARGE_MANA && energyStorage.getEnergyStored() >= completeEnergy) {
             SoundList.playSoundBlock(getWorld(), SoundList.injectionEffect, getPos());
             state = InjectionState.EFFECT;
             effect.start();
+            energyStorage.extractEnergy(completeEnergy, false);
             blockUpdate();
         }
         if (state == InjectionState.EFFECT && effect.isEnd()) {
@@ -165,42 +171,18 @@ public class TileCrafterCore extends TileHasSingleItem implements IEnergyStorage
         }
         return new LaunchableResult(new ArrayList<>(), false);
     }
-
+    
 	@Override
-	public int receiveEnergy(int maxReceive, boolean simulate) {
-        int energyReceived = Math.min(getMaxEnergyStored() - energy, maxReceive);
-
-        if (!simulate) {
-            energy += energyReceived;
-        }
-        markDirty();
-        blockUpdate();
-        return energyReceived;
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		if (capability == CapabilityEnergy.ENERGY) {
+			return CapabilityEnergy.ENERGY.cast(energyStorage);
+		}
+		return super.getCapability(capability, facing);
 	}
 
 	@Override
-	public int extractEnergy(int maxExtract, boolean simulate) {
-		return 0;
-	}
-
-	@Override
-	public int getEnergyStored() {
-        return energy;
-	}
-
-	@Override
-	public int getMaxEnergyStored() {
-        return 1000000;
-	}
-
-	@Override
-	public boolean canExtract() {
-		return false;
-	}
-
-	@Override
-	public boolean canReceive() {
-        return true;
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		return capability == CapabilityEnergy.ENERGY || super.hasCapability(capability, facing);
 	}
 
 }
