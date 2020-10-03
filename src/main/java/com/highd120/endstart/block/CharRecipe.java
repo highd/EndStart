@@ -181,10 +181,11 @@ public class CharRecipe {
                 new ItemStack(Blocks.DIRT), new ItemStack(Blocks.SAPLING)));
     }
     
-    public static Optional<ItemStack> craft(List<ItemStack> inputs, Color color) {
-    	for (CharRecipeData data: recipes) {
+    public static Optional<Integer> craft(List<ItemStack> inputs, Color color) {
+    	for (int i = 0; i < recipes.size(); i++) {
+    		CharRecipeData data = recipes.get(i);
     		if (data.checkRecipe(inputs, color)) {
-    			return Optional.of(data.getOutput());
+    			return Optional.of(i);
     		}
     	}
 		return Optional.empty();

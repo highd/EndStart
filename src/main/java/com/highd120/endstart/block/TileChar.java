@@ -10,6 +10,7 @@ import com.highd120.endstart.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
@@ -20,6 +21,7 @@ public class TileChar extends TileHasInventory {
 	public static int INPUT_SLOT_COUNT = 16;
 	private BlockChar.State state;
 	private BlockChar.Color color;
+	private Optional<Integer> oldRecipeIndex = Optional.empty();
     protected Random rand = new Random();
 		
 	public TileChar() {
@@ -37,6 +39,11 @@ public class TileChar extends TileHasInventory {
 		super.subReadNbt(compound);
 		state = BlockChar.State.values()[compound.getInteger("state")];
 		color = BlockChar.Color.values()[compound.getInteger("color")];
+		if (compound.hasKey("oldRecipeIndex") && compound.getInteger("oldRecipeIndex") != -1) {
+			oldRecipeIndex = Optional.of(compound.getInteger("oldRecipeIndex"));
+		} else {
+			oldRecipeIndex = Optional.empty();
+		}
 	}
 	
 	@Override
@@ -44,6 +51,7 @@ public class TileChar extends TileHasInventory {
 		super.subWriteNbt(compound);
 		compound.setInteger("color", color.ordinal());
 		compound.setInteger("state", state.ordinal());
+		compound.setInteger("oldRecipeIndex", oldRecipeIndex.orElse(-1));
 	}
 	
 	@Override
@@ -59,13 +67,35 @@ public class TileChar extends TileHasInventory {
         });
 	}
 	
+	public void setOldRecipe(EntityPlayer player, boolean isCreative) {
+		oldRecipeIndex.filter(index -> index < CharRecipe.recipes.size()).ifPresent(index -> {
+			CharRecipeData recipe = CharRecipe.recipes.get(index);
+			recipe.getInputList().forEach(recipeItem -> {
+				for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+					ItemStack item = player.inventory.getStackInSlot(i);
+					if (ItemUtil.equalItemStackForRecipe(item, recipeItem)) {
+						ItemStack clone = item.copy();
+						clone.setCount(1);
+						boolean result = addItem(clone);
+						if (!isCreative && result) {
+							item.shrink(1);
+						}
+						break;
+					}
+				}
+			});
+		});
+	}
+	
 	private void changeSandState() {
 		IBlockState blockState = world.getBlockState(pos);
 		state = BlockChar.State.SAND;
 		blockState = blockState.withProperty(BlockChar.STATE, state);
 		world.setBlockState(pos, blockState, 3);
 		if ( getResult() == ItemStack.EMPTY) {
-			CharRecipe.craft(getInputItems(), color).ifPresent(item -> {
+			CharRecipe.craft(getInputItems(), color).ifPresent(index -> {
+				ItemStack item = CharRecipe.recipes.get(index).getOutput();
+				oldRecipeIndex = Optional.of(index);
 				for (int i = 1; i < INPUT_SLOT_COUNT + 1; i++) {
 					itemHandler.setItemStock(i, ItemStack.EMPTY);
 				}

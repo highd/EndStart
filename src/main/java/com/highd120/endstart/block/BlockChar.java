@@ -66,7 +66,11 @@ public class BlockChar extends net.minecraft.block.Block {
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = playerIn.getHeldItem(hand);
 		State state = blockState.getValue(STATE);
-        if (!worldIn.isRemote && state == State.NORMAL && !isStick(stack)) {
+		if (!worldIn.isRemote && state == State.NORMAL && stack.isEmpty() && playerIn.isSneaking()) {
+    		TileChar tile = (TileChar) worldIn.getTileEntity(pos);
+        	tile.setOldRecipe(playerIn, playerIn.isCreative());
+		}
+        if (!worldIn.isRemote && state == State.NORMAL && !isStick(stack) && !playerIn.isSneaking()) {
     		TileChar tile = (TileChar) worldIn.getTileEntity(pos);
         	tile.changeItem(stack, playerIn.isCreative());
         }
