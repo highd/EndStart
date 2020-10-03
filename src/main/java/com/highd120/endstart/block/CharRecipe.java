@@ -41,7 +41,19 @@ public class CharRecipe {
                 new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT),
                 new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand)));
         
-        recipes.add(createRecipe(new ItemStack(Blocks.COBBLESTONE, 4),
+        recipes.add(createRecipe(new ItemStack(Items.POTATO, 2),
+                Color.RED,
+                new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT),
+                new ItemStack(Blocks.DIRT), new ItemStack(ModBlocks.endSand),
+                new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand)));
+        
+        recipes.add(createRecipe(new ItemStack(Items.WHEAT_SEEDS, 2),
+                Color.RED,
+                new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT),
+                new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand),
+                new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand)));
+        
+        recipes.add(createRecipe(new ItemStack(Blocks.COBBLESTONE, 8),
                 Color.RED,
                 new ItemStack(Items.STICK), 
                 new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT),
@@ -80,7 +92,17 @@ public class CharRecipe {
                 new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE),
                 new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE)));
 
-        recipes.add(createRecipe(new ItemStack(Items.BONE),
+        recipes.add(createRecipe(new ItemStack(Items.STONE_HOE),
+                Color.RED_BLACK,
+                new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE),
+                new ItemStack(Items.STICK), new ItemStack(Items.STICK)));
+
+        recipes.add(createRecipe(new ItemStack(Items.STONE_PICKAXE),
+                Color.RED_BLACK,
+                new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE),
+                new ItemStack(Items.STICK), new ItemStack(Items.STICK)));
+
+        recipes.add(createRecipe(new ItemStack(Items.BONE, 2),
                 Color.RED_BLACK,
                 new ItemStack(Blocks.SAND), new ItemStack(Blocks.SAND),
                 new ItemStack(Blocks.SAND), new ItemStack(Blocks.SAND),
@@ -104,6 +126,16 @@ public class CharRecipe {
                 new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand),
                 new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand),
                 new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand)));        
+
+        recipes.add(createRecipe(new ItemStack(Blocks.DIRT, 1, 2),
+                Color.GREEN,
+                new ItemStack(Blocks.DIRT), new ItemStack(Items.WHEAT_SEEDS),
+                new ItemStack(Items.MELON_SEEDS), new ItemStack(Items.SUGAR)));
+
+        recipes.add(createRecipe(new ItemStack(Items.STONE_AXE),
+                Color.GREEN,
+                new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE),
+                new ItemStack(Items.STICK), new ItemStack(Items.STICK)));
 
         recipes.add(createRecipe(new ItemStack(Items.BLAZE_ROD),
                 Color.GREEN,
