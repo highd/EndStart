@@ -74,6 +74,7 @@ dependencies {
 
     compileOnly  'org.projectlombok:lombok:1.16.4'  // compile against the JEI API but do not include it at runtime
     deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
+	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.586"
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
     // at runtime, use the full JEI jar
     testCompile('junit:junit:4.13')
