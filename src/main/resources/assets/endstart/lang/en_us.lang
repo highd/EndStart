@@ -21,6 +21,7 @@ item.endstart.chalk_red_black.name=Red Black Chalk
 item.endstart.chalk_green.name=Green Chalk
 item.endstart.stick.name=End Stick
 item.endstart.set_water.name=Water Chunk
+item.endstart.bedrock_pickaxe.name=Bedrock Breaker
 
 item.endstart.magnesium.name=Magnesium Dust
 item.endstart.crystal.name=Crystal Dust

@@ -50,6 +50,7 @@ public class ModItems {
 	public static ItemEndPickaxe endPickaxe;
 	public static ItemEndStoneShard endStoneShard;
 	public static ItemEndStoneSword endStoneSword;
+	public static ItemBedrockPickaxe bedrockPickaxe;
 	public static ItemExtra extra;
 	public static ItemNewRecipeCreater newRecipeCreater;
 	public static ItemWater water;
@@ -67,6 +68,7 @@ public class ModItems {
 		extra = regist(register, new ItemExtra(), "extra");
 		newRecipeCreater = regist(register, new ItemNewRecipeCreater(), "new_recipe");
 		water = regist(register, new ItemWater(), "set_water");
+		bedrockPickaxe = regist(register, new ItemBedrockPickaxe(), "bedrock_pickaxe");
 		
 		registItemBlock(register, ModBlocks.blackhole);
 		registItemBlock(register, ModBlocks.blood);
