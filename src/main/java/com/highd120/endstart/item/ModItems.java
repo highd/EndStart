@@ -54,6 +54,7 @@ public class ModItems {
 	public static ItemExtra extra;
 	public static ItemNewRecipeCreater newRecipeCreater;
 	public static ItemWater water;
+	public static ItemFluid fluid;
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
@@ -69,6 +70,7 @@ public class ModItems {
 		newRecipeCreater = regist(register, new ItemNewRecipeCreater(), "new_recipe");
 		water = regist(register, new ItemWater(), "set_water");
 		bedrockPickaxe = regist(register, new ItemBedrockPickaxe(), "bedrock_pickaxe");
+		fluid = regist(register, new ItemFluid(), "item_fluid");
 		
 		registItemBlock(register, ModBlocks.blackhole);
 		registItemBlock(register, ModBlocks.blood);

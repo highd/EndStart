@@ -37,6 +37,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.VanillaDoubleChestItemHandler;
+import net.minecraftforge.oredict.OreDictionary;
 public class ItemNewRecipeCreater extends ItemBase {
 	private static ExtraCraftData craftData;
 	public static void load() {
@@ -68,7 +69,9 @@ public class ItemNewRecipeCreater extends ItemBase {
             }
             consumer.accept(codeMap);
             Files.write(tmpFilePath, Lists.newArrayList(gson.toJson(codeMap)));
-            Collection<String> script = codeMap.values();
+            ArrayList<String> script = new ArrayList<>();
+            script.add(craftData.getHeader());
+            script.addAll(codeMap.values());
             new File(Minecraft.getMinecraft().mcDataDir, "scripts").mkdir();
             Path path = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\scripts\\extra_new.zs");
             Files.write(path, script);
@@ -78,7 +81,7 @@ public class ItemNewRecipeCreater extends ItemBase {
     }
 
     public static void deleteRecipe(ItemStack stack) {
-        updateDb(map -> map.remove(createItemText(stack)));
+        updateDb(map -> map.remove(createItemText(stack, false)));
     }
 
     private static IItemHandler getInventory(final World world, final BlockPos pos, final EnumFacing side) {
@@ -99,16 +102,33 @@ public class ItemNewRecipeCreater extends ItemBase {
 
     private static Pattern elementPattern = Pattern.compile("\\$\\(\\d+,\\d+\\)");
     private static Pattern functionPattern = Pattern.compile("\\$\\((\\d+),(\\d+)\\)");
+    
+    private static Pattern loopPattern = Pattern.compile("\\$\\(\\d+,\"[^\"]+\",\"[^\"]*\"\\)");
+    private static Pattern loopArgPattern = Pattern.compile("\\$\\((\\d+),\"([^\"]*)\",\"([^\"]*)\"\\)");
+    
+    private static Pattern optionPattern = Pattern.compile("\\$\\(\\d+,\\d+,\"[^\"]*\"\\)");
+    private static Pattern optionArgPattern = Pattern.compile("\\$\\((\\d+),(\\d+),\"([^\"]+)\"\\)");
 
-    private static String createItemText(ItemStack stack) {
+    private static String createItemText(ItemStack stack, boolean isUseOreDictionary) {
         if (stack.isEmpty()) {
             return "null";
         }
         if (stack.getItem() == ModItems.argument) {
             return NbtTagUtil.getString(ItemArgument.TAG, stack).orElse("null");
         }
+        if (stack.getItem() == ModItems.fluid) {
+            return NbtTagUtil.getString(ItemArgument.TAG, stack)
+            	.flatMap(count -> NbtTagUtil.getString(ItemFluid.NAME, stack).map(
+                	name -> "<liquid:" + name + "> * " + count)
+            	).orElse("null");
+        }
         final String itemName = stack.getItem().getRegistryName().toString();
         final int meta = stack.getMetadata();
+        int oreIds[] = OreDictionary.getOreIDs(stack);
+        if (oreIds.length > 0 && isUseOreDictionary && !craftData.getIsNotUseOreDictionary().contains(itemName + ":" + meta)) {
+        	String oreName = OreDictionary.getOreName(oreIds[0]);
+        	return "<ore:" + oreName + ">";
+        }
         List<String> nbtFilter = craftData.getNbtFilter().get(itemName + ":" + meta);
         if (nbtFilter == null) {
             nbtFilter = new ArrayList<>();
@@ -127,7 +147,7 @@ public class ItemNewRecipeCreater extends ItemBase {
     }
 
     private String convertRecipeCode(String template, final IItemHandler handler, final int width) {
-        final Matcher matcher = elementPattern.matcher(template);
+        Matcher matcher = elementPattern.matcher(template);
         while (matcher.find()) {
             final String element = matcher.group();
             final Matcher pointMatcher = functionPattern.matcher(element);
@@ -136,7 +156,42 @@ public class ItemNewRecipeCreater extends ItemBase {
             final int y = Integer.parseInt(pointMatcher.group(2));
             final int slot = y * width + x;
             final ItemStack slotStack = handler.getStackInSlot(slot);
-            final String result = createItemText(slotStack);
+            final String result = createItemText(slotStack, slot != 0);
+            template = template.replace(element, result);
+        }
+        matcher = loopPattern.matcher(template);
+        while (matcher.find()) {
+            final String element = matcher.group();
+            final Matcher pointMatcher = loopArgPattern.matcher(element);
+            pointMatcher.find();
+            final int y = Integer.parseInt(pointMatcher.group(1));
+            final String child = pointMatcher.group(2);
+            final String delimiter = pointMatcher.group(3);
+            List<String> result = new ArrayList<>();
+            for (int i = 0; i < width; i++) {
+                final int slot = y * width + i;
+                final ItemStack slotStack = handler.getStackInSlot(slot);
+                if (slotStack == ItemStack.EMPTY) {
+                	break;
+                }
+            	result.add(child.replace("$", createItemText(slotStack, slot != 0)));
+            }
+            template = template.replace(element, String.join(delimiter, result));
+        }
+        matcher = optionPattern.matcher(template);
+        while (matcher.find()) {
+            final String element = matcher.group();
+            final Matcher pointMatcher = optionArgPattern.matcher(element);
+            pointMatcher.find();
+            final int x = Integer.parseInt(pointMatcher.group(1));
+            final int y = Integer.parseInt(pointMatcher.group(2));
+            final String child = pointMatcher.group(3);
+            final int slot = y * width + x;
+            final ItemStack slotStack = handler.getStackInSlot(slot);
+            String result = "";
+            if (slotStack != ItemStack.EMPTY) {
+            	result = child.replace("$",createItemText(slotStack, slot != 0));
+            }
             template = template.replace(element, result);
         }
         return template;
@@ -165,7 +220,7 @@ public class ItemNewRecipeCreater extends ItemBase {
         }
         final String code = convertRecipeCode(template, handler, width);
         if (!craftData.getIsPrint().containsKey(downBlockString) || craftData.getIsPrint().get(downBlockString)) {
-        	updateDb(map -> map.put(createItemText(output), code));
+        	updateDb(map -> map.put(createItemText(output, false), code));
         } else {
     		Toolkit kit = Toolkit.getDefaultToolkit();
     		Clipboard clip = kit.getSystemClipboard();

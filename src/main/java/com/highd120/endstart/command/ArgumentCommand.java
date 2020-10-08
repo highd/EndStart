@@ -22,7 +22,7 @@ public class ArgumentCommand extends CommandBase {
         }
         EntityPlayer player = (EntityPlayer) sender;
         ItemStack stack = player.getHeldItemMainhand();
-        if (args.length != 1 || stack == null || stack.getItem() != ModItems.argument) {
+        if (args.length != 1 || stack == null || (stack.getItem() != ModItems.argument && stack.getItem() != ModItems.fluid)) {
             sender.sendMessage(new TextComponentTranslation("endstart.valid")
                 .setStyle(new Style().setColor(TextFormatting.RED)));
         }

@@ -23,6 +23,7 @@ item.endstart.chalk_green.name=緑のチョーク
 item.endstart.stick.name=エンドの棒
 item.endstart.set_water.name=水の塊
 item.endstart.bedrock_pickaxe.name=岩盤破壊器
+item.endstart.item_fluid.name=液体
 
 item.endstart.magnesium.name=マグネシウムの粉末
 item.endstart.crystal.name=水晶の粉末

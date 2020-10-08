@@ -123,7 +123,9 @@ public class PlayerDataEvents {
     }
     
     public static void createPlace(World world, BlockPos point) {
-    	
+    	if (world.isAirBlock(point.down())) {
+    		world.setBlockState(point, Blocks.END_STONE.getDefaultState(), 3);
+    	}
     }
 	/**
 	 * プレイヤーの更新処理。
@@ -152,11 +154,15 @@ public class PlayerDataEvents {
 					createPortalBlock(world, player);
 					persist.setBoolean(TAG_NO_DRAGON, true);
 					BlockPos playerPostion = calculateSpawnPoint(world);
+					if (playerPostion.getY() < 30) {
+						playerPostion = new BlockPos(playerPostion.getX(), 30, playerPostion.getZ());
+					}
 					persist.setInteger("endstart.x", playerPostion.getX());
 					persist.setInteger("endstart.y", playerPostion.getY());
 					persist.setInteger("endstart.z", playerPostion.getZ());
 					player.setPositionAndUpdate(playerPostion.getX(), playerPostion.getY(),
 							playerPostion.getZ());
+					createPlace(world, playerPostion);
 				}
 			}
 			if (player.ticksExisted > 3 && !persist.getBoolean(TAG_PLAYER_SPAWN)) {
@@ -230,6 +236,7 @@ public class PlayerDataEvents {
 		if (!persist.getBoolean(TAG_TOUCH_ENDPORTAL)) {
 			player.changeDimension(1);
 			player.setPositionAndUpdate(x, y, z);
+			createPlace(event.player.world, new BlockPos(x, y, z));
 		}
 	}
 
