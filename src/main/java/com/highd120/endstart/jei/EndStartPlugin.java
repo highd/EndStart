@@ -12,6 +12,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.IIngredientBlacklist;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.item.ItemStack;
@@ -35,6 +36,9 @@ public class EndStartPlugin implements IModPlugin {
 
 	@Override
 	public void register(IModRegistry registry) {
+		IIngredientBlacklist blacklist = registry.getJeiHelpers().getIngredientBlacklist();
+		blacklist.addIngredientToBlacklist(new ItemStack(ModBlocks.blockChar));
+		
 		registry.handleRecipes(InjectionRecipeData.class, InjectionRecipeWrapper::new, InjectionCategory.UID);
 		registry.addRecipes(InjectionRecipe.recipes, InjectionCategory.UID);
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.crafterCore), InjectionCategory.UID);
