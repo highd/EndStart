@@ -11,4 +11,5 @@ public class EndStartConfig {
 	public static String removeEnrichmentChamber[] = {};
 	public static boolean isGenerateLibrary = true;
 	public static int generateLibraryRate = 50;
+	public static String addDamyNbtTarget[] = {};
 }

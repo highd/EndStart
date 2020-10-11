@@ -60,6 +60,7 @@ public class EndStartMain {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(PlayerDataEvents.class);
+		MinecraftForge.EVENT_BUS.register(CheckerForDamyNbt.class);
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
         InjectionRecipe.init();
         CharRecipe.init();
