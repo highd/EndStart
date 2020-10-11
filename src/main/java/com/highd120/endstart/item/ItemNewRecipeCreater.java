@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
@@ -26,7 +25,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumActionResult;
@@ -238,6 +239,12 @@ public class ItemNewRecipeCreater extends ItemBase {
                 return "";
             }
             return key + ":" + childString;
+        }
+        if (child instanceof NBTTagByte) {
+            return key + ":" + ((NBTTagByte)child).getInt();
+        }
+        if (child instanceof NBTTagShort) {
+            return key + ":" + ((NBTTagShort)child).getInt();
         }
         return key + ":" + child.toString();
     }
