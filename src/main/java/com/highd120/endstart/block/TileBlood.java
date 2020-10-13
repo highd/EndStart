@@ -21,7 +21,7 @@ public class TileBlood extends TileEntityBase {
 	@Override
 	public void update() {
 		time++;
-		if (time == 20) {
+		if (time == 400) {
 			IBlockState state = world.getBlockState(pos);
 			world.setBlockState(pos, state.withProperty(BlockBlood.COLOR, BlockBlood.Color.BLACK), 3);
 		}

@@ -91,7 +91,7 @@ public class BlockBlood extends Block {
 
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-		ItemUtil.dropItem(world, pos, new ItemStack(ModItems.itemBlood, 1,
+		ItemUtil.dropItem(world, pos, new ItemStack(ModItems.itemBlood, 2,
 				state.getValue(COLOR).ordinal()));
     }
 

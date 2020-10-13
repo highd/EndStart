@@ -72,6 +72,8 @@ public class CharRecipe {
         recipes.add(createRecipe(new ItemStack(ModItems.endPickaxe),
                 Color.RED,
                 new ItemStack(Items.STICK), new ItemStack(Items.STICK), 
+                new ItemStack(Items.STICK), new ItemStack(Items.STICK), 
+                new ItemStack(Items.STICK), new ItemStack(Items.STICK), 
                 new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand),
                 new ItemStack(ModBlocks.endSand), new ItemStack(ModBlocks.endSand)));
 
@@ -84,7 +86,7 @@ public class CharRecipe {
                 new ItemStack(Blocks.GRAVEL), new ItemStack(Blocks.GRAVEL),
                 new ItemStack(Blocks.GRAVEL), new ItemStack(Blocks.GRAVEL)));
 
-        recipes.add(createRecipe(new ItemStack(Blocks.FURNACE, 8),
+        recipes.add(createRecipe(new ItemStack(Blocks.FURNACE),
                 Color.RED_BLACK,
                 new ItemStack(Items.FLINT), new ItemStack(Items.FLINT),
                 new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE),

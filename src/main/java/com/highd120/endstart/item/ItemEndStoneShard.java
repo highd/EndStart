@@ -19,7 +19,7 @@ public class ItemEndStoneShard extends ItemBase {
     @Override
     public float getDestroySpeed(ItemStack stack, IBlockState state) {
         if (state.getBlock() == Blocks.END_STONE) {
-            return 100;
+            return 70;
         }
         return super.getDestroySpeed(stack, state);
     }

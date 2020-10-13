@@ -265,7 +265,7 @@ public class PlayerDataEvents {
 		if (event.getSource().getTrueSource() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
 			if (player.getHeldItemMainhand().getItem() == ModItems.endStoneSword) {
-				addDropItem(event, new ItemStack(ModItems.itemBlood));
+				addDropItem(event, new ItemStack(ModItems.itemBlood, random.nextInt(2) + 1));
 			}
 		}
 		if ("ieCrushed".equals(event.getSource().getDamageType()) && event.getEntity() instanceof EntityZombie
