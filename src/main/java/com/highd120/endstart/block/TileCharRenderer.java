@@ -13,7 +13,7 @@ public class TileCharRenderer extends TileEntitySpecialRenderer<TileChar> {
     public TileCharRenderer() {
     }
     
-    public void draw(ItemStack stack, double x, double y, double z) {
+    public void draw(ItemStack stack, double x, double y, double z, double size) {
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) x + 0.5F, (float) y + 0.2f, (float) z + 0.5F);
 
@@ -22,7 +22,7 @@ public class TileCharRenderer extends TileEntitySpecialRenderer<TileChar> {
         GlStateManager.rotate((float) (boop * 40D % 360), 0, 1, 0);
 
         float scale = stack.getItem() instanceof ItemBlock ? 0.85F : 0.65F;
-        scale *= 0.2;
+        scale *= size;
         GlStateManager.scale(scale, scale, scale);
 
         GlStateManager.pushMatrix();
@@ -40,10 +40,10 @@ public class TileCharRenderer extends TileEntitySpecialRenderer<TileChar> {
     public void render(TileChar te, double x, double y, double z, float par5, int par6, float f) {
     	List<ItemStack> inputs = te.getInputItems();
     	for (int i = 0; i < inputs.size(); i++) {
-    		double xDiff = Math.sin(Math.PI * 2 / inputs.size() * i) * 0.3;
-    		double zDiff = Math.cos(Math.PI * 2 / inputs.size() * i) * 0.3;
-    		draw(inputs.get(i), xDiff + x, y, zDiff + z);
+    		double xDiff = Math.sin(Math.PI * 2 / inputs.size() * i) * 0.5;
+    		double zDiff = Math.cos(Math.PI * 2 / inputs.size() * i) * 0.5;
+    		draw(inputs.get(i), xDiff + x, y, zDiff + z, 0.4);
     	}
-		draw(te.getResult(), x, y + 1.0f, z);
+		draw(te.getResult(), x, y + 1.0f, z, 0.8);
     }
 }
