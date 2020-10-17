@@ -169,15 +169,6 @@ public class CharRecipe {
                 new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE),
                 new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE)));
 
-        recipes.add(createRecipe(new ItemStack(Blocks.SAPLING),
-                Color.GREEN,
-                new ItemStack(ModItems.itemBlood, 1, 0), new ItemStack(ModItems.itemBlood, 1, 0), 
-                new ItemStack(ModItems.itemBlood, 1, 1), new ItemStack(ModItems.itemBlood, 1, 1), 
-                new ItemStack(ModItems.itemBlood, 1, 2), new ItemStack(ModItems.itemBlood, 1, 2), 
-                new ItemStack(Items.BEETROOT), new ItemStack(Blocks.PUMPKIN),
-                new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.MELON),
-                new ItemStack(Items.POTATO), new ItemStack(Items.CARROT)));
-
         recipes.add(createRecipe(new ItemStack(Blocks.GRASS),
                 Color.GREEN,
                 new ItemStack(Blocks.DIRT), new ItemStack(Blocks.SAPLING)));
