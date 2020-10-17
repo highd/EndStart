@@ -23,6 +23,7 @@ item.endstart.stick.name=End Stick
 item.endstart.set_water.name=Water Chunk
 item.endstart.bedrock_pickaxe.name=Bedrock Breaker
 item.endstart.item_fluid.name=Fluid
+item.endstart.end_rotten_flesh.name=End Rotten Flesh
 
 item.endstart.magnesium.name=Magnesium Dust
 item.endstart.crystal.name=Crystal Dust

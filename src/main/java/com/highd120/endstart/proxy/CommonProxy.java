@@ -6,6 +6,9 @@ public class CommonProxy {
     public void registerRenderers() {
     }
 
+    public void init() {
+    }
+    
     public void wispFX(double x, double y, double z, float r, float g, float b, float size, float motionx, float motiony, float motionz, float maxAgeMul) {
     }
 

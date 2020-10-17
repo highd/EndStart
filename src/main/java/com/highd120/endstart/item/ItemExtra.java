@@ -8,7 +8,7 @@ public class ItemExtra extends ItemHasMeta {
 			"life_core", 
 			"fire", 
 			"water", 
-			"shulker_shell", 
+			"end_rotten_flesh", 
 			"magnesium",
 			"crystal",
 			"zinc",

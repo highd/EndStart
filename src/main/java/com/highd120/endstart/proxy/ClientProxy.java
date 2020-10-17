@@ -1,5 +1,7 @@
 package com.highd120.endstart.proxy;
 
+import com.highd120.endstart.EntityEndZombie;
+import com.highd120.endstart.RenderEndZombie;
 import com.highd120.endstart.block.TileChar;
 import com.highd120.endstart.block.TileCharRenderer;
 import com.highd120.endstart.block.TileCrafterCore;
@@ -7,6 +9,8 @@ import com.highd120.endstart.block.TileSingleItemRenderer;
 import com.highd120.endstart.block.TileStand;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelZombie;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -21,6 +25,12 @@ public class ClientProxy extends CommonProxy {
                 new TileSingleItemRenderer(1.5f));
         ClientRegistry.bindTileEntitySpecialRenderer(TileChar.class,
                 new TileCharRenderer());
+    }
+
+    @Override
+    public void init() {
+        RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
+        renderManager.entityRenderMap.put(EntityEndZombie.class, new RenderEndZombie(renderManager, new ModelZombie()));
     }
 
     @Override

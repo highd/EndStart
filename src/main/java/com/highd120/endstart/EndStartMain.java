@@ -13,6 +13,9 @@ import com.highd120.endstart.command.ReloadCommand;
 import com.highd120.endstart.item.ItemNewRecipeCreater;
 import com.highd120.endstart.proxy.CommonProxy;
 import com.highd120.endstart.world.WorldGenerator;
+
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -22,6 +25,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;;
 
 /**
@@ -50,6 +54,8 @@ public class EndStartMain {
 		GameRegistry.registerTileEntity(TileBlood.class, new ResourceLocation(MOD_ID, "blood"));
 		GameRegistry.registerTileEntity(TileChar.class, new ResourceLocation(MOD_ID, "char"));
         EndStartMessages.registerNetworkMessages();
+		EntityRegistry.registerModEntity(new ResourceLocation(EndStartMain.MOD_ID, "end_zombie"), EntityEndZombie.class,
+				"end_zombie", 23764, this, 64, 3, true);
         proxy.registerRenderers();
 	}
 
@@ -59,11 +65,13 @@ public class EndStartMain {
 	 */
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		EntityRegistry.addSpawn(EntityEndZombie.class, 10, 1, 3, EnumCreatureType.CREATURE, Biomes.SKY);
 		MinecraftForge.EVENT_BUS.register(PlayerDataEvents.class);
 		MinecraftForge.EVENT_BUS.register(CheckerForDamyNbt.class);
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
         InjectionRecipe.init();
         CharRecipe.init();
+        proxy.init();
 	}
 
 	@EventHandler
