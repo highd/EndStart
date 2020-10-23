@@ -22,7 +22,11 @@ public class ItemExtra extends ItemHasMeta {
 			"mercury",
 			"uranium",
 			"dust",
-			"stick"});
+			"stick",
+			"jewel_2",
+			"jewel_3",
+			"circuit_2",
+			"circuit_3"});
 	}
 
 }

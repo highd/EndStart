@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "type=black_hole": { "model": "endstart:blackhole" },
+        "type=machine_block_3": { "model": "endstart:machine_block_3" }
+    }
+}

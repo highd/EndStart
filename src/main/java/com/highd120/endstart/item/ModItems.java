@@ -1,6 +1,7 @@
 package com.highd120.endstart.item;
 
 import com.highd120.endstart.EndStartMain;
+import com.highd120.endstart.block.BlockExtra;
 import com.highd120.endstart.block.ModBlocks;
 
 import net.minecraft.block.Block;
@@ -71,8 +72,16 @@ public class ModItems {
 		water = regist(register, new ItemWater(), "set_water");
 		bedrockPickaxe = regist(register, new ItemBedrockPickaxe(), "bedrock_pickaxe");
 		fluid = regist(register, new ItemFluid(), "item_fluid");
-		
-		registItemBlock(register, ModBlocks.blackhole);
+
+		ItemBlockExtra blockExtra = new ItemBlockExtra(ModBlocks.blackhole);
+		blockExtra.setUnlocalizedName(ModBlocks.blackhole.getUnlocalizedName());
+		blockExtra.setRegistryName(ModBlocks.blackhole.getRegistryName());
+        register.register(blockExtra);
+        for (int i = 0; i < BlockExtra.Type.values().length; i++) {
+        	String subName = BlockExtra.Type.values()[i].getName();
+        	ResourceLocation location = new ResourceLocation(EndStartMain.MOD_ID, subName);
+        	ModelLoader.setCustomModelResourceLocation(blockExtra, i, new ModelResourceLocation(location, "inventory"));
+        }
 		registItemBlock(register, ModBlocks.blood);
 		registItemBlock(register, ModBlocks.blockChar);
 		registItemBlock(register, ModBlocks.crafterCore);

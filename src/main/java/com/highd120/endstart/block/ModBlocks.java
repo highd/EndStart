@@ -18,7 +18,7 @@ public class ModBlocks {
 		return block;
 	}
 	
-	public static BlockBlackHole blackhole;
+	public static BlockExtra blackhole;
 	public static BlockBlood blood;
 	public static BlockChar blockChar;
 	public static BlockCrafterCore crafterCore;
@@ -31,7 +31,7 @@ public class ModBlocks {
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
 		IForgeRegistry<Block> register = evt.getRegistry();
-		blackhole = regist(register, new BlockBlackHole(), "blackhole");
+		blackhole = regist(register, new BlockExtra(), "block_extra");
 		blood = regist(register, new BlockBlood(), "blood");
 		blockChar = regist(register, new BlockChar(), "char");
 		crafterCore = regist(register, new BlockCrafterCore(), "crafter_core");
