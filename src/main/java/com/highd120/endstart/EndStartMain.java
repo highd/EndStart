@@ -68,6 +68,7 @@ public class EndStartMain {
 		EntityRegistry.addSpawn(EntityEndZombie.class, 10, 1, 3, EnumCreatureType.CREATURE, Biomes.SKY);
 		MinecraftForge.EVENT_BUS.register(PlayerDataEvents.class);
 		MinecraftForge.EVENT_BUS.register(CheckerForDamyNbt.class);
+		MinecraftForge.EVENT_BUS.register(WoodBreakEvent.class);
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
         InjectionRecipe.init();
         CharRecipe.init();

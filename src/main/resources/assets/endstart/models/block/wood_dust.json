@@ -1,0 +1,7 @@
+{
+    "parent": "block/carpet",
+    "textures": {
+        "particle": "endstart:blocks/wood_dust",
+        "wool": "endstart:blocks/wood_dust"
+    }
+}

@@ -56,6 +56,8 @@ public class ModItems {
 	public static ItemNewRecipeCreater newRecipeCreater;
 	public static ItemWater water;
 	public static ItemFluid fluid;
+	public static ItemEndHammer endHammer;
+	public static ItemFireStarter fireStater;
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
@@ -72,7 +74,9 @@ public class ModItems {
 		water = regist(register, new ItemWater(), "set_water");
 		bedrockPickaxe = regist(register, new ItemBedrockPickaxe(), "bedrock_pickaxe");
 		fluid = regist(register, new ItemFluid(), "item_fluid");
-
+		endHammer = regist(register, new ItemEndHammer(), "end_hammer");
+		fireStater = regist(register, new ItemFireStarter(), "fire_starter");
+		
 		ItemBlockExtra blockExtra = new ItemBlockExtra(ModBlocks.blackhole);
 		blockExtra.setUnlocalizedName(ModBlocks.blackhole.getUnlocalizedName());
 		blockExtra.setRegistryName(ModBlocks.blackhole.getRegistryName());
@@ -89,6 +93,7 @@ public class ModItems {
 		registItemBlock(register, ModBlocks.endSand);
 		registItemBlock(register, ModBlocks.nolifeWitherSkeleton);
 		registItemBlock(register, ModBlocks.stand);
-		registItemBlock(register, ModBlocks.lavaStone);
+		registItemBlock(register, ModBlocks.lavaStone);;
+		registItemBlock(register, ModBlocks.woodDust);
 	}
 }
