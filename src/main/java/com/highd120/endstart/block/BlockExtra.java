@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 
 import com.highd120.endstart.EndStartCreativeTab;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -27,12 +26,9 @@ public class BlockExtra extends Block {
 	public static final PropertyEnum<Type> TYPE = PropertyEnum.create("type", Type.class);
 	public BlockExtra() {
 		super(Material.IRON);
-		setHarvestLevel("pickaxe", 5);
-		setSoundType(SoundType.GLASS);
-		setHardness(500.0F);
-        setResistance(2000.0F);
+		setHarvestLevel("pickaxe", 2);
+		setHardness(50.0F);
         setCreativeTab(EndStartCreativeTab.INSTANCE);
-		setResistance(2000.0F);
         IBlockState state = blockState.getBaseState()
                 .withProperty(TYPE, Type.BLACK_HOLE);
         setDefaultState(state);

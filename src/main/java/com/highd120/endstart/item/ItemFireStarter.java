@@ -1,5 +1,6 @@
 package com.highd120.endstart.item;
 
+import com.highd120.endstart.EndStartCreativeTab;
 import com.highd120.endstart.block.IUsableFireStarter;
 
 import net.minecraft.block.Block;
@@ -14,10 +15,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemFireStarter extends ItemBase {
-	
+	public ItemFireStarter() {
+        setCreativeTab(EndStartCreativeTab.INSTANCE);
+        this.maxStackSize = 1;
+        this.setMaxDamage(299);
+	}
+
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
+        if (!worldIn.isRemote) {
+            stack.damageItem(1, player);
+        }
 		IBlockState state = worldIn.getBlockState(pos);
 		Block block = state.getBlock();
 		if (!(block instanceof IUsableFireStarter)) {
@@ -27,7 +37,6 @@ public class ItemFireStarter extends ItemBase {
 		if (!target.isUsable(worldIn, pos, state)) {
 			return EnumActionResult.PASS;
 		}
-		ItemStack stack = player.getHeldItem(hand);
 		NBTTagCompound tag = stack.getTagCompound();
 		if (tag == null) {
 			tag = new NBTTagCompound();

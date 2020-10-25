@@ -89,11 +89,11 @@ public class TileStove extends TileHasInventory {
 		State state = State.FIRE;
 		blockState = blockState.withProperty(BlockStove.STATE, state);
 		world.setBlockState(pos, blockState, 3);
-		fuelCount = 1000;
+		fuelCount = 1400;
 		itemHandler.setItemStock(FUEL_SLOT, ItemStack.EMPTY);
 	}
 	
-	private static int itemSmeltingTime = 100;
+	private static int itemSmeltingTime = 220;
 	
 	public ItemStack getResultItem() {
 		ItemStack item = itemHandler.getStackInSlot(ITEM_SLOT);
