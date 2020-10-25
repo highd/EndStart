@@ -172,6 +172,16 @@ public class CharRecipe {
         recipes.add(createRecipe(new ItemStack(Blocks.GRASS),
                 Color.GREEN,
                 new ItemStack(Blocks.DIRT), new ItemStack(Blocks.SAPLING)));
+
+        recipes.add(createRecipe(new ItemStack(ModItems.endHammer),
+                Color.RED_BLACK,
+                new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.END_STONE),
+                new ItemStack(Items.STICK), new ItemStack(Items.STICK)));
+
+        recipes.add(createRecipe(new ItemStack(ModItems.fireStater),
+                Color.RED_BLACK,
+                new ItemStack(Items.STICK), new ItemStack(Items.STRING),
+                new ItemStack(Items.STICK), new ItemStack(Items.STICK)));
     }
     
     public static Optional<Integer> craft(List<ItemStack> inputs, Color color) {
