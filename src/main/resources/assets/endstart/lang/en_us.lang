@@ -54,6 +54,7 @@ tile.endstart.end_sand.name=End Sand
 tile.endstart.lava_stone.name=Lava Stone
 tile.endstart.block_extra.machine_block_3=Machine Base Rank 3
 tile.endstart.wood_dust.name=Wood Dust
+tile.endstart.stove.name=Stove
 
 item.endstart.msg.is_not_end=The "End Bed" can only used in The End.
 item.endstart.msg.chane_spawn=You changed the spawn point.

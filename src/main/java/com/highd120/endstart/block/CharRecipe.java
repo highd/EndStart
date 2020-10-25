@@ -86,7 +86,7 @@ public class CharRecipe {
                 new ItemStack(Blocks.GRAVEL), new ItemStack(Blocks.GRAVEL),
                 new ItemStack(Blocks.GRAVEL), new ItemStack(Blocks.GRAVEL)));
 
-        recipes.add(createRecipe(new ItemStack(Blocks.FURNACE),
+        recipes.add(createRecipe(new ItemStack(ModBlocks.stove),
                 Color.RED_BLACK,
                 new ItemStack(Items.FLINT), new ItemStack(Items.FLINT),
                 new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE),

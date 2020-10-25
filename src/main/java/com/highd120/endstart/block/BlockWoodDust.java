@@ -37,4 +37,9 @@ public class BlockWoodDust extends Block implements IUsableFireStarter {
 	public void fire(World world, BlockPos pos, IBlockState blockstate) {
 		world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 	}
+
+	@Override
+	public boolean isUsable(World world, BlockPos pos, IBlockState blockstate) {
+		return true;
+	}
 }

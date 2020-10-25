@@ -93,7 +93,8 @@ public class ModItems {
 		registItemBlock(register, ModBlocks.endSand);
 		registItemBlock(register, ModBlocks.nolifeWitherSkeleton);
 		registItemBlock(register, ModBlocks.stand);
-		registItemBlock(register, ModBlocks.lavaStone);;
+		registItemBlock(register, ModBlocks.lavaStone);
 		registItemBlock(register, ModBlocks.woodDust);
+		registItemBlock(register, ModBlocks.stove);
 	}
 }

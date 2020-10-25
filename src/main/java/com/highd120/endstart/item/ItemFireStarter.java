@@ -23,6 +23,10 @@ public class ItemFireStarter extends ItemBase {
 		if (!(block instanceof IUsableFireStarter)) {
 			return EnumActionResult.PASS;
 		}
+		IUsableFireStarter target = (IUsableFireStarter)block;
+		if (!target.isUsable(worldIn, pos, state)) {
+			return EnumActionResult.PASS;
+		}
 		ItemStack stack = player.getHeldItem(hand);
 		NBTTagCompound tag = stack.getTagCompound();
 		if (tag == null) {
@@ -43,7 +47,7 @@ public class ItemFireStarter extends ItemBase {
 				tag.setLong("x", x);
 				count = (int)(x % 133);
 				tag.setInteger("count", (count + 150) % 40);
-				((IUsableFireStarter)block).fire(worldIn, pos, state);
+				target.fire(worldIn, pos, state);
 			} else {
 				tag.setInteger("count", count - 1);
 			}

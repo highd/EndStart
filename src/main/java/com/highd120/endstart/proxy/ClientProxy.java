@@ -7,6 +7,8 @@ import com.highd120.endstart.block.TileCharRenderer;
 import com.highd120.endstart.block.TileCrafterCore;
 import com.highd120.endstart.block.TileSingleItemRenderer;
 import com.highd120.endstart.block.TileStand;
+import com.highd120.endstart.block.TileStove;
+import com.highd120.endstart.block.TileStoveRenderer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelZombie;
@@ -25,6 +27,8 @@ public class ClientProxy extends CommonProxy {
                 new TileSingleItemRenderer(1.5f));
         ClientRegistry.bindTileEntitySpecialRenderer(TileChar.class,
                 new TileCharRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileStove.class,
+                new TileStoveRenderer());
     }
 
     @Override

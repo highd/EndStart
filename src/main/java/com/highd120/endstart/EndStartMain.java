@@ -2,10 +2,12 @@ package com.highd120.endstart;
 
 import com.highd120.endstart.block.CharRecipe;
 import com.highd120.endstart.block.InjectionRecipe;
+import com.highd120.endstart.block.StoveFuelList;
 import com.highd120.endstart.block.TileBlood;
 import com.highd120.endstart.block.TileChar;
 import com.highd120.endstart.block.TileCrafterCore;
 import com.highd120.endstart.block.TileStand;
+import com.highd120.endstart.block.TileStove;
 import com.highd120.endstart.command.ArgumentCommand;
 import com.highd120.endstart.command.DebugCommand;
 import com.highd120.endstart.command.DeleteRecipeNewTmpCommand;
@@ -53,6 +55,7 @@ public class EndStartMain {
 		GameRegistry.registerTileEntity(TileStand.class, new ResourceLocation(MOD_ID, "stand"));
 		GameRegistry.registerTileEntity(TileBlood.class, new ResourceLocation(MOD_ID, "blood"));
 		GameRegistry.registerTileEntity(TileChar.class, new ResourceLocation(MOD_ID, "char"));
+		GameRegistry.registerTileEntity(TileStove.class, new ResourceLocation(MOD_ID, "stove"));
         EndStartMessages.registerNetworkMessages();
 		EntityRegistry.registerModEntity(new ResourceLocation(EndStartMain.MOD_ID, "end_zombie"), EntityEndZombie.class,
 				"end_zombie", 23764, this, 64, 3, true);
@@ -72,6 +75,7 @@ public class EndStartMain {
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
         InjectionRecipe.init();
         CharRecipe.init();
+        StoveFuelList.init();
         proxy.init();
 	}
 
