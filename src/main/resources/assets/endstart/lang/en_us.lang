@@ -30,6 +30,8 @@ item.endstart.circuit_2.name=Circuit Tier 3
 item.endstart.circuit_3.name=Circuit Tier 4
 item.endstart.end_hammer.name=End Hammer
 item.endstart.fire_starter.name=Fire Starter
+item.endstart.access_input.name=Accesser Input
+item.endstart.access_output.name=Accesser Output
 
 item.endstart.magnesium.name=Magnesium Dust
 item.endstart.crystal.name=Crystal Dust

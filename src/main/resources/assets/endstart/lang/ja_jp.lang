@@ -31,6 +31,8 @@ item.endstart.circuit_2.name=電子回路 ランク3
 item.endstart.circuit_3.name=電子回路 ランク4
 item.endstart.end_hammer.name=エンドのハンマー
 item.endstart.fire_starter.name=火起こし器
+item.endstart.access_input.name=アクセサー 入力
+item.endstart.access_output.name=アクセサー 出力
 
 item.endstart.magnesium.name=マグネシウムの粉末
 item.endstart.crystal.name=水晶の粉末

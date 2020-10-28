@@ -58,6 +58,7 @@ public class ModItems {
 	public static ItemFluid fluid;
 	public static ItemEndHammer endHammer;
 	public static ItemFireStarter fireStater;
+	public static ItemAccess access;
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
@@ -76,6 +77,7 @@ public class ModItems {
 		fluid = regist(register, new ItemFluid(), "item_fluid");
 		endHammer = regist(register, new ItemEndHammer(), "end_hammer");
 		fireStater = regist(register, new ItemFireStarter(), "fire_starter");
+		access = regist(register, new ItemAccess(), "access");
 		
 		ItemBlockExtra blockExtra = new ItemBlockExtra(ModBlocks.blackhole);
 		blockExtra.setUnlocalizedName(ModBlocks.blackhole.getUnlocalizedName());
