@@ -13,6 +13,9 @@ import net.minecraftforge.oredict.OreDictionary;
 public class WoodBreakEvent {
 	@SubscribeEvent
 	public static void onBreakBlock(HarvestDropsEvent  event) {
+		if (event.getHarvester() == null) {
+			return;
+		}
 		ItemStack stack = event.getHarvester().getHeldItemMainhand();
 		if (stack.getItem() != ModItems.endHammer) {
 			return;
