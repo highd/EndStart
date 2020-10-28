@@ -104,7 +104,7 @@ public class CharRecipe {
                 new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE),
                 new ItemStack(Items.STICK), new ItemStack(Items.STICK)));
 
-        recipes.add(createRecipe(new ItemStack(Items.BONE, 2),
+        recipes.add(createRecipe(new ItemStack(Items.BONE, 3),
                 Color.RED_BLACK,
                 new ItemStack(Blocks.SAND), new ItemStack(Blocks.SAND),
                 new ItemStack(Blocks.SAND), new ItemStack(Blocks.SAND),
