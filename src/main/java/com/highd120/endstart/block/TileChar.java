@@ -68,6 +68,9 @@ public class TileChar extends TileHasInventory {
 	}
 	
 	public void setOldRecipe(EntityPlayer player, boolean isCreative) {
+		if (!getResult().isEmpty() ) {
+			return;
+		}
 		oldRecipeIndex.filter(index -> index < CharRecipe.recipes.size()).ifPresent(index -> {
 			CharRecipeData recipe = CharRecipe.recipes.get(index);
 			recipe.getInputList().forEach(recipeItem -> {
