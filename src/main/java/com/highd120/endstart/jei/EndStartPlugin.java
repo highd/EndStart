@@ -15,6 +15,7 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IIngredientBlacklist;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.item.ItemStack;
 
 @JEIPlugin
@@ -46,6 +47,7 @@ public class EndStartPlugin implements IModPlugin {
 		registry.handleRecipes(CharRecipeData.class, CharRecipeWrapper::new, CharCategory.UID);
 		registry.addRecipes(CharRecipe.recipes, CharCategory.UID);
         registry.addRecipeCatalyst(new ItemStack(ModItems.chalk), CharCategory.UID);
+		registry.addRecipeCatalyst(new ItemStack(ModBlocks.stove), VanillaRecipeCategoryUid.SMELTING);
 	}
 
 	@Override
