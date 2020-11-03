@@ -98,5 +98,6 @@ public class ModItems {
 		registItemBlock(register, ModBlocks.lavaStone);
 		registItemBlock(register, ModBlocks.woodDust);
 		registItemBlock(register, ModBlocks.stove);
+		registItemBlock(register, ModBlocks.rack);
 	}
 }

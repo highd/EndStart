@@ -6,6 +6,7 @@ import com.highd120.endstart.block.StoveFuelList;
 import com.highd120.endstart.block.TileBlood;
 import com.highd120.endstart.block.TileChar;
 import com.highd120.endstart.block.TileCrafterCore;
+import com.highd120.endstart.block.TileRack;
 import com.highd120.endstart.block.TileStand;
 import com.highd120.endstart.block.TileStove;
 import com.highd120.endstart.command.ArgumentCommand;
@@ -56,6 +57,7 @@ public class EndStartMain {
 		GameRegistry.registerTileEntity(TileBlood.class, new ResourceLocation(MOD_ID, "blood"));
 		GameRegistry.registerTileEntity(TileChar.class, new ResourceLocation(MOD_ID, "char"));
 		GameRegistry.registerTileEntity(TileStove.class, new ResourceLocation(MOD_ID, "stove"));
+		GameRegistry.registerTileEntity(TileRack.class, new ResourceLocation(MOD_ID, "rack"));
         EndStartMessages.registerNetworkMessages();
 		EntityRegistry.registerModEntity(new ResourceLocation(EndStartMain.MOD_ID, "end_zombie"), EntityEndZombie.class,
 				"end_zombie", 23764, this, 64, 3, true);

@@ -59,6 +59,7 @@ tile.endstart.lava_stone.name=溶岩石
 tile.endstart.block_extra.machine_block_3.name=機械の基礎 ランク3
 tile.endstart.wood_dust.name=木の粉
 tile.endstart.stove.name=ストーブ
+tile.endstart.rack.name=エンドの棚
 
 item.endstart.msg.is_not_end=「エンドのベッド」はエンドでしか使えません。
 item.endstart.msg.chane_spawn=スポーン地点を変更しました。

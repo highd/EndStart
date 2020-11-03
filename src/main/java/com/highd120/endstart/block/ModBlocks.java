@@ -29,6 +29,7 @@ public class ModBlocks {
 	public static BlockLavaStone lavaStone;
 	public static BlockWoodDust woodDust;
 	public static BlockStove stove;
+	public static BlockRack rack;
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -44,5 +45,6 @@ public class ModBlocks {
 		lavaStone = regist(register, new BlockLavaStone(), "lava_stone");
 		woodDust = regist(register, new BlockWoodDust(), "wood_dust");
 		stove = regist(register, new BlockStove(), "stove");
+		rack = regist(register, new BlockRack(), "rack");
 	}
 }
