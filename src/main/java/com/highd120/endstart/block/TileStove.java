@@ -45,22 +45,30 @@ public class TileStove extends TileHasInventory {
 		ItemStack input = stack.copy();
 		ItemStack fuel = itemHandler.getStackInSlot(FUEL_SLOT);
 		input.setCount(1);
-		if (fuel.isEmpty() && StoveFuelList.isFuel(input)) {
-			itemHandler.setItemStock(FUEL_SLOT, input);
-			IBlockState blockState = world.getBlockState(pos);
-			State state = State.HAS_COAL;
-			blockState = blockState.withProperty(BlockStove.STATE, state);
-			world.setBlockState(pos, blockState, 3);
+		State nowState = world.getBlockState(pos).getValue(BlockStove.STATE);
+		if (nowState == State.FIRE && StoveFuelList.isFuel(input)) {
+			fuelCount = 1400;
 			if (!isCreative) {
 				stack.shrink(1);
 			}
-			return;
-		}
-		if (itemHandler.getStackInSlot(ITEM_SLOT).isEmpty()) {
-			itemHandler.setItemStock(ITEM_SLOT, input);
-			isCheckRecipe = true;
-			if (!isCreative) {
-				stack.shrink(1);
+		} else {
+			if (fuel.isEmpty() && StoveFuelList.isFuel(input)) {
+				itemHandler.setItemStock(FUEL_SLOT, input);
+				IBlockState blockState = world.getBlockState(pos);
+				State state = State.HAS_COAL;
+				blockState = blockState.withProperty(BlockStove.STATE, state);
+				world.setBlockState(pos, blockState, 3);
+				if (!isCreative) {
+					stack.shrink(1);
+				}
+				return;
+			}
+			if (itemHandler.getStackInSlot(ITEM_SLOT).isEmpty()) {
+				itemHandler.setItemStock(ITEM_SLOT, input);
+				isCheckRecipe = true;
+				if (!isCreative) {
+					stack.shrink(1);
+				}
 			}
 		}
 	}
