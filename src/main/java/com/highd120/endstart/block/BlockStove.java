@@ -14,6 +14,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -49,7 +50,10 @@ public class BlockStove extends Block implements IUsableFireStarter{
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = playerIn.getHeldItem(hand);
 		TileStove tile = (TileStove) worldIn.getTileEntity(pos);
-		if (!worldIn.isRemote && stack.isEmpty()) {
+		if (stack.getItem() == Items.FLINT_AND_STEEL) {
+			stack.damageItem(1, playerIn);
+			tile.fire();
+		} else if (!worldIn.isRemote && stack.isEmpty()) {
 			tile.removeItem();
 		} else if (!worldIn.isRemote) {
 			tile.addItem(stack, playerIn.isCreative());
