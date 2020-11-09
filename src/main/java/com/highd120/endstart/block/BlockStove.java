@@ -62,6 +62,15 @@ public class BlockStove extends Block implements IUsableFireStarter{
     		ItemStack stack) {
         worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
     }
+    
+    @Override
+    public int getLightValue(IBlockState blockState) {
+    	State state = blockState.getValue(STATE);
+    	if (state == State.FIRE) {
+    		return 7;
+    	}
+    	return 0;
+    }
 
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
@@ -72,6 +81,16 @@ public class BlockStove extends Block implements IUsableFireStarter{
         }
 
         super.breakBlock(world, pos, state);
+    }
+    
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+    	return false;
+    }
+    
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return true;
     }
 
 	@Override
