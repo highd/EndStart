@@ -53,10 +53,8 @@ public class BlockStove extends Block implements IUsableFireStarter{
 		if (stack.getItem() == Items.FLINT_AND_STEEL) {
 			stack.damageItem(1, playerIn);
 			tile.fire();
-		} else if (!worldIn.isRemote && stack.isEmpty()) {
-			tile.removeItem();
 		} else if (!worldIn.isRemote) {
-			tile.addItem(stack, playerIn.isCreative());
+			tile.changeItem(stack, playerIn.isCreative());
 		}
 		return true;
 	}

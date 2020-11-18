@@ -40,6 +40,18 @@ public class TileStove extends TileHasInventory {
 		compound.setBoolean("isCheckRecipe", isCheckRecipe);
 		compound.setBoolean("isCanSmeletResult", isCanSmeletResult);
 	}
+	
+	void changeItem(ItemStack stack, boolean isCreative) {
+		ItemStack input = stack.copy();
+		input.setCount(1);
+		ItemStack item = itemHandler.getStackInSlot(ITEM_SLOT);
+		if (!item.isEmpty() && !StoveFuelList.isFuel(input)) {
+			removeItem();
+		}
+		if (!stack.isEmpty()) {
+			addItem(stack, isCreative);
+		}
+	}
 
 	void addItem(ItemStack stack, boolean isCreative) {
 		ItemStack input = stack.copy();
@@ -97,7 +109,7 @@ public class TileStove extends TileHasInventory {
 		State state = State.FIRE;
 		blockState = blockState.withProperty(BlockStove.STATE, state);
 		world.setBlockState(pos, blockState, 3);
-		fuelCount = 1400;
+		fuelCount = 200;
 		itemHandler.setItemStock(FUEL_SLOT, ItemStack.EMPTY);
 	}
 	
