@@ -6,11 +6,13 @@ import com.highd120.endstart.block.IUsableFireStarter;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -57,6 +59,7 @@ public class ItemFireStarter extends ItemBase {
 				count = (int)(x % 133);
 				tag.setInteger("count", (count + 150) % 40);
 				target.fire(worldIn, pos, state);
+                worldIn.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
 			} else {
 				tag.setInteger("count", count - 1);
 			}

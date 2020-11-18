@@ -15,11 +15,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -54,6 +56,7 @@ public class BlockStove extends Block implements IUsableFireStarter{
 		if (stack.getItem() == Items.FLINT_AND_STEEL) {
 			stack.damageItem(1, playerIn);
 			tile.fire();
+            worldIn.playSound(playerIn, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, 0.8F);
 		} else if (StoveFuelList.isFuel(stack) && state == State.FIRE) {
 			tile.addFuel();
 			if (!playerIn.isCreative()) {
