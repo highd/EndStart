@@ -50,9 +50,15 @@ public class BlockStove extends Block implements IUsableFireStarter{
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = playerIn.getHeldItem(hand);
 		TileStove tile = (TileStove) worldIn.getTileEntity(pos);
+		State state = blockState.getValue(STATE);
 		if (stack.getItem() == Items.FLINT_AND_STEEL) {
 			stack.damageItem(1, playerIn);
 			tile.fire();
+		} else if (StoveFuelList.isFuel(stack) && state == State.FIRE) {
+			tile.addFuel();
+			if (!playerIn.isCreative()) {
+				stack.shrink(1);
+			}
 		} else if (!worldIn.isRemote) {
 			tile.changeItem(stack, playerIn.isCreative());
 		}

@@ -54,7 +54,7 @@ public class ItemAccess extends ItemHasMeta {
 				for (int i = 0; i < handler.getSlots(); i++) {
 					ItemStack extractItem = handler.extractItem(i, 1, false);
 					if (extractItem != null && !extractItem.isEmpty()) {
-						ItemUtil.dropItem(world, pos, extractItem);
+						ItemUtil.dropItem(world, pos.offset(side), extractItem);
 						break;
 					}
 				}

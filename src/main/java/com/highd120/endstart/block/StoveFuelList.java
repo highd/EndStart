@@ -16,6 +16,8 @@ public class StoveFuelList {
 	}
 	
 	public static boolean isFuel(ItemStack stack) {
+		stack = stack.copy();
+		stack.setCount(1);
 		for (ItemStack item : list) {
 			if (ItemStack.areItemStacksEqualUsingNBTShareTag(stack, item)) {
 				return true;
