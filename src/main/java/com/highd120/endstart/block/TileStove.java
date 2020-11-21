@@ -97,21 +97,21 @@ public class TileStove extends TileHasInventory {
 	}
 	
 	void addFuel() {
-		fuelCount = FUEL_TIME;
-	}
-	
-	void fire() {
 		IBlockState blockState = world.getBlockState(pos);
 		State state = State.FIRE;
 		blockState = blockState.withProperty(BlockStove.STATE, state);
 		world.setBlockState(pos, blockState, 3);
 		fuelCount = FUEL_TIME;
+	}
+	
+	void fire() {
+		addFuel();
 		itemHandler.setItemStock(FUEL_SLOT, ItemStack.EMPTY);
 	}
 	
 	private static int itemSmeltingTime = 220;
 	
-	public static final int FUEL_TIME = 1400;
+	public static final int FUEL_TIME = 200;
 	
 	public ItemStack getResultItem() {
 		ItemStack item = itemHandler.getStackInSlot(ITEM_SLOT);
@@ -147,6 +147,10 @@ public class TileStove extends TileHasInventory {
 	public void update() {
 		IBlockState blockState = world.getBlockState(pos);
 		State state = blockState.getValue(BlockStove.STATE);
+		if (fuelCount != 0 && fuelCount < FUEL_TIME / 10) {
+			blockState = blockState.withProperty(BlockStove.STATE, State.WEAK_FIRE);
+			world.setBlockState(pos, blockState, 3);
+		}
 		if (fuelCount > 0) {
 			fuelCount--;
 			ItemStack result = getResultItem();
@@ -158,7 +162,7 @@ public class TileStove extends TileHasInventory {
 					itemHandler.setStackInSlot(ITEM_SLOT, result.copy());
 				}
 			}
-			if (fuelCount == 0 && state == State.FIRE) {
+			if (fuelCount == 0 && (state == State.FIRE || state == State.WEAK_FIRE)) {
 				blockState = blockState.withProperty(BlockStove.STATE, State.NORMAL);
 				world.setBlockState(pos, blockState, 3);
 			}

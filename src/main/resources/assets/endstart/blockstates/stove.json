@@ -3,17 +3,21 @@
         "facing=north,state=fire": { "model": "endstart:stove_fire", "y": 180 },
         "facing=north,state=has_coal": { "model": "endstart:stove_has_coal", "y": 180 },
         "facing=north,state=normal": { "model": "endstart:stove_normal", "y": 180 },
+        "facing=north,state=weak_fire": { "model": "endstart:stove_weak_fire", "y": 180 },
         
         "facing=south,state=fire": { "model": "endstart:stove_fire" },
         "facing=south,state=has_coal": { "model": "endstart:stove_has_coal" },
         "facing=south,state=normal": { "model": "endstart:stove_normal" },
+        "facing=south,state=weak_fire": { "model": "endstart:stove_weak_fire" },
 
         "facing=west,state=fire": { "model": "endstart:stove_fire", "y": 90},
         "facing=west,state=has_coal": { "model": "endstart:stove_has_coal", "y": 90},
         "facing=west,state=normal": { "model": "endstart:stove_normal", "y": 90},
+        "facing=west,state=weak_fire": { "model": "endstart:stove_weak_fire", "y": 90},
 
         "facing=east,state=fire": { "model": "endstart:stove_fire", "y": 270 },
         "facing=east,state=has_coal": { "model": "endstart:stove_has_coal", "y": 270 },
-        "facing=east,state=normal": { "model": "endstart:stove_normal", "y": 270 }
+        "facing=east,state=normal": { "model": "endstart:stove_normal", "y": 270 },
+        "facing=east,state=weak_fire": { "model": "endstart:stove_weak_fire", "y": 270 }
     }
 }

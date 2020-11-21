@@ -23,11 +23,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class BlockStove extends Block implements IUsableFireStarter{
 	public enum State implements IStringSerializable {
-		NORMAL, HAS_COAL, FIRE;
+		NORMAL, HAS_COAL, FIRE, WEAK_FIRE;
 		@Override
 		public String getName() {
 			return name().toLowerCase(Locale.ROOT);
@@ -53,11 +54,12 @@ public class BlockStove extends Block implements IUsableFireStarter{
 		ItemStack stack = playerIn.getHeldItem(hand);
 		TileStove tile = (TileStove) worldIn.getTileEntity(pos);
 		State state = blockState.getValue(STATE);
-		if (stack.getItem() == Items.FLINT_AND_STEEL) {
+		playerIn.sendMessage(new TextComponentString(state.toString()));
+		if (stack.getItem() == Items.FLINT_AND_STEEL && isUsable(worldIn, pos, blockState)) {
 			stack.damageItem(1, playerIn);
 			tile.fire();
             worldIn.playSound(playerIn, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, 0.8F);
-		} else if (StoveFuelList.isFuel(stack) && state == State.FIRE) {
+		} else if (StoveFuelList.isFuel(stack) && (state == State.FIRE || state == State.WEAK_FIRE)) {
 			tile.addFuel();
 			if (!playerIn.isCreative()) {
 				stack.shrink(1);
