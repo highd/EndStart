@@ -22,6 +22,7 @@ public class TileChar extends TileHasInventory {
 	private BlockChar.State state;
 	private BlockChar.Color color;
 	private Optional<Integer> oldRecipeIndex = Optional.empty();
+	private int noControlTime = 0;
     protected Random rand = new Random();
 		
 	public TileChar() {
@@ -39,6 +40,7 @@ public class TileChar extends TileHasInventory {
 		super.subReadNbt(compound);
 		state = BlockChar.State.values()[compound.getInteger("state")];
 		color = BlockChar.Color.values()[compound.getInteger("color")];
+		noControlTime = compound.getInteger("noControlTime");
 		if (compound.hasKey("oldRecipeIndex") && compound.getInteger("oldRecipeIndex") != -1) {
 			oldRecipeIndex = Optional.of(compound.getInteger("oldRecipeIndex"));
 		} else {
@@ -51,6 +53,7 @@ public class TileChar extends TileHasInventory {
 		super.subWriteNbt(compound);
 		compound.setInteger("color", color.ordinal());
 		compound.setInteger("state", state.ordinal());
+		compound.setInteger("noControlTime", noControlTime);
 		compound.setInteger("oldRecipeIndex", oldRecipeIndex.orElse(-1));
 	}
 	
@@ -63,14 +66,32 @@ public class TileChar extends TileHasInventory {
         	if (entity.getBlock().getBlock() == endSand && entity.getDistanceSq(pos) < 0.64) {
         		entity.setDead();
         		changeSandState();
+        		noControlTime = 0;
         	}
         });
+        boolean isHasItem = false;
+    	for (int i=0; i < itemHandler.getSlots(); i++) {
+    		if (!itemHandler.getStackInSlot(i).isEmpty()) {
+    			isHasItem = true;
+    		}
+    	}
+    	if (isHasItem) {
+    		noControlTime++;
+    	}
+        if (noControlTime > 1200) {
+        	breakEvent();
+        	for (int i=0; i < itemHandler.getSlots(); i++) {
+        		itemHandler.setItemStock(i, ItemStack.EMPTY);
+        	}
+        	noControlTime = 0;
+        }
 	}
 	
 	public void setOldRecipe(EntityPlayer player, boolean isCreative) {
 		if (!getResult().isEmpty() ) {
 			return;
 		}
+		noControlTime = 0;
 		oldRecipeIndex.filter(index -> index < CharRecipe.recipes.size()).ifPresent(index -> {
 			CharRecipeData recipe = CharRecipe.recipes.get(index);
 			recipe.getInputList().forEach(recipeItem -> {
@@ -108,6 +129,7 @@ public class TileChar extends TileHasInventory {
 	}
 	
 	public void changeNotmal() {
+		noControlTime = 0;
 		IBlockState blockState = world.getBlockState(pos);
 		state = BlockChar.State.NORMAL;
 		blockState = blockState.withProperty(BlockChar.STATE, state);
@@ -180,6 +202,7 @@ public class TileChar extends TileHasInventory {
 	}
 	
 	public void changeItem(ItemStack stack, boolean isCreative) {
+		noControlTime = 0;
 		if (stack.isEmpty()) {
 			removeItem();
 		} else {
