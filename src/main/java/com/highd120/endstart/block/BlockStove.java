@@ -54,7 +54,6 @@ public class BlockStove extends Block implements IUsableFireStarter{
 		ItemStack stack = playerIn.getHeldItem(hand);
 		TileStove tile = (TileStove) worldIn.getTileEntity(pos);
 		State state = blockState.getValue(STATE);
-		playerIn.sendMessage(new TextComponentString(state.toString()));
 		if (stack.getItem() == Items.FLINT_AND_STEEL && isUsable(worldIn, pos, blockState)) {
 			stack.damageItem(1, playerIn);
 			tile.fire();

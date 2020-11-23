@@ -111,7 +111,7 @@ public class TileStove extends TileHasInventory {
 	
 	private static int itemSmeltingTime = 220;
 	
-	public static final int FUEL_TIME = 200;
+	public static final int FUEL_TIME = 1400;
 	
 	public ItemStack getResultItem() {
 		ItemStack item = itemHandler.getStackInSlot(ITEM_SLOT);
