@@ -118,7 +118,7 @@ public class TileChar extends TileHasInventory {
 		world.setBlockState(pos, blockState, 3);
 		if ( getResult() == ItemStack.EMPTY) {
 			CharRecipe.craft(getInputItems(), color).ifPresent(index -> {
-				ItemStack item = CharRecipe.recipes.get(index).getOutput();
+				ItemStack item = CharRecipe.recipes.get(index).getOutput().copy();
 				oldRecipeIndex = Optional.of(index);
 				for (int i = 1; i < INPUT_SLOT_COUNT + 1; i++) {
 					itemHandler.setItemStock(i, ItemStack.EMPTY);
