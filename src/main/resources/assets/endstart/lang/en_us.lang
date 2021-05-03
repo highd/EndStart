@@ -34,6 +34,7 @@ item.endstart.end_hammer.name=End Hammer
 item.endstart.fire_starter.name=Fire Starter
 item.endstart.access_input.name=Accesser Input
 item.endstart.access_output.name=Accesser Output
+item.endstart.ancient_knowledge.name=Ancient Language Knowledge
 
 item.endstart.magnesium.name=Magnesium Dust
 item.endstart.crystal.name=Crystal Dust
@@ -67,3 +68,6 @@ endstart.valid=ERROR
 itemGroup.endstart=End Start
 endstart.injection=Injection
 endstart.char=Magic Letter
+
+endstart.research.ancient_knowledge.title=Ancient Language Knowledge
+endstart.research.ancient_knowledge.0=WIP

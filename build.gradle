@@ -18,6 +18,8 @@ repositories {
     name = "ModMaven"
     url = "https://modmaven.k-4u.nl"
   }
+  maven { url 'https://maven.mcmoddev.com' }
+  maven { url = "https://www.cursemaven.com" }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
@@ -71,7 +73,10 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+    deobfCompile 'curse.maven:thaumcraft-223628:2629023'
+    deobfCompile 'curse.maven:baubles-227083:2518667'
+    deobfProvided "net.darkhax.gamestages:GameStages-1.12.2:2.0.114"
+    deobfProvided "net.darkhax.bookshelf:Bookshelf-1.12.2:2.3.575"
     compileOnly  'org.projectlombok:lombok:1.16.4'  // compile against the JEI API but do not include it at runtime
     deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
 	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.586"

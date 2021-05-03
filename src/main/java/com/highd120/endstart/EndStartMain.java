@@ -29,7 +29,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import thaumcraft.api.ThaumcraftApi;
 
 /**
  * メインとなるクラス。
@@ -70,6 +71,7 @@ public class EndStartMain {
 	 */
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		ThaumcraftApi.registerResearchLocation(new ResourceLocation(MOD_ID, "research.json"));
 		EntityRegistry.addSpawn(EntityEndZombie.class, 10, 1, 3, EnumCreatureType.CREATURE, Biomes.SKY);
 		MinecraftForge.EVENT_BUS.register(PlayerDataEvents.class);
 		MinecraftForge.EVENT_BUS.register(CheckerForDamyNbt.class);

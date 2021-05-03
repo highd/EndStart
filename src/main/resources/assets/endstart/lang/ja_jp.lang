@@ -35,6 +35,7 @@ item.endstart.end_hammer.name=エンドのハンマー
 item.endstart.fire_starter.name=火起こし器
 item.endstart.access_input.name=アクセサー 入力
 item.endstart.access_output.name=アクセサー 出力
+item.endstart.ancient_knowledge.name=古代言語の知識
 
 item.endstart.magnesium.name=マグネシウムの粉末
 item.endstart.crystal.name=水晶の粉末
@@ -69,3 +70,8 @@ endstart.valid=エラー
 itemGroup.endstart=End Start
 endstart.injection=アイテム注入
 endstart.char=魔法文字
+
+endstart.research.ancient_knowledge.title=古代言語の知識
+endstart.research.ancient_knowledge.0=いくつかの骨董品にはなんらかの文章が記されているようだ。これを読み解くことができれば研究の役に立つかもしれない。
+endstart.research.ancient_knowledge.1=霊界と対話により、古代の言語の知識を得る試みを行う。錬金術の応用で可能だろうか?
+endstart.research.ancient_knowledge.2=記述された言語の翻訳に成功した。これらには様々な知識が記されているようだ。

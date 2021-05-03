@@ -1,0 +1,43 @@
+{
+    "entries": [
+        {
+            "key": "GET_ANCIENT_KNOWLEDGE",
+            "name": "endstart.research.ancient_knowledge.title",
+            "icons": [
+                "endstart:textures/items/ancient_knowledge.png"
+            ],
+            "category": "ALCHEMY",
+            "parents": ["HEDGEALCHEMY"],
+            "location": [
+                -3,
+                2
+            ],
+            "stages": [
+                {
+                    "text": "endstart.research.ancient_knowledge.0",
+                    "required_item": [
+                        "thaumcraft:curio;1;1",
+                        "minecraft:paper"
+                    ],
+                    "required_knowledge": [
+                        "OBSERVATION;ALCHEMY;1",
+                        "THEORY;ALCHEMY;1",
+                        "THEORY;BASICS;1"
+                    ]
+                },
+                {
+                    "text": "endstart.research.ancient_knowledge.1",
+                    "recipes": ["endstart:ancient_knowledge_recipe"],
+                    "required_craft":["endstart:ancient_knowledge"],
+                    "required_knowledge": [
+                        "OBSERVATION;ALCHEMY;1"
+                    ]
+                },
+                {
+                    "text": "endstart.research.ancient_knowledge.2",
+                    "recipes": ["endstart:ancient_knowledge_recipe"]
+                }
+            ]
+        }
+    ]
+}
