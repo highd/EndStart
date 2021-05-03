@@ -39,7 +39,14 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.VanillaDoubleChestItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
-public class ItemNewRecipeCreater extends ItemBase {
+public class ItemNewRecipeCreater extends ItemHasMeta {
+	public ItemNewRecipeCreater() {
+		super(new String[] {
+			"new_recipe",
+			"recipe"
+		});
+	}
+
 	private static ExtraCraftData craftData;
 	public static void load() {
         final Path extraDataPath = Paths.get(Minecraft.getMinecraft().mcDataDir + "\\config\\extraCraft.json");
@@ -147,7 +154,7 @@ public class ItemNewRecipeCreater extends ItemBase {
         return "<" + itemName + ":" + meta + ">" + nbtTagString;
     }
 
-    private String convertRecipeCode(String template, final IItemHandler handler, final int width) {
+    private String convertRecipeCode(String template, final IItemHandler handler, final int width, int meta) {
         Matcher matcher = elementPattern.matcher(template);
         while (matcher.find()) {
             final String element = matcher.group();
@@ -157,7 +164,7 @@ public class ItemNewRecipeCreater extends ItemBase {
             final int y = Integer.parseInt(pointMatcher.group(2));
             final int slot = y * width + x;
             final ItemStack slotStack = handler.getStackInSlot(slot);
-            final String result = createItemText(slotStack, slot != 0);
+            final String result = createItemText(slotStack, slot != 0 && meta == 0);
             template = template.replace(element, result);
         }
         matcher = loopPattern.matcher(template);
@@ -175,7 +182,7 @@ public class ItemNewRecipeCreater extends ItemBase {
                 if (slotStack == ItemStack.EMPTY) {
                 	break;
                 }
-            	result.add(child.replace("$", createItemText(slotStack, slot != 0)));
+            	result.add(child.replace("$", createItemText(slotStack, slot != 0 && meta == 0)));
             }
             template = template.replace(element, String.join(delimiter, result));
         }
@@ -191,7 +198,7 @@ public class ItemNewRecipeCreater extends ItemBase {
             final ItemStack slotStack = handler.getStackInSlot(slot);
             String result = "";
             if (slotStack != ItemStack.EMPTY) {
-            	result = child.replace("$",createItemText(slotStack, slot != 0));
+            	result = child.replace("$",createItemText(slotStack, slot != 0 && meta == 0));
             }
             template = template.replace(element, result);
         }
@@ -219,7 +226,8 @@ public class ItemNewRecipeCreater extends ItemBase {
         if (width == null || template == null) {
             return super.onItemUse(playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
         }
-        final String code = convertRecipeCode(template, handler, width);
+        ItemStack holdItem = playerIn.getHeldItem(hand);
+        final String code = convertRecipeCode(template, handler, width, holdItem.getMetadata());
         if (!craftData.getIsPrint().containsKey(downBlockString) || craftData.getIsPrint().get(downBlockString)) {
         	updateDb(map -> map.put(createItemText(output, false), code));
         } else {
