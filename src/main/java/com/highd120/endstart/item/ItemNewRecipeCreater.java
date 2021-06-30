@@ -130,6 +130,12 @@ public class ItemNewRecipeCreater extends ItemHasMeta {
                 	name -> "<liquid:" + name + "> * " + count)
             	).orElse("null");
         }
+        if (stack.getItem() == ModItems.aspect) {
+            return NbtTagUtil.getString(ItemArgument.TAG, stack)
+            	.flatMap(count -> NbtTagUtil.getString(ItemFluid.NAME, stack).map(
+                	name -> "<aspect:" + name + "> * " + count)
+            	).orElse("null");
+        }
         final String itemName = stack.getItem().getRegistryName().toString();
         final int meta = stack.getMetadata();
         int oreIds[] = OreDictionary.getOreIDs(stack);

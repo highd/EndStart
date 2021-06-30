@@ -35,6 +35,7 @@ item.endstart.fire_starter.name=Fire Starter
 item.endstart.access_input.name=Accesser Input
 item.endstart.access_output.name=Accesser Output
 item.endstart.ancient_knowledge.name=Ancient Language Knowledge
+item.endstart.aspect.name=Aspect
 
 item.endstart.magnesium.name=Magnesium Dust
 item.endstart.crystal.name=Crystal Dust

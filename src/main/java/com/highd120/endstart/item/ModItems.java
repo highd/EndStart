@@ -60,6 +60,7 @@ public class ModItems {
 	public static ItemFireStarter fireStater;
 	public static ItemAccess access;
 	public static ItemAncientKnowledge ancientKnowledge;
+	public static ItemAspect aspect;
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
@@ -80,6 +81,7 @@ public class ModItems {
 		fireStater = regist(register, new ItemFireStarter(), "fire_starter");
 		access = regist(register, new ItemAccess(), "access");
 		ancientKnowledge = regist(register, new ItemAncientKnowledge(), "ancient_knowledge");
+		aspect = regist(register, new ItemAspect(), "aspect");
 		
 		ItemBlockExtra blockExtra = new ItemBlockExtra(ModBlocks.blackhole);
 		blockExtra.setUnlocalizedName(ModBlocks.blackhole.getUnlocalizedName());
