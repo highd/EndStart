@@ -1,6 +1,7 @@
 package com.highd120.endstart.block;
 
 import java.util.Locale;
+import java.util.Random;
 
 import javax.annotation.Nonnull;
 
@@ -29,8 +30,17 @@ public class BlockBlood extends Block {
 			return name().toLowerCase(Locale.ROOT);
 		}
 	}
-    private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.5, 1);
+	enum Type implements IStringSerializable {
+		SLAB, CUBE;
+		@Override
+		public String getName() {
+			return name().toLowerCase(Locale.ROOT);
+		}
+	}
+    private static final AxisAlignedBB AABB_SLAB = new AxisAlignedBB(0, 0, 0, 1, 0.5, 1);
+    private static final AxisAlignedBB AABB_CUBE = new AxisAlignedBB(0, 0, 0, 1, 1, 1);
     public static final PropertyEnum<Color> COLOR = PropertyEnum.create("color", Color.class);
+    public static final PropertyEnum<Type> TYPE = PropertyEnum.create("type", Type.class);
 
     /**
      * コンストラクター。
@@ -40,10 +50,26 @@ public class BlockBlood extends Block {
         setHardness(0.1F);
         setSoundType(SoundType.STONE);
         IBlockState state = blockState.getBaseState()
-                .withProperty(COLOR, Color.RED);
+                .withProperty(COLOR, Color.RED)
+                .withProperty(TYPE, Type.SLAB);
         setDefaultState(state);
+        setTickRandomly(true);
     }
+    
+	@Override
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+		world.scheduleUpdate(pos, this, 10);
+	}
 
+    @Override
+    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    	super.randomTick(worldIn, pos, state, rand);
+    	Color color = state.getValue(COLOR);
+    	if (color == Color.RED) {
+    		worldIn.setBlockState(pos, state.withProperty(BlockBlood.COLOR, BlockBlood.Color.BLACK), 3);
+    	}
+    }
+    
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
@@ -57,36 +83,31 @@ public class BlockBlood extends Block {
     @Nonnull
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return AABB;
+    	if (state.getValue(TYPE) ==  Type.SLAB) {
+    		return AABB_SLAB;
+    	}
+        return AABB_CUBE;
     }
 
     @Nonnull
     @Override
     public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, COLOR);
+        return new BlockStateContainer(this, COLOR, TYPE);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(COLOR).ordinal();
+        return state.getValue(COLOR).ordinal() + (state.getValue(TYPE).ordinal() << 1);
     }
 
     @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta) {
-    	Color color = Color.values()[meta];
+    	Color color = Color.values()[meta  & 1];
+    	Type type = Type.values()[meta >> 1];
         return getDefaultState()
-                .withProperty(COLOR, color);
-    }
-    
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-    	return true;
-    }
-    
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-    	return new TileBlood();
+                .withProperty(COLOR, color)
+                .withProperty(TYPE, type);
     }
 
     @Override

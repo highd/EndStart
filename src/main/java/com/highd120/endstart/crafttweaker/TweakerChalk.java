@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.highd120.endstart.block.BlockChar;
-import com.highd120.endstart.block.CharRecipe;
-import com.highd120.endstart.block.CharRecipeData;
+import com.highd120.endstart.block.charmagic.CharRecipe;
+import com.highd120.endstart.block.charmagic.CharRecipeData;
 
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;

@@ -1,6 +1,7 @@
 package com.highd120.endstart.block;
 
 import com.highd120.endstart.block.BlockStove.State;
+import com.highd120.endstart.block.base.TileHasInventory;
 import com.highd120.endstart.util.ItemUtil;
 
 import net.minecraft.block.state.IBlockState;

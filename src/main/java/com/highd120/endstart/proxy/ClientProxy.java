@@ -2,15 +2,15 @@ package com.highd120.endstart.proxy;
 
 import com.highd120.endstart.EntityEndZombie;
 import com.highd120.endstart.RenderEndZombie;
-import com.highd120.endstart.block.TileChar;
-import com.highd120.endstart.block.TileCharRenderer;
-import com.highd120.endstart.block.TileCrafterCore;
 import com.highd120.endstart.block.TileRack;
 import com.highd120.endstart.block.TileRackRenderer;
-import com.highd120.endstart.block.TileSingleItemRenderer;
 import com.highd120.endstart.block.TileStand;
 import com.highd120.endstart.block.TileStove;
 import com.highd120.endstart.block.TileStoveRenderer;
+import com.highd120.endstart.block.base.TileSingleItemRenderer;
+import com.highd120.endstart.block.charmagic.TileChar;
+import com.highd120.endstart.block.charmagic.TileCharRenderer;
+import com.highd120.endstart.block.crafter.TileCrafterCore;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelZombie;

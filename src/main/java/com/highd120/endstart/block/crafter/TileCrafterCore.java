@@ -1,4 +1,4 @@
-package com.highd120.endstart.block;
+package com.highd120.endstart.block.crafter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,8 @@ import javax.annotation.Nullable;
 
 import com.highd120.endstart.EndStartMessages;
 import com.highd120.endstart.SoundList;
+import com.highd120.endstart.block.TileStand;
+import com.highd120.endstart.block.base.TileHasSingleItem;
 import com.highd120.endstart.network.NetworkInjectionEffect;
 import com.highd120.endstart.network.NetworkInjectionEffectEnd;
 import com.highd120.endstart.util.ItemUtil;
@@ -29,18 +31,18 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
 public class TileCrafterCore extends TileHasSingleItem {
-    public enum InjectionState {
-        NOT_WORKING, CHARGE_MANA, EFFECT, ITEM_FLOW;
+    public enum CrafterState {
+        NOT_WORKING, CHARGE_ENERGY, EFFECT, ITEM_FLOW;
     }
 
     private ItemStack resultItem;
-    private InjectionState state = InjectionState.NOT_WORKING;
+    private CrafterState state = CrafterState.NOT_WORKING;
     private CrafterEffectManager effect;
     private EnergyStorage energyStorage = new EnergyStorage(1000000);
     private int completeEnergy = 0;
     private static final String ENERGY_TAG = "energy";
 
-    private static InjectionState[] stateList = InjectionState.values();
+    private static CrafterState[] stateList = CrafterState.values();
 
     public CrafterEffectManager getEffect() {
         return effect;
@@ -51,7 +53,7 @@ public class TileCrafterCore extends TileHasSingleItem {
      *
      * @return 状態。
      */
-    public InjectionState getState() {
+    public CrafterState getState() {
         return state;
     }
 
@@ -87,14 +89,14 @@ public class TileCrafterCore extends TileHasSingleItem {
         }
         effect.upDate();
         EndStartMessages.sendToNearby(getWorld(), getPos(), new NetworkInjectionEffect(getPos()));
-        if (state == InjectionState.CHARGE_MANA && energyStorage.getEnergyStored() >= completeEnergy) {
+        if (state == CrafterState.CHARGE_ENERGY && energyStorage.getEnergyStored() >= completeEnergy) {
             SoundList.playSoundBlock(getWorld(), SoundList.injectionEffect, getPos());
-            state = InjectionState.EFFECT;
+            state = CrafterState.EFFECT;
             effect.start();
             energyStorage.extractEnergy(completeEnergy, false);
             blockUpdate();
         }
-        if (state == InjectionState.EFFECT && effect.isEnd()) {
+        if (state == CrafterState.EFFECT && effect.isEnd()) {
             SoundList.playSoundBlock(getWorld(), SoundList.injectionComplete, getPos());
             effect = null;
             complete();
@@ -109,7 +111,7 @@ public class TileCrafterCore extends TileHasSingleItem {
             result.setNoGravity(true);
             result.setVelocity(0, -0.2f, 0);
         }
-        state = InjectionState.NOT_WORKING;
+        state = CrafterState.NOT_WORKING;
     }
 
     @AllArgsConstructor
@@ -123,25 +125,15 @@ public class TileCrafterCore extends TileHasSingleItem {
      */
     public void active() {
         LaunchableResult result = isLaunchable();
-        if (state == InjectionState.NOT_WORKING && result.isLaunchable) {
+        if (state == CrafterState.NOT_WORKING && result.isLaunchable) {
             List<BlockPos> standList = result.standList.stream()
                 .filter(stand -> !stand.getItem().isEmpty())
                 .map(TileStand::getPos)
                 .collect(Collectors.toList());
             effect = new CrafterEffectManager(standList, getPos());
-            state = InjectionState.CHARGE_MANA;
+            state = CrafterState.CHARGE_ENERGY;
             result.standList.forEach(TileStand::removeItem);
             itemHandler.setItemStock(0,  ItemStack.EMPTY);
-        }
-    }
-
-    @Value
-    private static class InjectionItemData implements Comparable<InjectionItemData> {
-        String name;
-
-        @Override
-        public int compareTo(InjectionItemData o) {
-            return name.compareTo(o.name);
         }
     }
 
@@ -162,9 +154,9 @@ public class TileCrafterCore extends TileHasSingleItem {
             .map(TileStand::getItem)
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
-        for (InjectionRecipeData data : InjectionRecipe.recipes) {
+        for (CrafterRecipeData data : CrafterRecipe.recipes) {
             if (data.checkRecipe(itemList, getItem())) {
-                resultItem = data.craft();
+                resultItem = data.getOutput().copy();
                 completeEnergy = data.useEnergy;
                 return new LaunchableResult(standList, true);
             }

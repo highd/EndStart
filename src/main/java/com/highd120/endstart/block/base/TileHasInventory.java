@@ -1,7 +1,8 @@
-package com.highd120.endstart.block;
+package com.highd120.endstart.block.base;
 
 import java.util.Optional;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
@@ -90,6 +91,10 @@ public abstract class TileHasInventory extends TileEntityBase {
 
 		public void setItemStock(int slot, ItemStack stack) {
 			setStackInSlot(slot, stack);
+		}
+		
+		public Stream<ItemStack> stream() {
+			return stacks.stream();
 		}
 	}
 }

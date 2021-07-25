@@ -3,6 +3,7 @@ package com.highd120.endstart.block;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.highd120.endstart.block.base.TileHasInventory;
 import com.highd120.endstart.util.ItemUtil;
 
 import net.minecraft.item.ItemStack;

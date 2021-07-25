@@ -1,14 +1,13 @@
 package com.highd120.endstart;
 
-import com.highd120.endstart.block.CharRecipe;
-import com.highd120.endstart.block.InjectionRecipe;
 import com.highd120.endstart.block.StoveFuelList;
-import com.highd120.endstart.block.TileBlood;
-import com.highd120.endstart.block.TileChar;
-import com.highd120.endstart.block.TileCrafterCore;
 import com.highd120.endstart.block.TileRack;
 import com.highd120.endstart.block.TileStand;
 import com.highd120.endstart.block.TileStove;
+import com.highd120.endstart.block.charmagic.CharRecipe;
+import com.highd120.endstart.block.charmagic.TileChar;
+import com.highd120.endstart.block.crafter.CrafterRecipe;
+import com.highd120.endstart.block.crafter.TileCrafterCore;
 import com.highd120.endstart.command.ArgumentCommand;
 import com.highd120.endstart.command.DebugCommand;
 import com.highd120.endstart.command.DeleteRecipeNewTmpCommand;
@@ -55,7 +54,6 @@ public class EndStartMain {
         ItemNewRecipeCreater.load();
 		GameRegistry.registerTileEntity(TileCrafterCore.class, new ResourceLocation(MOD_ID, "crafter_core"));
 		GameRegistry.registerTileEntity(TileStand.class, new ResourceLocation(MOD_ID, "stand"));
-		GameRegistry.registerTileEntity(TileBlood.class, new ResourceLocation(MOD_ID, "blood"));
 		GameRegistry.registerTileEntity(TileChar.class, new ResourceLocation(MOD_ID, "char"));
 		GameRegistry.registerTileEntity(TileStove.class, new ResourceLocation(MOD_ID, "stove"));
 		GameRegistry.registerTileEntity(TileRack.class, new ResourceLocation(MOD_ID, "rack"));
@@ -77,7 +75,7 @@ public class EndStartMain {
 		MinecraftForge.EVENT_BUS.register(CheckerForDamyNbt.class);
 		MinecraftForge.EVENT_BUS.register(WoodBreakEvent.class);
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
-        InjectionRecipe.init();
+        CrafterRecipe.init();
         CharRecipe.init();
         StoveFuelList.init();
         proxy.init();

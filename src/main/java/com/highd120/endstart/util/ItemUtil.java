@@ -1,6 +1,15 @@
 package com.highd120.endstart.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -62,6 +71,40 @@ public class ItemUtil {
 
 		}
 		return true;
+	}
+	
+	public static Stream<ItemStack> getPlayerStream(EntityPlayer player) {
+		List<ItemStack> list = new ArrayList<>();
+		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+			ItemStack item = player.inventory.getStackInSlot(i);
+			list.add(item);
+		}
+		return list.stream();
+	}
+	
+	public static void drawItem(ItemStack item, double x, double y, double z, double size, boolean isUpDown) {
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y, z);
 
+        double boop = Minecraft.getSystemTime() / 800D;
+        if (isUpDown) {
+        	GlStateManager.translate(0D, Math.sin(boop % (2 * Math.PI)) * 0.065, 0D);
+        }
+        GlStateManager.rotate((float) (boop * 40D % 360), 0, 1, 0);
+
+        float scale = item.getItem() instanceof ItemBlock ? 0.85F : 0.65F;
+        scale *= size;
+        GlStateManager.scale(scale, scale, scale);
+
+        GlStateManager.pushMatrix();
+        GlStateManager.disableLighting();
+        GlStateManager.pushAttrib();
+        Minecraft.getMinecraft().getRenderItem().renderItem(item, TransformType.FIXED);
+        GlStateManager.popAttrib();
+        GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
+
+        GlStateManager.popMatrix();
+		
 	}
 }

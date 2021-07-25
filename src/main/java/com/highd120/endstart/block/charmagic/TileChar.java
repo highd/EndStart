@@ -1,10 +1,15 @@
-package com.highd120.endstart.block;
+package com.highd120.endstart.block.charmagic;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import com.highd120.endstart.block.BlockChar;
+import com.highd120.endstart.block.ModBlocks;
+import com.highd120.endstart.block.BlockChar.Color;
+import com.highd120.endstart.block.BlockChar.State;
+import com.highd120.endstart.block.base.TileHasInventory;
 import com.highd120.endstart.item.ModItems;
 import com.highd120.endstart.util.ItemUtil;
 import net.minecraft.block.Block;
@@ -69,12 +74,7 @@ public class TileChar extends TileHasInventory {
         		noControlTime = 0;
         	}
         });
-        boolean isHasItem = false;
-    	for (int i=0; i < itemHandler.getSlots(); i++) {
-    		if (!itemHandler.getStackInSlot(i).isEmpty()) {
-    			isHasItem = true;
-    		}
-    	}
+        boolean isHasItem = itemHandler.stream().anyMatch(item -> !item.isEmpty());
     	if (isHasItem) {
     		noControlTime++;
     	}
@@ -95,18 +95,17 @@ public class TileChar extends TileHasInventory {
 		oldRecipeIndex.filter(index -> index < CharRecipe.recipes.size()).ifPresent(index -> {
 			CharRecipeData recipe = CharRecipe.recipes.get(index);
 			recipe.getInputList().forEach(recipeItem -> {
-				for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-					ItemStack item = player.inventory.getStackInSlot(i);
-					if (ItemUtil.equalItemStackForRecipe(item, recipeItem)) {
+				ItemUtil.getPlayerStream(player)
+					.filter(item -> ItemUtil.equalItemStackForRecipe(item, recipeItem))
+					.findFirst()
+					.ifPresent(item -> {
 						ItemStack clone = item.copy();
 						clone.setCount(1);
 						boolean result = addItem(clone);
 						if (!isCreative && result) {
 							item.shrink(1);
 						}
-						break;
-					}
-				}
+					});
 			});
 		});
 	}

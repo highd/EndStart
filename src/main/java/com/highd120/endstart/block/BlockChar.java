@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.highd120.endstart.block.charmagic.TileChar;
 import com.highd120.endstart.item.ModItems;
 
 import net.minecraft.block.Block;

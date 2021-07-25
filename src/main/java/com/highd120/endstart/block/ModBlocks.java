@@ -1,6 +1,7 @@
 package com.highd120.endstart.block;
 
 import com.highd120.endstart.EndStartMain;
+import com.highd120.endstart.block.crafter.BlockCrafterCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;

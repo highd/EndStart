@@ -3,7 +3,8 @@ package com.highd120.endstart.block;
 import javax.annotation.Nonnull;
 
 import com.highd120.endstart.EndStartCreativeTab;
-import com.highd120.endstart.block.BlockHasSingleItem;
+import com.highd120.endstart.block.base.BlockHasSingleItem;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

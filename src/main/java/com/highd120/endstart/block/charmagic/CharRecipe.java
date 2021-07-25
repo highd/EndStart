@@ -1,19 +1,56 @@
-package com.highd120.endstart.block;
+package com.highd120.endstart.block.charmagic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.highd120.endstart.EndStartMain;
+import com.highd120.endstart.block.BlockChar;
+import com.highd120.endstart.block.ModBlocks;
 import com.highd120.endstart.block.BlockChar.Color;
+import com.highd120.endstart.block.base.ListAndMainRecipeData;
+import com.highd120.endstart.block.crafter.CrafterRecipeData;
+import com.highd120.endstart.block.crafter.CrafterRecipe.JeiData;
 import com.highd120.endstart.item.ModItems;
+import com.highd120.endstart.jei.IListAndMainRecipeJeiData;
 
+import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class CharRecipe {
     public static final List<CharRecipeData> recipes = new ArrayList<>();
+    public static final String UID = EndStartMain.MOD_ID + ".char";
+
+    public static class JeiData implements IListAndMainRecipeJeiData {
+
+		@Override
+		public String getTitle() {
+			return I18n.format(EndStartMain.MOD_ID + ".char");
+		}
+
+		@Override
+		public String getUid() {
+			return UID;
+		}
+
+		@Override
+		public ListAndMainRecipeData parseIngredient(IIngredients ingredients) {
+	    	List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM); 
+	        ItemStack main = inputs.get(0).get(0);
+	        List<ItemStack> injectionList = inputs.get(1);
+	        ItemStack output = ingredients.getOutputs(VanillaTypes.ITEM).get(0).get(0);
+	        return new CrafterRecipeData(main, injectionList, output, 0);
+		}
+    }
+    
+    public static IListAndMainRecipeJeiData createJeiData() {
+		return new JeiData();
+    }
 
     public static CharRecipeData createRecipe(ItemStack output, Color color,
             ItemStack... inputs) {

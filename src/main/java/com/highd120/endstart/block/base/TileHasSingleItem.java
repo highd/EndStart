@@ -1,5 +1,6 @@
-package com.highd120.endstart.block;
+package com.highd120.endstart.block.base;
 
+import com.highd120.endstart.block.base.TileHasInventory.SimpleItemStackHandler;
 import com.highd120.endstart.util.ItemUtil;
 import net.minecraft.item.ItemStack;
 

@@ -1,5 +1,7 @@
 package com.highd120.endstart.block;
 
+import com.highd120.endstart.block.base.TileHasSingleItem;
+
 import net.minecraft.item.ItemStack;
 
 public class TileStand extends TileHasSingleItem {

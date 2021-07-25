@@ -1,4 +1,4 @@
-package com.highd120.endstart.block;
+package com.highd120.endstart.block.base;
 
 import javax.annotation.Nonnull;
 

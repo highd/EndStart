@@ -38,6 +38,33 @@
                     "recipes": ["endstart:ancient_knowledge_recipe"]
                 }
             ]
+        },
+        
+        {
+            "key": "CRYSTAL_LASER_LENS",
+            "name": "endstart.research.crystal_laser_lens.title",
+            "icons": [
+                "environmentaltech:laser_lens_crystal@^"
+            ],
+            "category": "ARTIFICE",
+            "parents": ["ARCANEBORE"],
+            "location": [
+                -5,
+                -5
+            ],
+            "stages": [
+                {
+                    "text": "endstart.research.crystal_laser_lens.0",
+                    "required_knowledge": [
+                        "OBSERVATION;ARTIFICE;1",
+                        "THEORY;ALCHEMY;1",
+                        "THEORY;ARTIFICE;1"
+                    ]
+                },
+                {
+                    "text": "endstart.research.crystal_laser_lens.1"
+                }
+            ]
         }
     ]
 }

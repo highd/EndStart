@@ -1,6 +1,8 @@
 {
     "variants": {
-        "color=black": { "model": "endstart:black_blood" },
-        "color=red": { "model": "endstart:red_blood" }
+        "color=black,type=slab": { "model": "endstart:black_blood_slab" },
+        "color=red,type=slab": { "model": "endstart:red_blood_slab" },
+        "color=black,type=cube": { "model": "endstart:black_blood_cube" },
+        "color=red,type=cube": { "model": "endstart:red_blood_cube" }
     }
 }

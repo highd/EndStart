@@ -1,7 +1,7 @@
 package com.highd120.endstart.network;
 
-import com.highd120.endstart.block.CrafterEffectManager;
-import com.highd120.endstart.block.TileCrafterCore;
+import com.highd120.endstart.block.crafter.CrafterEffectManager;
+import com.highd120.endstart.block.crafter.TileCrafterCore;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;

@@ -1,5 +1,7 @@
 package com.highd120.endstart.block;
 
+import com.highd120.endstart.block.base.TileEntityBase;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;

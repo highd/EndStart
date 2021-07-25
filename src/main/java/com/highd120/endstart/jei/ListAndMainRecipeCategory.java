@@ -3,7 +3,8 @@ package com.highd120.endstart.jei;
 import javax.annotation.Nonnull;
 
 import com.highd120.endstart.EndStartMain;
-import com.highd120.endstart.block.CharRecipeData;
+import com.highd120.endstart.block.base.ListAndMainRecipeData;
+import com.highd120.endstart.block.charmagic.CharRecipeData;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -13,41 +14,43 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class CharCategory implements IRecipeCategory<CharRecipeWrapper> {
-    private final IDrawable background;
-    public static final String UID = EndStartMain.MOD_ID + ".char";
+public class ListAndMainRecipeCategory implements IRecipeCategory<ListAndMainRecipeWrapper>{
+	private final IListAndMainRecipeJeiData data;
     private final IDrawable overlay;
+    private final IDrawable background;
 
-
-    /**
-     * コンストラクター。
-     * @param guiHelper GUIのヘルパー。
-     */
-    public CharCategory(IGuiHelper guiHelper) {
+	public ListAndMainRecipeCategory(IGuiHelper guiHelper, IListAndMainRecipeJeiData data) {
+		super();
+		this.data = data;
         background = guiHelper.createBlankDrawable(150, 110);
         overlay = guiHelper.createDrawable(
                 new ResourceLocation("endstart", "textures/gui/injection.png"), 0, 0, 150, 110);
-    }
+		
+	}
 
-    @Override
-    public String getUid() {
-        return UID;
-    }
+	@Override
+	public String getUid() {
+		return data.getUid();
+	}
 
-    @Override
-    public String getTitle() {
-        return I18n.format("endstart.char");
-    }
+	@Override
+	public String getTitle() {
+		return data.getTitle();
+	}
 
-    @Override
-    public IDrawable getBackground() {
-        return background;
-    }
+	@Override
+	public String getModName() {
+		return EndStartMain.MOD_ID;
+	}
 
+	@Override
+	public IDrawable getBackground() {
+		return background;
+	}
+	
     @Override
     public void drawExtras(@Nonnull Minecraft minecraft) {
         GlStateManager.enableAlpha();
@@ -57,11 +60,11 @@ public class CharCategory implements IRecipeCategory<CharRecipeWrapper> {
         GlStateManager.disableAlpha();
     }
 
-    @Override
-    public void setRecipe(IRecipeLayout recipeLayout, CharRecipeWrapper recipeWrapper,
-            IIngredients ingredients) {
+	@Override
+	public void setRecipe(IRecipeLayout recipeLayout, ListAndMainRecipeWrapper recipeWrapper,
+			IIngredients ingredients) {
         recipeWrapper.getIngredients(ingredients);
-        final CharRecipeData recipe = CharRecipeData.parseIngredient(ingredients);
+        final ListAndMainRecipeData recipe = data.parseIngredient(ingredients);
         IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
         final int centerX = 64;
         final int centerY = 62;
@@ -80,10 +83,7 @@ public class CharCategory implements IRecipeCategory<CharRecipeWrapper> {
         }
         itemStacks.init(inputSize + 1, false, 105, 17);
         itemStacks.set(inputSize + 1, recipe.getOutput());
-    }
-
-	@Override
-	public String getModName() {
-		return EndStartMain.MOD_ID;
+		
 	}
+
 }
