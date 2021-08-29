@@ -61,6 +61,7 @@ public class ModItems {
 	public static ItemAccess access;
 	public static ItemAncientKnowledge ancientKnowledge;
 	public static ItemAspect aspect;
+	public static ItemMedicine medicine;
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
@@ -82,6 +83,7 @@ public class ModItems {
 		access = regist(register, new ItemAccess(), "access");
 		ancientKnowledge = regist(register, new ItemAncientKnowledge(), "ancient_knowledge");
 		aspect = regist(register, new ItemAspect(), "aspect");
+		medicine = regist(register, new ItemMedicine(), "medicine");
 		
 		ItemBlockExtra blockExtra = new ItemBlockExtra(ModBlocks.blackhole);
 		blockExtra.setUnlocalizedName(ModBlocks.blackhole.getUnlocalizedName());
