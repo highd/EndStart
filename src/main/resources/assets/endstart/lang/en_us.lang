@@ -37,6 +37,7 @@ item.endstart.access_output.name=Accesser Output
 item.endstart.ancient_knowledge.name=Ancient Language Knowledge
 item.endstart.aspect.name=Aspect
 item.endstart.medicine.name=Medicine
+item.endstart.wand.name=Wand
 
 item.endstart.magnesium.name=Magnesium Dust
 item.endstart.crystal.name=Crystal Dust

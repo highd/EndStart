@@ -2,6 +2,7 @@ package com.highd120.endstart.block.crafter;
 
 import com.highd120.endstart.EndStartCreativeTab;
 import com.highd120.endstart.block.base.BlockHasSingleItem;
+import com.highd120.endstart.item.ModItems;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,7 +31,7 @@ public class BlockCrafterCore extends BlockHasSingleItem  {
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     	ItemStack heldItem = playerIn.getHeldItem(hand);
-        if (heldItem != null && heldItem.getItem() == Items.STICK) {
+        if (heldItem != null && heldItem.getItem() == ModItems.extra && heldItem.getMetadata() == 25) {
             activate(worldIn, pos);
             return true;
         }

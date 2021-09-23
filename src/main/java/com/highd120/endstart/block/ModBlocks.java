@@ -31,6 +31,7 @@ public class ModBlocks {
 	public static BlockWoodDust woodDust;
 	public static BlockStove stove;
 	public static BlockRack rack;
+	public static BlockEnergy energy;
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -47,5 +48,6 @@ public class ModBlocks {
 		woodDust = regist(register, new BlockWoodDust(), "wood_dust");
 		stove = regist(register, new BlockStove(), "stove");
 		rack = regist(register, new BlockRack(), "rack");
+		energy = regist(register, new BlockEnergy(), "energy");
 	}
 }

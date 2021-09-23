@@ -105,5 +105,6 @@ public class ModItems {
 		registItemBlock(register, ModBlocks.woodDust);
 		registItemBlock(register, ModBlocks.stove);
 		registItemBlock(register, ModBlocks.rack);
+		registItemBlock(register, ModBlocks.energy);
 	}
 }

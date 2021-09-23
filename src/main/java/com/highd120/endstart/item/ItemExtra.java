@@ -28,7 +28,8 @@ public class ItemExtra extends ItemHasMeta {
 			"circuit_2",
 			"circuit_3",
 			"rainbow",
-			"pe_stone"});
+			"pe_stone",
+			"wand"});
 	}
 
 }
