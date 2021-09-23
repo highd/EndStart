@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import com.highd120.endstart.advancements.EndStartAdvancements;
 import com.highd120.endstart.block.BlockChar;
 import com.highd120.endstart.block.ModBlocks;
 import com.highd120.endstart.block.BlockChar.Color;
@@ -16,6 +17,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
@@ -242,6 +244,12 @@ public class TileChar extends TileHasInventory {
 	@Override
 	public SimpleItemStackHandler createItemStackHandler() {
 		return new ItemStackHandler(this);
+	}
+	
+	public void checkAdvancement(EntityPlayerMP player) {
+		if (state == State.SAND && !itemHandler.getStackInSlot(0).isEmpty()) {
+			EndStartAdvancements.TEST.trigger(player, itemHandler.getStackInSlot(0));
+		}
 	}
 
 }

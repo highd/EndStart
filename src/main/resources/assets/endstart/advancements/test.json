@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+            "item": "endstart:set_water"
+        },
+        "title": {
+            "translate": "advancements.endstart.test.title"
+        },
+        "description": {
+            "translate": "advancements.endstart.test.desc"
+        }
+    },
+    "parent": "endstart:root",
+    "criteria": {
+        "endstart_test": {
+            "trigger": "endstart:test",
+            "item": {
+                "item": "endstart:set_water"
+            }
+        }
+    }
+}

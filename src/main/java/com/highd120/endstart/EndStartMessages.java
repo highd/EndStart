@@ -2,6 +2,7 @@ package com.highd120.endstart;
 
 import com.highd120.endstart.network.NetworkInjectionEffect;
 import com.highd120.endstart.network.NetworkInjectionEffectEnd;
+import com.highd120.endstart.network.PacketNormal;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -24,6 +25,7 @@ public class EndStartMessages {
         network.registerMessage(NetworkInjectionEffectEnd.Handler.class,
                 NetworkInjectionEffectEnd.class,
                 2, Side.CLIENT);
+		network.registerMessage(PacketNormal.Handler.class, PacketNormal.class, 0, Side.CLIENT);
     }
 
     /**

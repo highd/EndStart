@@ -14,6 +14,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -79,6 +80,11 @@ public class BlockChar extends net.minecraft.block.Block {
         if (state == State.SAND && isStick(stack)) {
     		TileChar tile = (TileChar) worldIn.getTileEntity(pos);
     		tile.changeNotmal();
+        }
+        if (playerIn instanceof EntityPlayerMP) {
+    		TileChar tile = (TileChar) worldIn.getTileEntity(pos);
+    		tile.checkAdvancement((EntityPlayerMP) playerIn);
+        	
         }
 		return true;
 	}

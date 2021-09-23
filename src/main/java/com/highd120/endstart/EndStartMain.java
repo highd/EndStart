@@ -1,13 +1,18 @@
 package com.highd120.endstart;
 
+import com.highd120.endstart.advancements.EndStartAdvancements;
 import com.highd120.endstart.block.StoveFuelList;
+import com.highd120.endstart.block.TileEnergy;
 import com.highd120.endstart.block.TileRack;
 import com.highd120.endstart.block.TileStand;
 import com.highd120.endstart.block.TileStove;
+import com.highd120.endstart.block.advancementcafter.AdvancementCrafterRecipe;
+import com.highd120.endstart.block.advancementcafter.TileAdvancementCrafter;
 import com.highd120.endstart.block.charmagic.CharRecipe;
 import com.highd120.endstart.block.charmagic.TileChar;
 import com.highd120.endstart.block.crafter.CrafterRecipe;
 import com.highd120.endstart.block.crafter.TileCrafterCore;
+import com.highd120.endstart.gui.GuiManager;
 import com.highd120.endstart.command.ArgumentCommand;
 import com.highd120.endstart.command.DebugCommand;
 import com.highd120.endstart.command.DeleteRecipeNewTmpCommand;
@@ -18,6 +23,7 @@ import com.highd120.endstart.world.WorldGenerator;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -27,6 +33,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import thaumcraft.api.ThaumcraftApi;
@@ -57,10 +64,13 @@ public class EndStartMain {
 		GameRegistry.registerTileEntity(TileChar.class, new ResourceLocation(MOD_ID, "char"));
 		GameRegistry.registerTileEntity(TileStove.class, new ResourceLocation(MOD_ID, "stove"));
 		GameRegistry.registerTileEntity(TileRack.class, new ResourceLocation(MOD_ID, "rack"));
+		GameRegistry.registerTileEntity(TileAdvancementCrafter.class, new ResourceLocation(MOD_ID, "advancement_rafter"));
+		GameRegistry.registerTileEntity(TileEnergy.class, new ResourceLocation(MOD_ID, "energy"));
         EndStartMessages.registerNetworkMessages();
 		EntityRegistry.registerModEntity(new ResourceLocation(EndStartMain.MOD_ID, "end_zombie"), EntityEndZombie.class,
 				"end_zombie", 23764, this, 64, 3, true);
         proxy.registerRenderers();
+        EndStartAdvancements.init();
 	}
 
 	/**
@@ -75,9 +85,11 @@ public class EndStartMain {
 		MinecraftForge.EVENT_BUS.register(CheckerForDamyNbt.class);
 		MinecraftForge.EVENT_BUS.register(WoodBreakEvent.class);
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiManager());
         CrafterRecipe.init();
         CharRecipe.init();
         StoveFuelList.init();
+        AdvancementCrafterRecipe.init();
         proxy.init();
 	}
 

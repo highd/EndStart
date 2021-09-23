@@ -2,6 +2,7 @@ package com.highd120.endstart;
 
 import com.highd120.endstart.block.ModBlocks;
 import com.highd120.endstart.item.ModItems;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;

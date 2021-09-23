@@ -1,0 +1,21 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:end_stone"
+        },
+        "title": {
+            "translate": "advancements.endstart.root.title"
+        },
+        "description": {
+            "translate": "advancements.endstart.root.desc"
+        },
+        "show_toast": false,
+        "announce_to_chat": false,
+        "background": "minecraft:textures/gui/advancements/backgrounds/husbandry.png"
+    },
+    "criteria": {
+        "endstart_root": {
+            "trigger": "minecraft:tick"
+        }
+    }
+}
