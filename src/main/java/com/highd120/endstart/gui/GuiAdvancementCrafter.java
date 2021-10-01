@@ -1,6 +1,7 @@
 package com.highd120.endstart.gui;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,17 +64,29 @@ public class GuiAdvancementCrafter extends GuiContainer {
 		int startY = (this.height - this.ySize) / 2 + 10;
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX, mouseY);
         int i = 0;
-        for (Advancement advancement: table.getAdvancementsList(mc.player.connection.getAdvancementManager())) {
-    		drawItemStack2(advancement.getDisplay().getIcon(), startX + 4, startY + 20 + i * 18, null);
+        List<Advancement> advancementsList = table.getAdvancementsList(mc.player.connection.getAdvancementManager());
+        for (Advancement advancement: advancementsList) {
+    		drawItemStack2(advancement.getDisplay().getIcon(), startX + 4, startY + 20 + i * 16, null);
     		i++;
+        }
+        if (startX + 4 < mouseX && mouseX < startX + 20) {
+        	int id = (mouseY - startY - 20) / 16;
+        	if (0 <= id && id < advancementsList.size()) {
+                List<String> textLines = new ArrayList();
+                textLines.add(advancementsList.get(id).getDisplay().getTitle().getFormattedText());
+                textLines.add(advancementsList.get(id).getDisplay().getDescription().getFormattedText());
+                this.drawHoveringText(textLines, mouseX, mouseY, fontRenderer);
+        	}
         }
         
         Optional<AdvancementCrafterRecipeData> result = table.find();
         
         result.ifPresent(data -> {
 			Slot slot = inventorySlots.inventorySlots.get(0);
+			if (!slot.getStack().isEmpty() ) {
+				return;
+			}
 			ItemStack stack = data.getOutput();
 			int x = slot.xPos + guiLeft;
 			int y = slot.yPos + guiTop;
@@ -101,7 +114,9 @@ public class GuiAdvancementCrafter extends GuiContainer {
         GlStateManager.colorMask(true, true, true, true);
         GlStateManager.enableLighting();
         GlStateManager.enableDepth();
-        fontRenderer.drawStringWithShadow(table.getEnergy() + "/" + TileAdvancementCrafter.MAX_ENERGY, this.xSize, startY, 16777215);
+        fontRenderer.drawString(table.getEnergy() + "/", xSize, startY, 0);
+        fontRenderer.drawString(TileAdvancementCrafter.MAX_ENERGY + "", xSize, startY + 10, 0);
+        this.renderHoveredToolTip(mouseX, mouseY);
     }
 	
     private void drawItemStack2(ItemStack stack, int x, int y, String altText) {

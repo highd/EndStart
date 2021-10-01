@@ -9,6 +9,7 @@ import com.highd120.endstart.EndStartMain;
 import com.highd120.endstart.block.BlockStove.State;
 import com.highd120.endstart.block.base.BlockHasSingleItem;
 import com.highd120.endstart.block.base.TileHasSingleItem;
+import com.highd120.endstart.item.ModItems;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.block.Block;
@@ -53,7 +54,11 @@ public class BlockAdvancementCrafter extends Block {
     	if (!(playerIn instanceof EntityPlayerMP)) {
     		return true;
     	}
-    	tile.check((EntityPlayerMP)playerIn, server);
+    	ItemStack heldItem = playerIn.getHeldItem(hand);
+        if (heldItem != null && heldItem.getItem() == ModItems.extra && heldItem.getMetadata() == 25) {
+        	tile.check((EntityPlayerMP)playerIn, server);
+            return true;
+        }
     	return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 

@@ -65,6 +65,7 @@ tile.endstart.wood_dust.name=Wood Dust
 tile.endstart.stove.name=Stove
 tile.endstart.rack.name=End Rack
 tile.endstart.energy.name=Test Energy
+tile.endstart.advancement_crafter.name=Advancement Crafter
 
 item.endstart.msg.is_not_end=The "End Bed" can only used in The End.
 item.endstart.msg.chane_spawn=You changed the spawn point.
@@ -72,6 +73,7 @@ endstart.valid=ERROR
 itemGroup.endstart=End Start
 endstart.injection=Injection
 endstart.char=Magic Letter
+endstart.advancementcrafter=Advancement Crafter
 
 endstart.research.ancient_knowledge.title=Ancient Language Knowledge
 endstart.research.ancient_knowledge.0=WIP

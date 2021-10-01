@@ -1,6 +1,7 @@
 package com.highd120.endstart.block;
 
 import com.highd120.endstart.EndStartMain;
+import com.highd120.endstart.block.advancementcafter.BlockAdvancementCrafter;
 import com.highd120.endstart.block.crafter.BlockCrafterCore;
 
 import net.minecraft.block.Block;
@@ -32,6 +33,7 @@ public class ModBlocks {
 	public static BlockStove stove;
 	public static BlockRack rack;
 	public static BlockEnergy energy;
+	public static BlockAdvancementCrafter advancementCrafter;
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -49,5 +51,6 @@ public class ModBlocks {
 		stove = regist(register, new BlockStove(), "stove");
 		rack = regist(register, new BlockRack(), "rack");
 		energy = regist(register, new BlockEnergy(), "energy");
+		advancementCrafter = regist(register, new BlockAdvancementCrafter(), "advancement_crafter");
 	}
 }

@@ -73,6 +73,23 @@ public class ItemUtil {
 		return true;
 	}
 	
+	public static boolean canMarge(ItemStack itemStack1, ItemStack itemStack2, int maxStackSize) {
+		if (itemStack1.isEmpty() || itemStack2.isEmpty()) {
+			return true;
+		}
+		if (itemStack1.getItem() != itemStack2.getItem()) {
+			return false;
+		}
+		if (itemStack1.getHasSubtypes() && itemStack1.getMetadata() != itemStack2.getMetadata()) {
+			return false;
+		}
+		if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2)) {
+			maxStackSize = Math.min(maxStackSize, itemStack1.getMaxStackSize());
+			return itemStack1.getCount() + itemStack2.getCount() <= maxStackSize;
+		}
+		return false;
+	}
+	
 	public static Stream<ItemStack> getPlayerStream(EntityPlayer player) {
 		List<ItemStack> list = new ArrayList<>();
 		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {

@@ -1,6 +1,7 @@
 package com.highd120.endstart.block.advancementcafter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ import com.highd120.endstart.EndStartMessages;
 import com.highd120.endstart.block.base.TileHasInventory;
 import com.highd120.endstart.network.PacketNormal;
 import com.highd120.endstart.network.TileEntityHasPacket;
+import com.highd120.endstart.recipe.IRecipeItem;
 import com.highd120.endstart.util.ItemUtil;
 
 import net.minecraft.advancements.Advancement;
@@ -42,17 +44,32 @@ public class TileAdvancementCrafter extends TileHasInventory implements TileEnti
 	public void update() {
 		if (isEnd) {
 			find().ifPresent(data -> {
-				
-				for (int i = 0; i < 25; i++) {
-					itemHandler.setItemStock(i + 1, ItemStack.EMPTY);
+				if (energyStorage.getEnergyStored() < data.getMinEnergy()) {
+					return;
 				}
-				itemHandler.setItemStock(0, data.getOutput().copy());
-				isEnd = false;
+				if (ItemUtil.canMarge(itemHandler.getStackInSlot(0), data.getOutput(), 64)) {
+					for (int i = 0; i < 25; i++) {
+						if (itemHandler.getStackInSlot(i + 1).getCount() == 1) {
+							itemHandler.setItemStock(i + 1, ItemStack.EMPTY);
+						} else {
+							itemHandler.getStackInSlot(i + 1).shrink(1);
+							itemHandler.onContentsChanged(i + 1);
+						}
+					}
+					if (itemHandler.getStackInSlot(0).isEmpty()) {
+						itemHandler.setItemStock(0, data.getOutput().copy());
+					} else {
+						itemHandler.getStackInSlot(0).grow(1);
+						itemHandler.onContentsChanged(0);
+					}
+					energyStorage.extractEnergy(data.getMinEnergy(), false);
+				}
 			});
+			isEnd = false;
 		}
-		find().ifPresent(data -> {
-			advancementsList = data.getAdvancementsList();
-		});
+		advancementsList = find().map(data -> {
+			return data.getAdvancementsList();
+		}).orElse(Collections.emptyList());
 	}
 	
 	public Optional<AdvancementCrafterRecipeData> find() {
@@ -60,8 +77,8 @@ public class TileAdvancementCrafter extends TileHasInventory implements TileEnti
 			boolean isMatch = true;
 			for (int i = 0; i < 25; i++) {
 				ItemStack item = itemHandler.getStackInSlot(i + 1);
-				ItemStack recipeItem = recipe.getInputList().get(i);
-				if (!ItemUtil.equalItemStackForRecipe(item, recipeItem)) {
+				IRecipeItem recipeItem = recipe.getInputList().get(i);
+				if (!recipeItem.checkRecipe(item)) {
 					isMatch = false;
 					break;
 				}
@@ -96,6 +113,9 @@ public class TileAdvancementCrafter extends TileHasInventory implements TileEnti
 				advancementsList.add(advancement);
 			}
 		}
+        if (compound.hasKey(ENERGY_TAG)) {
+        	energyStorage = new EnergyStorage(MAX_ENERGY, MAX_ENERGY, MAX_ENERGY, compound.getInteger(ENERGY_TAG));
+        }
 		super.subReadNbt(compound);
 	}
 	
@@ -109,6 +129,7 @@ public class TileAdvancementCrafter extends TileHasInventory implements TileEnti
 		}
 		advancementsListTag.setInteger("size", advancementsList.size());
 		compound.setTag("advancementsList", advancementsListTag);
+        compound.setInteger(ENERGY_TAG, energyStorage.getEnergyStored());
 		super.subWriteNbt(compound);
 	}
 	
@@ -142,7 +163,7 @@ public class TileAdvancementCrafter extends TileHasInventory implements TileEnti
 		
 		@Override
 		protected int getStackLimit(int slot, ItemStack stack) {
-			return 1;
+			return 64;
 		}
 	}
 	

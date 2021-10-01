@@ -66,6 +66,7 @@ tile.endstart.wood_dust.name=木の粉
 tile.endstart.stove.name=ストーブ
 tile.endstart.rack.name=エンドの棚
 tile.endstart.energy.name=テスト用エネルギー
+tile.endstart.advancement_crafter.name=進捗作業台
 
 item.endstart.msg.is_not_end=「エンドのベッド」はエンドでしか使えません。
 item.endstart.msg.chane_spawn=スポーン地点を変更しました。
@@ -73,6 +74,7 @@ endstart.valid=エラー
 itemGroup.endstart=End Start
 endstart.injection=アイテム注入
 endstart.char=魔法文字
+endstart.advancementcrafter=進捗作業台
 
 endstart.research.ancient_knowledge.title=古代言語の知識
 endstart.research.ancient_knowledge.0=いくつかの骨董品にはなんらかの文章が記されているようだ。これを読み解くことができれば研究の役に立つかもしれない。
