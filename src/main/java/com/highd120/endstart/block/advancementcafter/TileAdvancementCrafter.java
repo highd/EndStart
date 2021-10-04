@@ -94,6 +94,9 @@ public class TileAdvancementCrafter extends TileHasInventory implements TileEnti
     	AdvancementManager manager = world.getMinecraftServer().getAdvancementManager();
     	isEnd = advancementsList.stream().allMatch(name -> {
     		Advancement advancement = manager.getAdvancement(new ResourceLocation(name));
+    		if (advancement == null) {
+    			return true;
+    		}
     		return player.getAdvancements().getProgress(advancement).isDone();
     	});
     	System.out.println(isEnd);
@@ -136,6 +139,7 @@ public class TileAdvancementCrafter extends TileHasInventory implements TileEnti
 	public List<Advancement> getAdvancementsList(ClientAdvancementManager manager) {
 		return advancementsList.stream()
 				.map(name -> manager.getAdvancementList().getAdvancement(new ResourceLocation(name)))
+				.filter(advancement -> advancement != null)
 				.collect(Collectors.toList());
 	}
 	

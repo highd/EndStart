@@ -48,6 +48,7 @@ public class AdvancementCrafterWrapper implements IRecipeWrapper {
 		ClientAdvancementManager manager = minecraft.player.connection.getAdvancementManager();
 		List<Advancement> list = data.getAdvancementsList().stream()
 			.map(name -> manager.getAdvancementList().getAdvancement(new ResourceLocation(name)))
+			.filter(advancement -> advancement != null)
 			.collect(Collectors.toList());
 		int i = 0;
 		for (Advancement advancement: list) {
