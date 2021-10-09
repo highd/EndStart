@@ -89,7 +89,6 @@ public class EndStartMain {
         CrafterRecipe.init();
         CharRecipe.init();
         StoveFuelList.init();
-        AdvancementCrafterRecipe.init();
         proxy.init();
 	}
 
