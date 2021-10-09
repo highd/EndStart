@@ -29,7 +29,23 @@ public class ItemExtra extends ItemHasMeta {
 			"circuit_3",
 			"rainbow",
 			"pe_stone",
-			"wand"});
+			"wand",
+			"circuit_tier1",
+			"circuit_tier2",
+			"circuit_tier3",
+			"circuit_tier4", 
+			"rock_magnesium",
+			"rock_crystal",
+			"rock_zinc",
+			"rock_tungsten",
+			"rock_dark_iron", 
+			"rock_platinum",
+			"rock_palladium",
+			"rock_nickel",
+			"rock_volcanic",
+			"rock_carbon",
+			"rock_mercury",
+			"rock_uranium"});
 	}
 
 }
