@@ -21,7 +21,7 @@ public class TileSingleItemRenderer extends TileEntitySpecialRenderer<TileHasSin
         if (te.getItem() != null) {
             ItemStack stack = te.getItem();
             if (stack != null) {
-            	ItemUtil.drawItem(stack, x + 0.5, y + yOffset, z + 0.5, 0.7, true);
+            	ItemUtil.drawItem(stack, x + 0.5, y + yOffset, z + 0.5, 0.7, false);
             }
         }
     }

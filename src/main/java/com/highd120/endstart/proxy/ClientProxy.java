@@ -24,9 +24,9 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerRenderers() {
         ClientRegistry.bindTileEntitySpecialRenderer(TileCrafterCore.class,
-                new TileSingleItemRenderer(1.7f));
+                new TileSingleItemRenderer(0.6f));
         ClientRegistry.bindTileEntitySpecialRenderer(TileStand.class,
-                new TileSingleItemRenderer(1.5f));
+                new TileSingleItemRenderer(1.1f));
         ClientRegistry.bindTileEntitySpecialRenderer(TileChar.class,
                 new TileCharRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileStove.class,
