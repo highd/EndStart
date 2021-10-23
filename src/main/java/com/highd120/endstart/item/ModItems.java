@@ -108,5 +108,6 @@ public class ModItems {
 		registItemBlock(register, ModBlocks.energy);
 		registItemBlock(register, ModBlocks.advancementCrafter);
 		registItemBlock(register, ModBlocks.endLight);
+		registItemBlock(register, ModBlocks.endBedRock);
 	}
 }

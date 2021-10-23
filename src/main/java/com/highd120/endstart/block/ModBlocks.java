@@ -35,6 +35,7 @@ public class ModBlocks {
 	public static BlockEnergy energy;
 	public static BlockAdvancementCrafter advancementCrafter;
 	public static BlockEndLight endLight;
+	public static BlockEndBedrock endBedRock;
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -54,5 +55,6 @@ public class ModBlocks {
 		energy = regist(register, new BlockEnergy(), "energy");
 		advancementCrafter = regist(register, new BlockAdvancementCrafter(), "advancement_crafter");
 		endLight = regist(register, new BlockEndLight(), "end_light");
+		endBedRock = regist(register, new BlockEndBedrock(), "end_bedrock");
 	}
 }

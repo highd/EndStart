@@ -14,6 +14,7 @@ import com.highd120.endstart.block.crafter.CrafterRecipe;
 import com.highd120.endstart.block.crafter.TileCrafterCore;
 import com.highd120.endstart.gui.GuiManager;
 import com.highd120.endstart.command.ArgumentCommand;
+import com.highd120.endstart.command.CreateGatewayCommand;
 import com.highd120.endstart.command.DebugCommand;
 import com.highd120.endstart.command.DeleteRecipeNewTmpCommand;
 import com.highd120.endstart.command.ReloadCommand;
@@ -98,5 +99,6 @@ public class EndStartMain {
 		event.registerServerCommand(new DeleteRecipeNewTmpCommand());
 		event.registerServerCommand(new DebugCommand());
 		event.registerServerCommand(new ArgumentCommand());
+		event.registerServerCommand(new CreateGatewayCommand());
 	}
 }

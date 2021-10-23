@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.highd120.endstart.block.ModBlocks;
+import com.highd120.endstart.command.CreateGatewayCommand;
 import com.highd120.endstart.item.ModItems;
 import com.highd120.endstart.util.ItemUtil;
 
@@ -17,6 +19,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityEndGateway;
 import net.minecraft.tileentity.TileEntityEndPortal;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
@@ -122,10 +125,16 @@ public class PlayerDataEvents {
         return exitPortal;
     }
     
+    public static final BlockPos MAIN_LAND_GATEWAY_POS = new BlockPos(100, 80, 0);
+    public static final int SUB_LAND_GATEWAY_HEIGHT = 42;
+
     public static void createPlace(World world, BlockPos point) {
     	if (world.isAirBlock(point.down())) {
     		world.setBlockState(point, Blocks.END_STONE.getDefaultState(), 3);
     	}
+		CreateGatewayCommand.createGateWay(world, point.up(SUB_LAND_GATEWAY_HEIGHT));
+		CreateGatewayCommand.setGatewayTarget(world, point.add(0, 42, 0), MAIN_LAND_GATEWAY_POS.up(4));
+		CreateGatewayCommand.setGatewayTarget(world, MAIN_LAND_GATEWAY_POS, point.up(SUB_LAND_GATEWAY_HEIGHT + 4));
     }
 	/**
 	 * プレイヤーの更新処理。
@@ -215,6 +224,7 @@ public class PlayerDataEvents {
 				Blocks.BEDROCK.getDefaultState(), 2);
 		world.setBlockState(player.getPosition().add(0, -3, -1),
 				Blocks.BEDROCK.getDefaultState(), 2);
+		CreateGatewayCommand.createGateWay(world, new BlockPos(100, 80, 0));
 	}
 
 	/**
