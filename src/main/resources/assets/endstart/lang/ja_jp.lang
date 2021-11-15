@@ -42,6 +42,7 @@ item.endstart.circuit_tier1.name=電子回路 ランク1
 item.endstart.circuit_tier2.name=電子回路 ランク2
 item.endstart.circuit_tier3.name=電子回路 ランク3
 item.endstart.circuit_tier4.name=電子回路 ランク4
+item.endstart.golem_logistics_info.name=ゴーレムの物流管理の情報
 
 item.endstart.magnesium.name=マグネシウムの粉末
 item.endstart.crystal.name=水晶の粉末

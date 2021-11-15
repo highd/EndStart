@@ -45,7 +45,8 @@ public class ItemExtra extends ItemHasMeta {
 			"rock_volcanic",
 			"rock_carbon",
 			"rock_mercury",
-			"rock_uranium"});
+			"rock_uranium",
+			"golem_logistics_info"});
 	}
 
 }

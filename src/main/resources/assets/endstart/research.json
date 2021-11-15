@@ -65,6 +65,24 @@
                     "text": "endstart.research.crystal_laser_lens.1"
                 }
             ]
+        },
+        {
+            "key": "GOLEMLOGISTICS", 
+            "name": "research.GOLEMLOGISTICS.title",
+            "icons": [ "thaumcraft:textures/research/golem_logistics.png" ], 
+            "category": "GOLEMANCY", 
+            "location": [ 3, 4 ], 
+            "parents": [ "~SEALPROVIDE", "GOLEMDIRECT" ], 
+            "stages": [            
+                {
+                    "text": "research.GOLEMLOGISTICS.stage.1",
+                    "required_knowledge":["OBSERVATION;BASICS;1","OBSERVATION;GOLEMANCY;1"],
+                    "required_item":["minecraft:map","minecraft:ender_eye","endstart:extra;1;42"]
+                },
+                {
+                    "text": "research.GOLEMLOGISTICS.stage.2"
+                }
+            ]
         }
     ]
 }

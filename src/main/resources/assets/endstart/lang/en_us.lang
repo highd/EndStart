@@ -42,6 +42,7 @@ item.endstart.circuit_tier1.name=Circuit Tier 1
 item.endstart.circuit_tier2.name=Circuit Tier 2
 item.endstart.circuit_tier3.name=Circuit Tier 3
 item.endstart.circuit_tier4.name=Circuit Tier 4
+item.endstart.golem_logistics_info.name=Golem Logistics Info
 
 item.endstart.magnesium.name=Magnesium Dust
 item.endstart.crystal.name=Crystal Dust
