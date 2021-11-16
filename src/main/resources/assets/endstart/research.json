@@ -44,7 +44,7 @@
             "key": "CRYSTAL_LASER_LENS",
             "name": "endstart.research.crystal_laser_lens.title",
             "icons": [
-                "environmentaltech:laser_lens_crystal@^"
+                "environmentaltech:laser_lens_crystal"
             ],
             "category": "ARTIFICE",
             "parents": ["ARCANEBORE"],
