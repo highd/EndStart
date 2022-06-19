@@ -27,6 +27,7 @@ import net.minecraft.init.Biomes;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -68,8 +69,6 @@ public class EndStartMain {
 		GameRegistry.registerTileEntity(TileAdvancementCrafter.class, new ResourceLocation(MOD_ID, "advancement_rafter"));
 		GameRegistry.registerTileEntity(TileEnergy.class, new ResourceLocation(MOD_ID, "energy"));
         EndStartMessages.registerNetworkMessages();
-		EntityRegistry.registerModEntity(new ResourceLocation(EndStartMain.MOD_ID, "end_zombie"), EntityEndZombie.class,
-				"end_zombie", 23764, this, 64, 3, true);
         proxy.registerRenderers();
         EndStartAdvancements.init();
 	}

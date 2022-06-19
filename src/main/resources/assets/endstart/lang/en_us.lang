@@ -97,3 +97,5 @@ endstart.advancementcrafter=Advancement Crafter
 
 endstart.research.ancient_knowledge.title=Ancient Language Knowledge
 endstart.research.ancient_knowledge.0=WIP
+
+entity.endstart.end_zombie.name=End Zombie

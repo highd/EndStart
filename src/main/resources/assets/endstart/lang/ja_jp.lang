@@ -104,3 +104,5 @@ endstart.research.ancient_knowledge.2=記述された言語の翻訳に成功し
 endstart.research.crystal_laser_lens.title=クリスタルのレンズ
 endstart.research.crystal_laser_lens.0=レーザーをレンズに通すことで、性質を変えられるらしい。これを利用してクリスタルを効率的に集められないだろうか?
 endstart.research.crystal_laser_lens.1=特殊なレンズを通すことで、クリスタルを効率的に集められるようだ。
+
+entity.endstart.end_zombie.name=エンドゾンビ
