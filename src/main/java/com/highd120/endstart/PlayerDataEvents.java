@@ -3,7 +3,9 @@ package com.highd120.endstart;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.StreamSupport;
 
+import com.highd120.endstart.advancements.EndStartAdvancements;
 import com.highd120.endstart.block.ModBlocks;
 import com.highd120.endstart.command.CreateGatewayCommand;
 import com.highd120.endstart.item.ModItems;
@@ -15,6 +17,7 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -129,13 +132,23 @@ public class PlayerDataEvents {
     public static final int SUB_LAND_GATEWAY_HEIGHT = 42;
 
     public static void createPlace(World world, BlockPos point) {
-    	if (world.isAirBlock(point.down())) {
-    		world.setBlockState(point, Blocks.END_STONE.getDefaultState(), 3);
-    	}
+    	createSavePlace(world, point);
 		CreateGatewayCommand.createGateWay(world, point.up(SUB_LAND_GATEWAY_HEIGHT));
 		CreateGatewayCommand.setGatewayTarget(world, point.add(0, 42, 0), MAIN_LAND_GATEWAY_POS.up(4));
 		CreateGatewayCommand.setGatewayTarget(world, MAIN_LAND_GATEWAY_POS, point.up(SUB_LAND_GATEWAY_HEIGHT + 4));
     }
+    
+    public static void createSavePlace(World world, BlockPos point) {
+		BlockPos start = point.add(5, -2, 5);
+		BlockPos end = point.add(-5, -7, -5);
+		BlockPos.getAllInBox(start, end).forEach(pos -> {
+			if (world.isAirBlock(pos)) {
+				world.setBlockState(pos, Blocks.END_STONE.getDefaultState(), 3);
+			}
+		});
+    	
+    }
+    
 	/**
 	 * プレイヤーの更新処理。
 	 * @param event イベントデータ
@@ -188,6 +201,9 @@ public class PlayerDataEvents {
 			BlockPos playerBottom = player.getPosition().add(0, -1, 0);
 			if (playerY > 2 && world.getBlockState(playerBottom).getBlock() == Blocks.END_PORTAL) {
 				persist.setBoolean(TAG_TOUCH_ENDPORTAL, true);
+				if (player instanceof EntityPlayerMP) {
+					EndStartAdvancements.ESCAPE.trigger((EntityPlayerMP)player);
+				}
 			}
 		}
 	}
@@ -246,7 +262,7 @@ public class PlayerDataEvents {
 		if (!persist.getBoolean(TAG_TOUCH_ENDPORTAL)) {
 			player.changeDimension(1);
 			player.setPositionAndUpdate(x, y, z);
-			createPlace(event.player.world, new BlockPos(x, y, z));
+			createSavePlace(event.player.world, new BlockPos(x, y, z));
 		}
 	}
 
